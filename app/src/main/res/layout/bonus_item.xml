@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/bonus_jornada_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:text="@string/round"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/text_over_background"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/bonus_jornada_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_alignBaseline="@+id/bonus_jornada_label"
+        android:layout_toRightOf="@+id/bonus_jornada_label"
+        android:contentDescription="@string/description"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/text_over_background"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/bonus_goles_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bonus_jornada_label"
+        android:layout_alignParentLeft="true"
+        android:paddingLeft="10dp"
+        android:text="@string/goles"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/text_over_background"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/bonus_goles_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/bonus_goles_label"
+        android:layout_toRightOf="@+id/bonus_goles_label"
+        android:paddingLeft="10dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/text_over_background"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/bonus_portero_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/bonus_goles_label"
+        android:paddingLeft="10dp"
+        android:text="@string/portero"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/text_over_background"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/bonus_portero_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/bonus_portero_label"
+        android:layout_toRightOf="@+id/bonus_portero_label"
+        android:paddingLeft="10dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/text_over_background"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/bonus_ultimo_jornada_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/bonus_portero_label"
+        android:paddingLeft="10dp"
+        android:text="@string/ultimo_jornada"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/text_over_background"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/bonus_ultimo_jornada_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/bonus_ultimo_jornada_label"
+        android:layout_toRightOf="@+id/bonus_ultimo_jornada_label"
+        android:paddingLeft="10dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/text_over_background"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/bonus_ultimo_general_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/bonus_ultimo_jornada_label"
+        android:paddingLeft="10dp"
+        android:text="@string/ultimo_general"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/text_over_background"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/bonus_ultimo_general_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/bonus_ultimo_general_label"
+        android:layout_toRightOf="@+id/bonus_ultimo_general_label"
+        android:paddingLeft="10dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/text_over_background"
+        android:textStyle="bold"/>
+
+</RelativeLayout>

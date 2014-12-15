@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:comunioelpuntal="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_connect"
+        android:icon="@drawable/ic_autorenew_white_24dp"
+        android:title="@string/connect"
+        comunioelpuntal:showAsAction="ifRoom|withText" />
+
+    <item
+        android:id="@+id/menu_settings"
+        android:title="@string/settings"
+        comunioelpuntal:showAsAction="never" />
+
+
+</menu>

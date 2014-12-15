@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/select_player_tablet"
+    android:id="@+id/mode_tablet">
+
+    <TextView
+        android:id="@+id/select_gamer_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:text="@string/choose_player"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/text_over_background"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/select_gamer_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_below="@+id/select_gamer_label"
+        android:background="@drawable/myspinner_background" />
+
+    <Button
+        android:id="@+id/select_gamer_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:text="@string/accept"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textStyle="bold"
+
+        />
+</RelativeLayout>
+
+
+
+
+

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/balance_header_main_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:baselineAligned="false">
+
+    <LinearLayout
+        android:id="@+id/balance_header_ingresos_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:background="@color/balance_positive">
+
+        <TextView
+            android:id="@+id/balance_header_ingresos_label"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:paddingBottom="0dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:text="@string/incomes"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/text_over_header"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/balance_header_ingresos_view"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:paddingLeft="15dp"
+            android:paddingRight="5dp"
+            android:paddingTop="0dp"
+            android:paddingBottom="10dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/text_over_header"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/balance_header_gastos_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:background="@color/balance_negative">
+
+        <TextView
+            android:id="@+id/balance_header_gastos_label"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:paddingBottom="0dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp"
+            android:text="@string/gastos"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/text_over_header"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/balance_header_gastos_view"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingRight="15dp"
+            android:paddingTop="0dp"
+            android:paddingBottom="10dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/text_over_header"
+            android:textStyle="bold" />
+    </LinearLayout>
+</LinearLayout>

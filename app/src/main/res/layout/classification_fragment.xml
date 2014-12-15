@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/AppBaseTheme"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        style="@style/AppBaseTheme"
+        android:id="@+id/classification_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true"
+        android:background="@color/color_header">
+
+        <TextView
+            android:id="@+id/classification_label"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:singleLine="false"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/text_over_header"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/classification_spinner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:popupBackground="@color/spinner_list"
+            android:background="@drawable/myspinner_background_white" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/classification_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/classification_linear_layout"
+        android:divider="@color/color_list_divider"
+        android:dividerHeight="1dp"
+        style="@style/AppBaseTheme"
+        android:choiceMode="none" />
+
+</RelativeLayout>

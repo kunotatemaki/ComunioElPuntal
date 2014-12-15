@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/color_header">
+
+    <TextView
+        android:id="@+id/score_header_points_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="@string/points"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/text_over_header"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/score_header_points_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/score_header_points_label"
+        android:layout_toRightOf="@+id/score_header_points_label"
+        android:paddingLeft="10dp"
+        android:paddingBottom="10dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/text_over_header"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/score_header_ranking_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/score_header_points_label"
+        android:layout_alignParentLeft="true"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="@string/ranking"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/text_over_header"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/score_header_ranking_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/score_header_ranking_label"
+        android:layout_toRightOf="@+id/score_header_ranking_label"
+        android:paddingLeft="10dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/text_over_header"
+        android:textStyle="bold"/>
+
+
+</RelativeLayout>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color_header">#ba68c8</color>
+    <color name="color_list_divider">#000</color>
+    <color name="color_list_divider_notification">#9c27b0</color>
+    <color name="text_over_header">#ffffff</color>
+    <color name="text_over_background">#000000</color>
+    <color name="text_information">#e91e63</color>
+    <color name="color_primary">#9c27b0</color>
+    <color name="color_primary_dark">#4a148c</color>
+    <color name="color_accent">#f50057</color>
+    <color name="navigation_drawer_list">#e1bee7</color>
+    <color name="color_secondary">#fff</color>
+    <color name="colorSecondaryDark">#000</color>
+    <color name="actionbar_title_text">#fff</color>
+    <color name="actionbar_title_text_light">#000</color>
+    <color name="actionbar_menu_text">#0f0</color>
+    <color name="money_negative">#f44336</color>
+    <color name="money_positive_under_limit">#795548</color>
+    <color name="money_positive">#3f51b5</color>
+    <color name="money_negative_over_color_header">#ffffff</color>
+    <color name="money_positive_under_limit_over_color_header">#ffffff</color>
+    <color name="money_positive_over_color_header">#ffffff</color>
+    <color name="players_ok">#3f51b5</color>
+    <color name="players_on_limit">#e91e63</color>
+    <color name="players_over_limit">#f44336</color>
+    <color name="players_ok_over_color_header">#ffffff</color>
+    <color name="players_on_limit_over_color_header">#ffffff</color>
+    <color name="players_over_limit_over_color_header">#ffffff</color>
+    <color name="notification_read">#4a148c</color>
+    <color name="notification_not_read">#fff</color>
+    <color name="color_tabs_background">#9c27b0</color>
+    <color name="color_tabs_text">#fff</color>
+    <color name="balance_positive">#03a9f4</color>
+    <color name="balance_negative">#f44336</color>
+    <color name="spinner_list">#ba68c8</color>
+    <color name="spinner_background">#fff59d</color>
+
+    <color name="my_spinner_text_color">#00f</color>
+
+    <integer-array name="colors">
+        <item>@color/holo_blue_dark</item>
+        <item>@color/holo_yellow_dark</item>
+        <item>@color/holo_green_dark</item>
+        <item>@color/holo_purple_dark</item>
+        <item>@color/holo_red_dark</item>
+    </integer-array>
+
+    <integer-array name="gplus_colors">
+        <item>@color/gplus_color_1</item>
+        <item>@color/gplus_color_2</item>
+        <item>@color/gplus_color_3</item>
+        <item>@color/gplus_color_4</item>
+    </integer-array>
+
+    <integer-array name="pocket_bar_colors">
+        <item>@color/pocket_color_1</item>
+        <item>@color/pocket_color_1</item>
+        <item>@color/pocket_color_1</item>
+        <item>@color/pocket_color_1</item>
+        <item>@color/pocket_color_2</item>
+        <item>@color/pocket_color_2</item>
+        <item>@color/pocket_color_2</item>
+        <item>@color/pocket_color_2</item>
+        <item>@color/pocket_color_3</item>
+        <item>@color/pocket_color_3</item>
+        <item>@color/pocket_color_3</item>
+        <item>@color/pocket_color_3</item>
+        <item>@color/pocket_color_4</item>
+        <item>@color/pocket_color_4</item>
+        <item>@color/pocket_color_4</item>
+        <item>@color/pocket_color_4</item>
+    </integer-array>
+
+    <integer-array name="pocket_background_colors">
+        <item>@color/pocket_color_1</item>
+        <item>@color/pocket_color_2</item>
+        <item>@color/pocket_color_3</item>
+        <item>@color/pocket_color_4</item>
+    </integer-array>
+
+    <color name="pocket_color_1">#85edb9</color>
+    <color name="pocket_color_2">#34bdb7</color>
+    <color name="pocket_color_3">#ee4458</color>
+    <color name="pocket_color_4">#fcb74d</color>
+    <color name="gplus_color_1">#3e802f</color>
+    <color name="gplus_color_2">#f4b400</color>
+    <color name="gplus_color_3">#427fed</color>
+    <color name="gplus_color_4">#b23424</color>
+    <color name="holo_blue_dark">#0099cc</color>
+    <color name="holo_yellow_dark">#ff8800</color>
+    <color name="holo_green_dark">#669900</color>
+    <color name="holo_purple_dark">#9933cc</color>
+    <color name="holo_red_dark">#cc0000</color>
+
+</resources>

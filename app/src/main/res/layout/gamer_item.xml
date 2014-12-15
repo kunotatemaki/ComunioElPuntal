@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/gamer_item_layout_total"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/gamer_item_name_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dip"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/text_over_background"
+        android:textStyle="bold"/>
+
+    <LinearLayout
+        android:id="@+id/gamer_item_layout_datos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:baselineAligned="false">
+
+
+        <LinearLayout
+            android:id="@+id/gamer_item_layout_img_money_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:baselineAligned="false">
+
+            <ImageView
+                android:id="@+id/gamer_item_image"
+                android:adjustViewBounds="true"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:paddingLeft="10dip"
+                android:layout_gravity="center_vertical"
+                android:contentDescription="@string/description" />
+
+            <LinearLayout
+                android:id="@+id/gamer_item_layout_money_num"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/gamer_item_layout_money"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/gamer_item_money_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="15dp"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/text_over_background"
+                        android:textStyle="bold"
+                        android:text="@string/money"/>
+
+                    <TextView
+                        android:id="@+id/gamer_item_money_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/gamer_item_money_label"
+                        android:layout_toRightOf="@+id/gamer_item_money_label"
+                        android:paddingLeft="5dp"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/text_over_background"
+                        android:textStyle="bold"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/gamer_item_layout_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/gamer_item_num_of_players_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="15dip"
+                        android:paddingBottom="5dip"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/text_over_background"
+                        android:textStyle="bold"
+                        android:text="@string/num_of_players"/>
+
+                    <TextView
+                        android:id="@+id/gamer_item_num_of_players_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/gamer_item_num_of_players_label"
+                        android:layout_toRightOf="@+id/gamer_item_num_of_players_label"
+                        android:paddingLeft="5dip"
+                        android:paddingBottom="5dip"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/text_over_background"
+                        android:textStyle="bold"/>
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/gamer_item_layout_points_ranking"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/gamer_item_layout_points"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/gamer_item_puntos_general_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dip"
+                    android:layout_alignParentLeft="true"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/text_over_background"
+                    android:textStyle="bold"
+                    android:text="@string/points"/>
+
+                <TextView
+                    android:id="@+id/gamer_item_puntos_general_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dip"
+                    android:layout_alignBaseline="@+id/gamer_item_puntos_general_label"
+                    android:layout_toRightOf="@+id/gamer_item_puntos_general_label"
+                    android:gravity="right"
+                    android:textColor="@color/text_over_background"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textStyle="bold"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/gamer_item_layout_ranking"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/gamer_item_ranking_general_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:paddingLeft="5dip"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/text_over_background"
+                    android:textStyle="bold"
+                    android:text="@string/ranking"/>
+
+                <TextView
+                    android:id="@+id/gamer_item_ranking_general_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dip"
+                    android:layout_alignBaseline="@+id/gamer_item_ranking_general_label"
+                    android:layout_toRightOf="@+id/gamer_item_ranking_general_label"
+                    android:gravity="right"
+                    android:textColor="@color/text_over_background"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textStyle="bold"/>
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
+	
+			    
+
+

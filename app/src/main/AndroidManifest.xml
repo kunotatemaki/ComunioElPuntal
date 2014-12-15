@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.rukiasoft.androidapps.comunioelpuntal" >
+
+    <!-- GCM connects to Internet Services. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- GCM requires a Google account. -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <!-- Keeps the processor from sleeping when a message is received. -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- Creates a custom permission so only this app can receive its messages. -->
+    <permission
+        android:name="ruler.elpuntal.comunio.androidapp.comunication.gcm.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="ruler.elpuntal.comunio.androidapp.comunication.gcm.permission.C2D_MESSAGE" />
+    <!-- This app has permission to register and receive data message. -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.SEND" />
+    <!-- Network State Permissions to detect Internet status -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Permission to vibrate -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- Permission to start on boot -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- Permission to access and change wifi state -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.DELETE_PACKAGES" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.ComunioTheme">
+        <activity
+            android:name="com.rukiasoft.androidapps.comunioelpuntal.MainActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/app_name"/>
+
+        <activity
+            android:name=".SelectGamerActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.ComunioTheme">
+            <intent-filter>
+                <action android:name="ruler.action.SELECT_WHO_YOU_ARE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".StartScreenActivity"
+            android:label="@string/app_name"/>
+
+        <activity
+            android:name=".NotificationActivity"
+            android:label="@string/app_name"
+            android:launchMode="singleInstance"/>
+
+        <receiver android:name=".wifi.WifiReceiver">
+            <intent-filter android:priority="100">
+                <action android:name="android.net.wifi.STATE_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".comunication.gcm.StartMyServiceAtBootReceiver"
+            android:enabled="true"
+            android:exported="true"
+            android:label="StartMyServiceAtBootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".comunication.gcm.RegisterService"
+            android:label="Register Service" />
+
+        <receiver
+            android:name=".comunication.gcm.GCMBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="ruler.elpuntal.comunio.androidapp.comunication.gcm" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".NotNotificationOpenReceiver"
+            android:exported="false">
+            <intent-filter android:priority="0">
+                <action android:name="ruler.elpuntal.comunio.androidapp.NOTIFICATION" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".DataBaseDownloadReceiver"
+            android:exported="false">
+            <intent-filter android:priority="0">
+                <action android:name="ruler.elpuntal.comunio.androidapp.DATABASE" />
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".comunication.gcm.GCMIntentService" />
+        <service android:name=".comunication.gcm.AppDownloaderIntentService" />
+
+        <service android:name=".NotNotificationOpenService" />
+
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+    </application>
+
+</manifest>

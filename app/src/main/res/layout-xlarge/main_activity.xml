@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_parent_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true">
+
+    <include layout="@layout/toolbar" />
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Contenido Principal -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:baselineAligned="false"
+            android:orientation="horizontal"
+            android:background="@drawable/football_ground_yellow_land"
+            android:id="@+id/mode_tablet">
+
+            <FrameLayout
+                android:id="@+id/primary_fragment_container"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2" />
+
+            <FrameLayout
+                android:id="@+id/secondary_fragment_container"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:background="@drawable/border" />
+
+        </LinearLayout>
+
+
+        <!-- Menú Lateral -->
+        <ListView
+            android:id="@+id/left_drawer"
+            android:layout_width="240dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/navigation_drawer_list"
+            android:choiceMode="singleChoice" />
+
+    </android.support.v4.widget.DrawerLayout>
+</LinearLayout>

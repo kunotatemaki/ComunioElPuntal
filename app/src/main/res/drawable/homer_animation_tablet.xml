@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/homer_tablet0"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/homer_tablet1"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/homer_tablet2"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/homer_tablet3"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/homer_tablet4"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/homer_tablet5"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/homer_tablet6"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/homer_tablet7"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/homer_tablet8"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/homer_tablet9"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/homer_tablet10"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/homer_tablet11"
+        android:duration="100" />
+
+</animation-list>

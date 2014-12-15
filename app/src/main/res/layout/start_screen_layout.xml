@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_vertical|center_horizontal"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/start_screen_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/description" />
+
+    <ProgressBar
+        android:id="@+id/start_screen_horizontal_progress_bar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp" />
+
+
+    <fr.castorflex.android.circularprogressbar.CircularProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/start_screen_indefinite_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:layout_above="@+id/start_screen_text"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        app:cpb_color="#FFee44"
+        app:cpb_colors="@array/gplus_colors"
+        app:cpb_rotation_speed="1.0"
+        app:cpb_sweep_speed="1.0"
+        app:cpb_stroke_width="8dp"
+        app:cpb_min_sweep_angle="10"
+        app:cpb_max_sweep_angle="300" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_above="@+id/start_screen_horizontal_progress_bar"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/text_over_header"
+        android:textStyle="bold"
+        android:id="@+id/start_screen_text" />
+
+</RelativeLayout>
+
+
+     
+ 

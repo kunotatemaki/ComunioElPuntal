@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/notification_item_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/notification_item_date_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:paddingLeft="5dip"
+        android:paddingTop="10dip"
+        android:text="@string/date_received"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <TextView
+        android:id="@+id/notification_item_date_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/notification_item_date_label"
+        android:layout_toRightOf="@+id/notification_item_date_label"
+        android:longClickable="false"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+    <TextView
+        android:id="@+id/notification_item_time_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/notification_item_date_label"
+        android:layout_toLeftOf="@+id/notification_item_time_view"
+        android:paddingLeft="5dp"
+        android:text="@string/time_received"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <TextView
+        android:id="@+id/notification_item_time_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignBaseline="@+id/notification_item_date_label"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+    <TextView
+        android:id="@+id/notification_item_state_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/notification_item_date_label"
+        android:paddingLeft="5dp"
+        android:text="@string/state"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <TextView
+        android:id="@+id/notification_item_state_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/notification_item_state_label"
+        android:layout_toRightOf="@+id/notification_item_state_label"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+    <TextView
+        android:id="@+id/notification_item_subject_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/notification_item_state_label"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:text="@string/subject"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <TextView
+        android:id="@+id/notification_item_subject_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/notification_item_subject_label"
+        android:layout_toRightOf="@+id/notification_item_subject_label"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"/>
+</RelativeLayout>
