@@ -175,11 +175,11 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
                 serverClient = new ServerClient(this, am.open("application.xml"));
                 //am.close();
             } catch (IOException e) {
-                Log.i(TAG, "Excepción crear cliente IOException");
+                Log.i(TAG, "Excepción al crear cliente IOException");
             } catch (SAXException e) {
-                Log.i(TAG, "Excepción crear cliente SAXException");
+                Log.i(TAG, "Excepción al crear cliente SAXException");
             } catch (ParserConfigurationException e) {
-                Log.i(TAG, "Excepción crear cliente ParserConfigurationException");
+                Log.i(TAG, "Excepción al crear cliente ParserConfigurationException");
             } catch (Exception e) {
                 Log.i(TAG, "Excepción no controlada al crear cliente");
             }
