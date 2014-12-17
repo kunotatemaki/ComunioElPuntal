@@ -25,10 +25,10 @@ public class TeamPlayersFragment extends Fragment implements Serializable {
      *
      */
     private static final long serialVersionUID = 1L;
-    PlayersListAdapter mAdapter = null;
+    private PlayersListAdapter mAdapter = null;
     private static final String TAG = "TeamPlayersFragment";
-    String cabecera = "";
-    TextView textCabecera;
+    private String cabecera = "";
+    private TextView textCabecera;
 
 
     @Override
@@ -79,7 +79,7 @@ public class TeamPlayersFragment extends Fragment implements Serializable {
 
     }
 
-    public void setPlayerList(Context context, List<PlayerItem> playerItems) {
+    public void setPlayerList(List<PlayerItem> playerItems) {
         if (mAdapter == null) {
             mAdapter = new PlayersListAdapter();
         }

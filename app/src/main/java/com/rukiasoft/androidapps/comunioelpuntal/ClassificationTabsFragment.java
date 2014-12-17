@@ -25,9 +25,10 @@ public class ClassificationTabsFragment extends Fragment implements Serializable
     private static final long serialVersionUID = 1L;
     private static final String TAG = "ClassificationTabsFragment";
     private static FragmentTabHost mTabHost;
-    AppSectionsPagerAdapter mAppSectionsPagerAdapter;
-    ViewPager mViewPager;
-    static ClassificationFragment fGeneral = null, fLastRound = null, fRound = null;
+    private ViewPager mViewPager;
+    private static ClassificationFragment fGeneral = null;
+    private static ClassificationFragment fLastRound = null;
+    private static ClassificationFragment fRound = null;
 
 
     @Override
@@ -92,7 +93,7 @@ public class ClassificationTabsFragment extends Fragment implements Serializable
         }
 
         mViewPager = (ViewPager) rootView.findViewById(R.id.classification_tabs_viewpager);
-        mAppSectionsPagerAdapter = new AppSectionsPagerAdapter(getChildFragmentManager());
+        AppSectionsPagerAdapter mAppSectionsPagerAdapter = new AppSectionsPagerAdapter(getChildFragmentManager());
         mViewPager.setAdapter(mAppSectionsPagerAdapter);
         mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
@@ -109,7 +110,7 @@ public class ClassificationTabsFragment extends Fragment implements Serializable
 
     public static class AppSectionsPagerAdapter extends FragmentPagerAdapter {
 
-        FragmentManager fragmentManager;
+        final FragmentManager fragmentManager;
 
         public AppSectionsPagerAdapter(FragmentManager fm) {
             super(fm);

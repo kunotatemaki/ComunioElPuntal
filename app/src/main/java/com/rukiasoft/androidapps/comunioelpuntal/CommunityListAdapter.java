@@ -17,7 +17,7 @@ import java.util.List;
 
 //import android.util.Log;
 
-public class CommunityListAdapter extends BaseAdapter {
+class CommunityListAdapter extends BaseAdapter {
 
     // List of ToDoItems
     private final List<GamerInformation> mItems = new ArrayList<>();
@@ -35,7 +35,7 @@ public class CommunityListAdapter extends BaseAdapter {
         refresh();
     }
 
-    public void refresh() {
+    void refresh() {
         //Log.d(TAG, "refresh");
         notifyDataSetChanged();
     }

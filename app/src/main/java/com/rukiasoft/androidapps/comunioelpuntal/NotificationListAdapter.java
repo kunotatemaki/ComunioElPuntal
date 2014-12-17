@@ -14,7 +14,7 @@ import java.util.List;
 //import android.util.Log;
 
 
-public class NotificationListAdapter extends BaseAdapter {
+class NotificationListAdapter extends BaseAdapter {
 
     @SuppressWarnings("unused")
     private static final String TAG = "NotificationListAdapter";

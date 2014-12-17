@@ -22,7 +22,7 @@ import java.util.Comparator;
 import java.util.List;
 
 
-public class PlayersListAdapter extends BaseAdapter implements Filterable {
+class PlayersListAdapter extends BaseAdapter implements Filterable {
 
     @SuppressWarnings("unused")
     private static final String TAG = "PlayersListAdapter";
@@ -30,7 +30,7 @@ public class PlayersListAdapter extends BaseAdapter implements Filterable {
     private List<PlayerItem> showedItems = new ArrayList<>();
     //private final Context mContext;
     private Comparator<PlayerItem> comparator = new PlayerNameComparator();
-    Filter myFilter = new Filter() {
+    private final Filter myFilter = new Filter() {
         @SuppressLint("DefaultLocale")
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {

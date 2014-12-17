@@ -4,7 +4,7 @@ package com.rukiasoft.androidapps.comunioelpuntal;
 
 public class NotificationItem {
 
-    private int mID;
+    private final int mID;
     private String mDateSent = "";
     private String mTimeSent = "";
     private String mMessage = "";

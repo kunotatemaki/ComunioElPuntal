@@ -1,6 +1,6 @@
 package com.rukiasoft.androidapps.comunioelpuntal.dataclasses;
 
-public class Posicion {
+class Posicion {
     private String nombre;
     private String tabla;
     private Integer puntos;

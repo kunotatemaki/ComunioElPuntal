@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ScoreListAdapter extends BaseAdapter {
+class ScoreListAdapter extends BaseAdapter {
 
     @SuppressWarnings("unused")
     private static final String TAG = "ScoreListAdapter";
@@ -27,7 +27,7 @@ public class ScoreListAdapter extends BaseAdapter {
         refresh();
     }
 
-    public void refresh() {
+    void refresh() {
         //Log.d(TAG, "refresh");
         notifyDataSetChanged();
     }

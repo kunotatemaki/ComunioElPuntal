@@ -29,18 +29,18 @@ public class ClassificationFragment extends Fragment implements Serializable {
      */
     private static final long serialVersionUID = 1L;
     private static final String TAG = "ClassificationFragment";
-    private List<GamerInformation> participantes = new ArrayList<>();
+    private final List<GamerInformation> participantes = new ArrayList<>();
     private ClassificationListAdapter mAdapter = null;
     private Comparator<GamerInformation> comparator = null;
-    private ArrayList<String> datosSpinner = new ArrayList<>();
+    private final ArrayList<String> datosSpinner = new ArrayList<>();
     private Integer index = 0;
 
     public static enum OrderType {
         GENERAL, LAST_ROUND, ROUND
     }
 
-    OrderType order = OrderType.GENERAL;
-    Double selectedRound = (double) 0;
+    private OrderType order = OrderType.GENERAL;
+    private Double selectedRound = (double) 0;
 
     public interface ClassificationFragmentSelectionListener {
         public void onClassificationFragmentItemSelected(GamerInformation item);
@@ -133,12 +133,7 @@ public class ClassificationFragment extends Fragment implements Serializable {
 
     }
 
-    @Override
-    public void onResume() {
-        //Log.d(TAG, "onResume");
-        super.onResume();
 
-    }
 
 
     @Override
@@ -148,7 +143,7 @@ public class ClassificationFragment extends Fragment implements Serializable {
         //mAdapter.clear();
     }
 
-    public void loadItems() {
+    void loadItems() {
         Log.d(TAG, "actualizo los items");
         if (mAdapter == null) {
             //Log.d(TAG,  "era null");
@@ -218,14 +213,14 @@ public class ClassificationFragment extends Fragment implements Serializable {
         loadItems();
     }
 
-    public class GeneralComparator implements java.util.Comparator<GamerInformation> {
+    private class GeneralComparator implements java.util.Comparator<GamerInformation> {
         @Override
         public int compare(GamerInformation p1, GamerInformation p2) {
             return p1.getCurrentRanking().compareTo(p2.getCurrentRanking());
         }
     }
 
-    public class LastRoundComparator implements java.util.Comparator<GamerInformation> {
+    private class LastRoundComparator implements java.util.Comparator<GamerInformation> {
         @Override
         public int compare(GamerInformation p1, GamerInformation p2) {
             return p1.getPuntuaciones().get(p1.getPuntuaciones().size() - 1).getPosicion_jornada().compareTo(
@@ -233,7 +228,7 @@ public class ClassificationFragment extends Fragment implements Serializable {
         }
     }
 
-    public class RoundComparator implements java.util.Comparator<GamerInformation> {
+    private class RoundComparator implements java.util.Comparator<GamerInformation> {
         @Override
         public int compare(GamerInformation p1, GamerInformation p2) {
             //busco la jornada

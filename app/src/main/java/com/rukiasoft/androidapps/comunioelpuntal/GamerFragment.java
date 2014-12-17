@@ -31,13 +31,13 @@ public class GamerFragment extends Fragment implements Serializable {
      */
     private static final long serialVersionUID = 1L;
     private static final String TAG = "GamerFragment";
-    public static int currentPosition = 0;
+    private static int currentPosition = 0;
     private ListView lstOpcionesGamer;
     private GamerFragmentSelectionListener listener;
     private GamerInformation gamer;
-    Boolean updateItems = true;
+    private Boolean updateItems = true;
 
-    AdaptadorGamer mAdapter = null;
+    private AdaptadorGamer mAdapter = null;
 
     @Override
     public void onAttach(Activity activity) {
@@ -169,7 +169,7 @@ public class GamerFragment extends Fragment implements Serializable {
             lstOpcionesGamer.setItemChecked(0, true);
     }
 
-    public void loadItems() {
+    void loadItems() {
         mAdapter.clear();
         Log.d(TAG, "actualizo los items");
         mAdapter.add(
@@ -258,7 +258,7 @@ public class GamerFragment extends Fragment implements Serializable {
     }
 
     class AdaptadorGamer extends ArrayAdapter<MainItem> {
-        Activity context;
+        final Activity context;
 
         AdaptadorGamer(Fragment context) {
             super(context.getActivity(), R.layout.main_item);

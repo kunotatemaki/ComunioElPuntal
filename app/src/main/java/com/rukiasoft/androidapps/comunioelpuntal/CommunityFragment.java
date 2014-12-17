@@ -20,7 +20,7 @@ public class CommunityFragment extends ListFragment implements Serializable {
      */
     private static final long serialVersionUID = 1L;
     private static final String TAG = "CommunityFragment";
-    public static int currentPosition = 0;
+    private static int currentPosition = 0;
     private CommunityListAdapter mAdapter = null;
 
     public interface CommunityFragmentSelectionListener {

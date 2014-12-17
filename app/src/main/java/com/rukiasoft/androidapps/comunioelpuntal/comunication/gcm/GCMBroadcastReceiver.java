@@ -15,7 +15,7 @@ import com.rukiasoft.androidapps.comunioelpuntal.wifi.WifiHandler;
 
 public class GCMBroadcastReceiver extends WakefulBroadcastReceiver {
 
-    static String TAG = "GCMBroadcastReceiver";
+    private static final String TAG = "GCMBroadcastReceiver";
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -47,7 +47,7 @@ public class GCMBroadcastReceiver extends WakefulBroadcastReceiver {
             ActivityTool.savePreferences(context, ComunioConstants.PROPERTY_VERSION_APP_FOR_DOWNLOADING, versionForDownload);
 
             Boolean downloadWithWifi = ActivityTool.getBooleanFromPreferences(context, "option_update_wifi");
-            if (downloadWithWifi && WifiHandler.IsWifiConnected(context) == false) {
+            if (downloadWithWifi && !WifiHandler.IsWifiConnected(context)) {
                 Log.d(TAG, "hay que bajar con wifi y no está conectado");
 
             } else {

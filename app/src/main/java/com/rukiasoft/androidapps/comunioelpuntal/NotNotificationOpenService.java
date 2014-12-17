@@ -21,8 +21,8 @@ import com.rukiasoft.androidapps.comunioelpuntal.utils.ActivityTool;
 
 public class NotNotificationOpenService extends IntentService {
     private static final int NOTIF_ALERTA_ID = 1;
-    static String TAG = "NotNotificationOpenService";
-    private long[] mVibratePattern = {0, 200, 200, 300};
+    private static final String TAG = "NotNotificationOpenService";
+    private final long[] mVibratePattern = {0, 200, 200, 300};
     // Notification Count
     static private int mNotificationCount;
 

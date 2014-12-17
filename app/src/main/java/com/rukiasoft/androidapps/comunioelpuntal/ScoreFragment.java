@@ -24,11 +24,11 @@ public class ScoreFragment extends Fragment implements Serializable {
      *
      */
     private static final long serialVersionUID = 1L;
-    ScoreListAdapter mAdapter = null;
+    private ScoreListAdapter mAdapter = null;
     private static final String TAG = "ScoreFragment";
     private List<Puntuacion> puntuaciones;
-    Integer pointsGeneral = 0;
-    Integer rankingGeneral = 0;
+    private Integer pointsGeneral = 0;
+    private Integer rankingGeneral = 0;
 
     @Override
     public void onAttach(Activity activity) {
@@ -74,7 +74,7 @@ public class ScoreFragment extends Fragment implements Serializable {
 
     }
 
-    public void loadItems() {
+    void loadItems() {
         pointsGeneral = 0;
         rankingGeneral = 0;
 

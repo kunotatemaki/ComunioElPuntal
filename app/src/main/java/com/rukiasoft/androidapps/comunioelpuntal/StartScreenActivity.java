@@ -22,7 +22,7 @@ public class StartScreenActivity extends Activity {
     private static ProgressBar indefiniteProgressBar;
     private static TextView descripcion;
     private static AnimationDrawable frameAnimation;
-    static Activity activity;
+    private static Activity activity;
 
     @Override
     public void onCreate(Bundle bundle) {
@@ -82,14 +82,22 @@ public class StartScreenActivity extends Activity {
             @Override
             public void run() {
                 MainActivity.loadDatabase(horizontalProgressBar, descripcion);
-
-                if (activity != null) {
+                finalizarActivity(RESULT_OK);
+                /*if (activity != null) {
                     Log.d(TAG, "pongo ok y termino");
                     activity.setResult(RESULT_OK);
                     activity.finish();
-                }
+                }*/
             }
         }).start();
+    }
+
+    public static void finalizarActivity(int mode){
+        if (activity != null) {
+            Log.d(TAG, "pongo ok y termino");
+            activity.setResult(mode);
+            activity.finish();
+        }
     }
 
     @Override

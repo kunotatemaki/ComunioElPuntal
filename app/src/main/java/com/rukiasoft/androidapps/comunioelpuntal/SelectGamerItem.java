@@ -1,6 +1,6 @@
 package com.rukiasoft.androidapps.comunioelpuntal;
 
-public class SelectGamerItem {
+class SelectGamerItem {
 
     private String nombre = "";
 

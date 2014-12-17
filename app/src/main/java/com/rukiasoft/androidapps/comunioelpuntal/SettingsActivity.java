@@ -15,8 +15,6 @@ import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
  * Created by Ruler on 2014.
  */
 public class SettingsActivity extends ActionBarActivity {
-    //private static String TAG = "SettingsActivity";
-    Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +27,7 @@ public class SettingsActivity extends ActionBarActivity {
         else
             ActivityTool.setOrientation(this, MainActivity.Orientation.LANDSCAPE);
 
-        mToolbar = (Toolbar) this.findViewById(R.id.toolbar);
+        Toolbar mToolbar = (Toolbar) this.findViewById(R.id.toolbar);
 
         if (mToolbar != null) {
             setSupportActionBar(mToolbar);

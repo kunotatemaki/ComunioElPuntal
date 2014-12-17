@@ -21,7 +21,6 @@ public class NotificationActivity extends ActionBarActivity {
     private static final String STATE_SELECTED_NAVIGATION_ITEM = "selected_navigation_item";
     private static final String TAG = "NotificationActivity";
     private NotificationFragment fNotification;
-    Toolbar mToolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,7 +32,7 @@ public class NotificationActivity extends ActionBarActivity {
         else
             ActivityTool.setOrientation(this, MainActivity.Orientation.LANDSCAPE);
 
-        mToolbar = (Toolbar) this.findViewById(R.id.toolbar);
+        Toolbar mToolbar = (Toolbar) this.findViewById(R.id.toolbar);
         if (mToolbar != null) {
             setSupportActionBar(mToolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -70,13 +69,7 @@ public class NotificationActivity extends ActionBarActivity {
         super.onStart();
     }
 
-    @Override
-    protected void onDestroy() {
-        //Log.d(TAG, "onDestroy");
-        super.onDestroy();
-    }
-
-    public void load() {
+    void load() {
         //Log.d(TAG, "load");
         fNotification.loadItems();
     }

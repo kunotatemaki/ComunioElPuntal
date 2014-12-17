@@ -12,7 +12,6 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -70,14 +69,14 @@ public class ServerClient {
     private static Boolean downloadingApp = false;
 
 
-    public static final long EXPIRATION_TIME_MS = 1000 * 3600 * 24 * 7;
+    private static final long EXPIRATION_TIME_MS = 1000 * 3600 * 24 * 7;
     private GoogleCloudMessaging gcm;
-    static final String TAG = "ServerClient";
+    private static final String TAG = "ServerClient";
 
     private String regid;
 
     //public static String name;
-    public String email = "";
+    private String email = "";
 
     //private static Boolean registradoServer = false;
     public static enum AccessMode {
@@ -121,13 +120,13 @@ public class ServerClient {
         return true;
     }
 
-    public String setUrl(String _url, String _host, String _port) {
+    String setUrl(String _url, String _host, String _port) {
         String url = _url.replaceAll("port", _port);
         url = url.replaceAll("host", _host);
         return url;
     }
 
-    public Boolean conectar(AccessMode mode) {
+    public void conectar(AccessMode mode) {
 
         //Log.d(TAG, "Intentamos conectar al servidor de google y propio");
         ConnectionDetector cd = new ConnectionDetector(context);
@@ -136,9 +135,9 @@ public class ServerClient {
             // Internet Connection is not present
             Log.i(TAG, "no hay conexión a internet");
             ActivityTool.showToast(context,
-                    context.getResources().getString(R.string.no_connection), Toast.LENGTH_LONG);
+                    context.getResources().getString(R.string.no_connection));
             // stop executing code by return
-            return false;
+            return;
         }
         //Chequemos si está instalado Google Play Services
         if (checkPlayServices()) {
@@ -160,7 +159,6 @@ public class ServerClient {
         } else {
             Log.i(TAG, "No se ha encontrado Google Play Services.");
         }
-        return true;
     }
 
     private boolean checkPlayServices() {
@@ -223,7 +221,7 @@ public class ServerClient {
         protected void onPostExecute(String result) {
             if (result.compareTo("") != 0) {
                 Log.d(TAG, "Voy a mandar un Toast de error de conexión al servidor");
-                ActivityTool.showToast(context, result, Toast.LENGTH_LONG);
+                ActivityTool.showToast(context, result);
                 //Toast.makeText(context, result, Toast.LENGTH_LONG).show();
                 //registradoServer = false;
             } else {
@@ -474,7 +472,7 @@ public class ServerClient {
         return downloadingApp;
     }
 
-    public static void setDownloadingApp(Boolean downloadingApp) {
+    private static void setDownloadingApp(Boolean downloadingApp) {
         ServerClient.downloadingApp = downloadingApp;
     }
 

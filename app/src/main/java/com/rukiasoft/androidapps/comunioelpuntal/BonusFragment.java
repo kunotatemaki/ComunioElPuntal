@@ -25,14 +25,13 @@ public class BonusFragment extends Fragment implements Serializable {
      *
      */
     private static final long serialVersionUID = 1L;
-    BonusListAdapter mAdapter = null;
+    private BonusListAdapter mAdapter = null;
     private static final String TAG = "BonusFragment";
     private List<Puntuacion> puntuaciones;
-    Integer totalMoneyGoles = 0;
-    Integer totalMoneyPortero = 0;
-    Integer totalMoneyTorpeJornada = 0;
-    Integer totalMoneyTorpeGeneral = 0;
-    ListView listView = null;
+    private Integer totalMoneyGoles = 0;
+    private Integer totalMoneyPortero = 0;
+    private Integer totalMoneyTorpeJornada = 0;
+    private Integer totalMoneyTorpeGeneral = 0;
 
     @Override
     public void onAttach(Activity activity) {
@@ -60,7 +59,7 @@ public class BonusFragment extends Fragment implements Serializable {
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
         Log.i(TAG, "onActivityCreated() ");
-        listView = (ListView) getView().findViewById(R.id.bonus_list);
+        ListView listView = (ListView) getView().findViewById(R.id.bonus_list);
         if(listView != null) {
             listView.setAdapter(mAdapter);
             if (mAdapter.getCount() == 0)
@@ -80,7 +79,7 @@ public class BonusFragment extends Fragment implements Serializable {
 
     }
 
-    public void loadItems() {
+    void loadItems() {
         totalMoneyGoles = 0;
         totalMoneyPortero = 0;
         totalMoneyTorpeJornada = 0;

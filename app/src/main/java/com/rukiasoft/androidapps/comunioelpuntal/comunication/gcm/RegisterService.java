@@ -14,7 +14,7 @@ import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 
 public class RegisterService extends IntentService {
-    static String TAG = "RegisterService";
+    private static final String TAG = "RegisterService";
 
     public RegisterService() {
         super("RegisterService");

@@ -15,7 +15,7 @@ import java.util.List;
 
 //import android.util.Log;
 
-public class NavigationDrawerAdapter extends BaseAdapter {
+class NavigationDrawerAdapter extends BaseAdapter {
 
     // List of ToDoItems
     private final List<MainItem> mItems = new ArrayList<>();
@@ -35,7 +35,7 @@ public class NavigationDrawerAdapter extends BaseAdapter {
         refresh();
     }
 
-    public void refresh() {
+    void refresh() {
         //Log.d(TAG, "refresh");
         notifyDataSetChanged();
     }

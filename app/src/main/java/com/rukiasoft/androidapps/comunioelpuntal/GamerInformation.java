@@ -17,9 +17,9 @@ public class GamerInformation implements Serializable {
      */
     //private static final String TAG = "GamerInformation";
     private static final long serialVersionUID = 1L;
-    private List<PlayerItem> playerItems = new ArrayList<>();
-    private List<PlayerItem> ventas = new ArrayList<>();
-    private List<PlayerItem> fichajes = new ArrayList<>();
+    private final List<PlayerItem> playerItems = new ArrayList<>();
+    private final List<PlayerItem> ventas = new ArrayList<>();
+    private final List<PlayerItem> fichajes = new ArrayList<>();
     private List<Puntuacion> puntuaciones = new ArrayList<>();
     private Integer dineroTotal = 0;
     private Integer dineroPrimasGoles = 0;
@@ -36,7 +36,7 @@ public class GamerInformation implements Serializable {
     private Integer puntosTotales = 0;
     private Integer currentRanking = 0;
     //DatabaseHandler MainActivity.getdbHandler() = null;
-    Participante participante;
+    private Participante participante;
 
 
     public GamerInformation() {

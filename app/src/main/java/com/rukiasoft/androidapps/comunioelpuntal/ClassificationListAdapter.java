@@ -13,7 +13,7 @@ import java.util.List;
 //import android.util.Log;
 
 
-public class ClassificationListAdapter extends BaseAdapter {
+class ClassificationListAdapter extends BaseAdapter {
 
     //private static final String TAG = "ClassificationListAdapter";
     private List<ClassificationItem> mItems = new ArrayList<>();
@@ -28,7 +28,7 @@ public class ClassificationListAdapter extends BaseAdapter {
         //refresh();
     }
 
-    public void refresh() {
+    void refresh() {
         //Log.d(TAG, "refresh");
         notifyDataSetChanged();
     }

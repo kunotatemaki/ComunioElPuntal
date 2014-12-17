@@ -8,8 +8,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
+import com.rukiasoft.androidapps.comunioelpuntal.dataclasses.Participante;
 import com.rukiasoft.androidapps.comunioelpuntal.utils.ActivityTool;
 import com.rukiasoft.androidapps.comunioelpuntal.utils.ComunioConstants;
 
@@ -23,7 +23,7 @@ public class SelectGamerActivity extends Activity {
     private final static String TAG = "SelectGamerActivity";
 
     @Override
-    public void onCreate(Bundle bundle) {
+    public void onCreate(final Bundle bundle) {
         super.onCreate(bundle);
         //ExceptionHandler.register(this); 
         setContentView(R.layout.select_gamer);
@@ -35,15 +35,15 @@ public class SelectGamerActivity extends Activity {
         String nombre = ActivityTool.getStringFromPreferences(getApplicationContext(), ComunioConstants.PROPERTY_MY_TEAM);
         Integer position = 0;
         final ArrayList<String> datos = new ArrayList<>();
-        List<GamerInformation> participantes = MainActivity.getGamers();
+        List<Participante> participantes = MainActivity.loadGamerNamesFromDatabase();
         if (participantes.size() == 0) {
-            ActivityTool.showToast(this, "no hay participantes", Toast.LENGTH_LONG);
+            ActivityTool.showToast(this, "no hay participantes");
             setResult(RESULT_CANCELED);
             finish();
         }
         for (int i = 0; i < participantes.size(); i++) {
-            datos.add(participantes.get(i).getParticipante().getNombre());
-            if (nombre.compareTo(participantes.get(i).getParticipante().getNombre()) == 0)
+            datos.add(participantes.get(i).getNombre());
+            if (nombre.compareTo(participantes.get(i).getNombre()) == 0)
                 position = i;
         }
         ArrayAdapter<String> adaptador =
@@ -74,9 +74,12 @@ public class SelectGamerActivity extends Activity {
                         ComunioConstants.PROPERTY_MY_TEAM);
                 Log.d(TAG, "salvo: " + nombre);
                 if (nombre.compareTo("") == 0)
-                    ActivityTool.showToast(getParent(), getResources().getString(R.string.pick_no_team), Toast.LENGTH_LONG);
+                    ActivityTool.showToast(getParent(), getResources().getString(R.string.pick_no_team));
                 else {
-                    setResult(RESULT_OK);
+                    if(getIntent().hasExtra("mode"))
+                        setResult(getIntent().getExtras().getInt("mode"));
+                    else
+                        setResult(RESULT_OK);
                     finish();
                 }
 

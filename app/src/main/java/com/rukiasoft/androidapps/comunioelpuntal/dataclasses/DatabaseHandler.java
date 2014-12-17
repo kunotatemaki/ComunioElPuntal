@@ -30,8 +30,8 @@ public class DatabaseHandler implements Serializable {
     //DataBase
     private SQLiteDatabase mDB = null;
     private DatabaseOpenHelper mDbHelper;
-    private ObjectMapper mapper = new ObjectMapper();
-    private Context context;
+    private final ObjectMapper mapper = new ObjectMapper();
+    private final Context context;
     private final static String TAG = "DatabaseHandler";
 
     public DatabaseHandler(Context context) {
@@ -196,7 +196,7 @@ public class DatabaseHandler implements Serializable {
         return resultado;
     }
 
-    public boolean isTableExists(String tableName) {
+    boolean isTableExists(String tableName) {
 
         Cursor cursor = mDB.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = '" + tableName + "'", null);
         if (cursor != null) {
@@ -209,7 +209,7 @@ public class DatabaseHandler implements Serializable {
         return false;
     }
 
-    public List<Player> getPlayerList(String name, String _column) throws Exception {
+    public List<Player> getPlayerList(String name, String _column) {
         List<Player> players = new ArrayList<>();
         try {
             mDbHelper = new DatabaseOpenHelper(context);
@@ -245,7 +245,7 @@ public class DatabaseHandler implements Serializable {
         return players;
     }
 
-    public String getShieldName(String teamName) throws Exception {
+    public String getShieldName(String teamName) {
         String sTeam = "";
         try {
             mDbHelper = new DatabaseOpenHelper(context);
@@ -270,7 +270,7 @@ public class DatabaseHandler implements Serializable {
         return sTeam;
     }
 
-    public Participante getGamerByName(String name) throws Exception {
+    public Participante getGamerByName(String name) {
         Participante participante = new Participante();
         try {
             mDbHelper = new DatabaseOpenHelper(context);
@@ -298,7 +298,7 @@ public class DatabaseHandler implements Serializable {
         return participante;
     }
 
-    public List<Participante> getAllGamers() throws Exception {
+    public List<Participante> getAllGamers() {
         List<Participante> participantes = new ArrayList<>();
         try {
             mDbHelper = new DatabaseOpenHelper(context);
@@ -328,7 +328,7 @@ public class DatabaseHandler implements Serializable {
         return participantes;
     }
 
-    public List<Signing> getSignings(String name, String _column) throws Exception {
+    public List<Signing> getSignings(String name, String _column) {
         List<Signing> fichajes = new ArrayList<>();
         try {
             mDbHelper = new DatabaseOpenHelper(context);
@@ -364,7 +364,7 @@ public class DatabaseHandler implements Serializable {
 
     }
 
-    public List<Puntuacion> getScores(Participante participante) throws Exception {
+    public List<Puntuacion> getScores(Participante participante) {
         List<Puntuacion> puntuaciones = new ArrayList<>();
         try {
             mDbHelper = new DatabaseOpenHelper(context);
@@ -433,7 +433,7 @@ public class DatabaseHandler implements Serializable {
     }
 
     // Insert data in database
-    private long insertNotificationData(Bundle extras) throws Exception {
+    private long insertNotificationData(Bundle extras) {
         long resultado;
         ContentValues values = new ContentValues();
         values.put(DatabaseOpenHelper.TIMESTAMP_NOTIFICATION, extras.getString("timestamp_notification"));

@@ -28,7 +28,7 @@ public class PlayersFragment extends ListFragment implements OnQueryTextListener
      *
      */
     private static final long serialVersionUID = 1L;
-    PlayersListAdapter mAdapter = null;
+    private PlayersListAdapter mAdapter = null;
     private static final String TAG = "PlayersFragment";
 
     public void createAdapter() {

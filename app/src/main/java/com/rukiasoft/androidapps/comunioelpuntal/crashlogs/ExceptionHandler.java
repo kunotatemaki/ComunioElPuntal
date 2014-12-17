@@ -50,7 +50,7 @@ import com.rukiasoft.androidapps.comunioelpuntal.comunication.gcm.ServerClient;
 
 public class ExceptionHandler {
 
-    public static String TAG = "com.nullwire.trace.ExceptionsHandler";
+    private static final String TAG = "com.nullwire.trace.ExceptionsHandler";
     private static Context context;
     private static String[] stackTraceFileList = null;
 
@@ -130,7 +130,7 @@ public class ExceptionHandler {
      * Look into the files folder to see if there are any "*.stacktrace" files.
      * If any are present, submit them to the trace server.
      */
-    public static void submitStackTraces() {
+    private static void submitStackTraces() {
         try {
             Log.d(TAG, "Looking for exceptions in: " + G.FILES_PATH);
             String[] list = searchForStackTraces();

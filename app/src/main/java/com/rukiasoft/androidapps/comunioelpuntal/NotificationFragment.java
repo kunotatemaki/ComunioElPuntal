@@ -34,11 +34,6 @@ public class NotificationFragment extends ListFragment implements Serializable {
 
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-    }
-
-    @Override
     public void onCreate(Bundle savedInstanceState) {
         Log.i(TAG, "onCreate");
         super.onCreate(savedInstanceState);
@@ -167,7 +162,7 @@ public class NotificationFragment extends ListFragment implements Serializable {
         mAdapter.getItem(position).alreadyRead();
     }
 
-    public void deleteItemsDataBase() {
+    void deleteItemsDataBase() {
 
         if (mAdapter != null)
             mAdapter.clear();

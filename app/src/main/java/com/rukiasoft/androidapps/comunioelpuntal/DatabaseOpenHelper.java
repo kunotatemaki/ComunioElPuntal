@@ -61,25 +61,25 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper implements Serializable
     final public static String[] columnsPlayers = {ID, NOMBRE, DEMARCACION, EQUIPO, PROPIETARIO};
     final public static String[] columnsNotifications = {ID, TIMESTAMP_NOTIFICATION, TIMESTAMP_SERVER, TITLE_MESSAGE, BODY_MESSAGE, READ};
 
-    private String CREATE_SIGNING_CMD = "CREATE TABLE " + ComunioConstants.TABLE_SIGNING + " (" + ID + " INTEGER, "
+    private final String CREATE_SIGNING_CMD = "CREATE TABLE " + ComunioConstants.TABLE_SIGNING + " (" + ID + " INTEGER, "
             + NOMBRE + " TEXT NOT NULL, "
             + COMPRADOR + " TEXT NOT NULL, "
             + VENDEDOR + " TEXT NOT NULL, "
             + PRECIO + " INTEGER, "
             + JORNADA + " REAL)";
 
-    private String CREATE_GAMERS_CMD = "CREATE TABLE " + ComunioConstants.TABLE_GAMERS + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+    private final String CREATE_GAMERS_CMD = "CREATE TABLE " + ComunioConstants.TABLE_GAMERS + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + NOMBRE + " TEXT NOT NULL, "
             + LOGIN + " TEXT NOT NULL, "
             + EMAIL + " TEXT, "
             + GCM_REGID + " TEXT, "
             + TABLA + " TEXT NOT NULL)";
 
-    private String CREATE_TEAMS_CMD = "CREATE TABLE " + ComunioConstants.TABLE_TEAMS + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+    private final String CREATE_TEAMS_CMD = "CREATE TABLE " + ComunioConstants.TABLE_TEAMS + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + NOMBRE + " TEXT NOT NULL, "
             + FOTO + " TEXT NOT NULL)";
 
-    private String CREATE_PLAYERS_CMD = "CREATE TABLE " + ComunioConstants.TABLE_PLAYERS + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+    private final String CREATE_PLAYERS_CMD = "CREATE TABLE " + ComunioConstants.TABLE_PLAYERS + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + NOMBRE + " TEXT NOT NULL, "
             + DEMARCACION + " TEXT NOT NULL, "
             + EQUIPO + " TEXT NOT NULL, "

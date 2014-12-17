@@ -41,9 +41,9 @@ import java.util.Random;
 
 //import android.util.Log;
 
-public class DefaultExceptionHandler implements UncaughtExceptionHandler {
+class DefaultExceptionHandler implements UncaughtExceptionHandler {
 
-    private UncaughtExceptionHandler defaultExceptionHandler;
+    private final UncaughtExceptionHandler defaultExceptionHandler;
 
     //private static final String TAG = "UNHANDLED_EXCEPTION";
 

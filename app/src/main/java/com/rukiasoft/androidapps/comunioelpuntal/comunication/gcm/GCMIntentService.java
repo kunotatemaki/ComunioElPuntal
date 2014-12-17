@@ -10,9 +10,9 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.rukiasoft.androidapps.comunioelpuntal.dataclasses.DatabaseHandler;
 
 public class GCMIntentService extends IntentService {
-    static final String CUSTOM_INTENT = "ruler.elpuntal.comunio.androidapp.NOTIFICATION";
+    private static final String CUSTOM_INTENT = "ruler.elpuntal.comunio.androidapp.NOTIFICATION";
 
-    static String TAG = "GCMIntentService";
+    private static final String TAG = "GCMIntentService";
     //DataBase
 
 

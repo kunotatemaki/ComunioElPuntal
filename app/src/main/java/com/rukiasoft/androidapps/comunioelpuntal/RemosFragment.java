@@ -59,7 +59,7 @@ public class RemosFragment extends Fragment implements Serializable {
     }
 
     @SuppressWarnings("unchecked")
-    public Integer loadItems(ListView listView) {
+    Integer loadItems(ListView listView) {
         Integer money = 0;
         if (puntuaciones == null)
             return money;

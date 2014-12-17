@@ -33,7 +33,10 @@ public class DataBaseDownloadReceiver extends BroadcastReceiver {
             }
         } else if (type.compareTo(StartScreenActivity.class.getSimpleName()) == 0) {
             Log.d(TAG, "estoy en startScreen");
-            StartScreenActivity.loadData();
+            if(!MainActivity.isGamerSelected()) //no existe player, lo elijo
+                StartScreenActivity.finalizarActivity(MainActivity.RESULT_LOAD_SELECT);
+            else
+                StartScreenActivity.loadData();
         }
 
     }

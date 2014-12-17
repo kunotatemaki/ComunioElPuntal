@@ -31,7 +31,6 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.xml.sax.SAXException;
 
@@ -59,11 +58,13 @@ import com.rukiasoft.androidapps.comunioelpuntal.utils.ComunioConstants;
 public class MainActivity extends ActionBarActivity implements GamerFragmentSelectionListener,
         CommunityFragmentSelectionListener, ClassificationFragmentSelectionListener {
 
-    static final String TAG = "MainActivity";
-    public static int RESULT_START_ACTIVITY = 246;
-    public static int RESULT_SELECT_ACTIVITY = 247;
-    public static int RESULT_INSTALL_ACTIVITY = 248;
-    public static int RESULT_SETTINGS_ACTIVITY = 249;
+    private static final String TAG = "MainActivity";
+    private static final int RESULT_START_ACTIVITY = 246;
+    private static final int RESULT_SELECT_ACTIVITY = 247;
+    private static final int RESULT_INSTALL_ACTIVITY = 248;
+    private static final int RESULT_SETTINGS_ACTIVITY = 249;
+    public static final int RESULT_LOAD_SELECT = 250;
+    public static final int RESULT_LOAD_START_SCREEN = 251;
 
     private static PlayersFragment playersFragment = null;
     private static GamerFragment gamerFragment = null;
@@ -93,12 +94,12 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
     private static DrawerLayout mDrawerLayout;
     private static ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
-    NavigationDrawerAdapter navigationDrawerAdapter;
+    private NavigationDrawerAdapter navigationDrawerAdapter;
     //private CharSequence mTitle;
     private Boolean firstStart = true;
     private static String myNameGamer = "";
     private Integer arrowCounter = 0;
-    private ArrayList<String> titulos = new ArrayList<>();
+    private final ArrayList<String> titulos = new ArrayList<>();
 
     private static SmoothProgressBar mProgressBar;
 
@@ -184,6 +185,8 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
                 Log.i(TAG, "Excepción no controlada al crear cliente");
             }
         }
+        //registro el código, por si no lo he hecho antes.
+        serverClient.conectar(ServerClient.AccessMode.ACTIVITY);
 
         ExceptionHandler.register(this);
 
@@ -248,7 +251,7 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
         ActivityTool.HideProgress(mProgressBar, this);
 
         if (ActivityTool.getBooleanFromPreferences(this, ComunioConstants.PROPERTY_INSTALL_UPDATED_APP)) {
-            Log.d(TAG, "Aquí tocaría actualizar la app");
+            Log.d(TAG, "actualizar la app");
             try {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setDataAndType(Uri.fromFile(new File(Environment.getExternalStorageDirectory() + ComunioConstants.DIRECTORY_APP + ComunioConstants.NOMBRE_APP)), "application/vnd.android.package-archive");
@@ -269,7 +272,7 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
     }
 
 
-    public void loadItemsNavigationDrawer() {
+    void loadItemsNavigationDrawer() {
 
         navigationDrawerAdapter.clear();
         myNameGamer = ActivityTool.getStringFromPreferences(getApplicationContext(),
@@ -331,8 +334,7 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
 
         if (requestCode == RESULT_START_ACTIVITY) {
             if (resultCode == RESULT_OK) {
-                myNameGamer = ActivityTool.getStringFromPreferences(this, ComunioConstants.PROPERTY_MY_TEAM);
-                if (myNameGamer.compareTo("") == 0) {
+                if (!isGamerSelected()) {
                     Log.d(TAG, "no hay nombre, lanzo la pantalla de selección");
                     Intent intent = new Intent(this, SelectGamerActivity.class);
                     startActivityForResult(intent, RESULT_SELECT_ACTIVITY);
@@ -344,16 +346,24 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
                         }
                     });
                 }
-            } else
+            } else if (resultCode == RESULT_LOAD_SELECT){
+               Intent intent = new Intent(this, SelectGamerActivity.class);
+               intent.putExtra("mode", RESULT_LOAD_START_SCREEN);
+               startActivityForResult(intent, RESULT_SELECT_ACTIVITY);
+            }else
                 Log.d(TAG, "vuelvo sin haber puesto ok");
         } else if (requestCode == RESULT_SELECT_ACTIVITY) {
-            if (!isCreated())
-                new Handler().post(new Runnable() {
-                    public void run() {
-                        //loadFragmentsOnCreate();
-                        loadItemsNavigationDrawer();
-                    }
-                });
+            if(resultCode == RESULT_LOAD_START_SCREEN) {
+                Intent intent = new Intent(MainActivity.this, StartScreenActivity.class);
+                startActivityForResult(intent, RESULT_START_ACTIVITY);
+            }else if(resultCode == RESULT_OK)
+                if (!isCreated())
+                    new Handler().post(new Runnable() {
+                        public void run() {
+                            //loadFragmentsOnCreate();
+                            loadItemsNavigationDrawer();
+                        }
+                    });
 
         } else if (requestCode == RESULT_SETTINGS_ACTIVITY) {
             if (!isCreated()) {
@@ -409,12 +419,6 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
         if (players.size() > 0)
             savedInstanceState.putSerializable("players", (Serializable) players);
         super.onSaveInstanceState(savedInstanceState);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-
-        super.onRestoreInstanceState(savedInstanceState);
     }
 
     @Override
@@ -491,7 +495,7 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
         return serverClient;
     }
 
-    public void onNavigationDrawerItemSelected(MainItem item) {
+    void onNavigationDrawerItemSelected(MainItem item) {
 
         Log.i(TAG, "Entered onNavigationDrawerItemSelected");
         Bundle extras = item.getIntent().getExtras();
@@ -503,11 +507,11 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
         if (name.compareTo("MyTeam") == 0) {
             String myName = extras.getString("Gamer");
             if (myName.compareTo("") == 0) {
-                ActivityTool.showToast(this, getResources().getString(R.string.no_gamer_selected), Toast.LENGTH_LONG);
+                ActivityTool.showToast(this, getResources().getString(R.string.no_gamer_selected));
                 return;
             }
             if (getGamers().size() == 0) {
-                ActivityTool.showToast(this, getResources().getString(R.string.no_gamers_loaded), Toast.LENGTH_LONG);
+                ActivityTool.showToast(this, getResources().getString(R.string.no_gamers_loaded));
                 return;
             }
             mMainFragment = getGamerFragment(myName);
@@ -515,7 +519,7 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
 
 
             if (ActivityTool.isForTablet(this)) {
-                teamPlayersFragment.setPlayerList(this.getApplicationContext(),
+                teamPlayersFragment.setPlayerList(
                         ((GamerFragment) mMainFragment).getPlayerItemsForTablets());
                 teamPlayersFragment.setCabeceraView("");
                 mSecondaryFragment = teamPlayersFragment;
@@ -523,13 +527,13 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
         } else if (name.compareTo("Players") == 0) {
             mMainFragment = playersFragment;
             if (!((PlayersFragment) mMainFragment).hasInformation()) {
-                ActivityTool.showToast(this, getResources().getString(R.string.no_players_loaded), Toast.LENGTH_LONG);
+                ActivityTool.showToast(this, getResources().getString(R.string.no_players_loaded));
                 return;
             }
         } else if (name.compareTo("Community") == 0) {
             mMainFragment = communityFragment;
             if (getGamers().size() == 0) {
-                ActivityTool.showToast(this, getResources().getString(R.string.no_gamers_loaded), Toast.LENGTH_LONG);
+                ActivityTool.showToast(this, getResources().getString(R.string.no_gamers_loaded));
                 return;
             }
         } else if (name.compareTo("Notifications") == 0) {
@@ -537,7 +541,7 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
         } else if (name.compareTo("Classification") == 0) {
             mMainFragment = classificationTabsFragment;
         } else {
-            ActivityTool.showToast(this, getResources().getString(R.string.coming_soon), Toast.LENGTH_LONG);
+            ActivityTool.showToast(this, getResources().getString(R.string.coming_soon));
             return;
         }
         mFragmentTransaction = mFragmentManager.beginTransaction();
@@ -587,14 +591,14 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
         if (name.compareTo("MyPlayers") == 0) {
             @SuppressWarnings("unchecked")
             List<PlayerItem> player = (List<PlayerItem>) extras.getSerializable("Players");
-            teamPlayersFragment.setPlayerList(this.getApplicationContext(), player);
+            teamPlayersFragment.setPlayerList(player);
             teamPlayersFragment.setCabeceraView("");
             mMainFragment = teamPlayersFragment;
         } else if (name.compareTo("Signings") == 0) {
             @SuppressWarnings("unchecked")
             List<PlayerItem> player = (List<PlayerItem>) extras.getSerializable("Players");
             Integer money = extras.getInt("Money");
-            teamPlayersFragment.setPlayerList(this.getApplicationContext(), player);
+            teamPlayersFragment.setPlayerList(player);
             teamPlayersFragment.setCabeceraView(ActivityTool.getFormatedCurrencyNumber(money) + " €");
             mMainFragment = teamPlayersFragment;
         } else if (name.compareTo("Sales") == 0) {
@@ -602,7 +606,7 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
             List<PlayerItem> player = (List<PlayerItem>) extras.getSerializable("Players");
             Integer money = extras.getInt("Money");
             Log.d(TAG, "Voy a poner en ventas: " + ActivityTool.getFormatedCurrencyNumber(money) + " €");
-            teamPlayersFragment.setPlayerList(this.getApplicationContext(), player);
+            teamPlayersFragment.setPlayerList(player);
             teamPlayersFragment.setCabeceraView(ActivityTool.getFormatedCurrencyNumber(money) + " €");
             mMainFragment = teamPlayersFragment;
         } else if (name.compareTo("Remos") == 0) {
@@ -625,7 +629,7 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
             balanceFragment.setGamer(gamer);
             mMainFragment = balanceFragment;
         } else
-            ActivityTool.showToast(this, getResources().getString(R.string.coming_soon), Toast.LENGTH_LONG);
+            ActivityTool.showToast(this, getResources().getString(R.string.coming_soon));
 
         if (!ActivityTool.isForTablet(this)) {
             mFragmentTransaction.replace(R.id.fragment_container, mMainFragment);
@@ -659,7 +663,7 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
                     .commit();
         } else {
             showSecondaryFragment();
-            teamPlayersFragment.setPlayerList(this.getApplicationContext(),
+            teamPlayersFragment.setPlayerList(
                     ((GamerFragment) mMainFragment).getPlayerItemsForTablets());
             teamPlayersFragment.setCabeceraView("");
             mSecondaryFragment = teamPlayersFragment;
@@ -687,7 +691,7 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
                     .commit();
         } else {
             showSecondaryFragment();
-            teamPlayersFragment.setPlayerList(this.getApplicationContext(),
+            teamPlayersFragment.setPlayerList(
                     ((GamerFragment) mMainFragment).getPlayerItemsForTablets());
             teamPlayersFragment.setCabeceraView("");
             mSecondaryFragment = teamPlayersFragment;
@@ -850,6 +854,11 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
 
     }
 
+    public static List<Participante> loadGamerNamesFromDatabase() {
+
+        return dbHandler.getAllGamers();
+    }
+
     private static void setTextProgress(final String text, final TextView textView) {
         if (textView instanceof TextView) {
             textView.post(new Runnable() {
@@ -872,7 +881,7 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
         }
     }
 
-    public GamerFragment getGamerFragment(String nombre) {
+    GamerFragment getGamerFragment(String nombre) {
         //Log.d(TAG, "busco el fragment");
         if (gamerFragment.getGamer() != null)
             if (gamerFragment.getGamer().getParticipante().getNombre().compareTo(nombre) == 0) {
@@ -913,6 +922,14 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
         LayoutParams params = layout.getLayoutParams();
         params.width = LayoutParams.MATCH_PARENT;
         layout.setLayoutParams(params);
+    }
+
+    public static Boolean isGamerSelected(){
+        myNameGamer = ActivityTool.getStringFromPreferences(context, ComunioConstants.PROPERTY_MY_TEAM);
+        if (myNameGamer.compareTo("") == 0)
+            return false;
+        else
+            return true;
     }
 
 }

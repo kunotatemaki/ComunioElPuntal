@@ -32,7 +32,7 @@ import com.rukiasoft.androidapps.comunioelpuntal.R;
 
 public class ActivityTool {
 
-    static final String TAG = "ActivityTool";
+    private static final String TAG = "ActivityTool";
     static public String ACTIVITY = "activity";
     static private Toast toast = null;
 
@@ -64,7 +64,7 @@ public class ActivityTool {
         return result;
     }
 
-    public static void showToast(final Context context, final String text, final int duration) {
+    public static void showToast(final Context context, final String text) {
 
         //sólo quiero mostrar si viene de una activity
         if (!(context instanceof Activity)) {
@@ -78,7 +78,7 @@ public class ActivityTool {
                     return;
                 }
             }
-            toast = Toast.makeText(context, text, duration);
+            toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
             toast.show();
         } catch (Exception e) {
             Log.e(TAG, "error en showToast: " + e.getMessage());
@@ -222,7 +222,7 @@ public class ActivityTool {
         return df.format(c.getTime());
     }
 
-    public static Date getDateFromString(Context context, String fecha) {
+    private static Date getDateFromString(Context context, String fecha) {
         SimpleDateFormat form = new SimpleDateFormat(ComunioConstants.FORMAT_DATE_TIME, context.getResources().getConfiguration().locale);
         Date date = null;
         try {

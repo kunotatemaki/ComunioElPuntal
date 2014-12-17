@@ -2,7 +2,7 @@ package com.rukiasoft.androidapps.comunioelpuntal.dataclasses;
 
 import java.io.Serializable;
 
-public class Teams implements Serializable {
+class Teams implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
