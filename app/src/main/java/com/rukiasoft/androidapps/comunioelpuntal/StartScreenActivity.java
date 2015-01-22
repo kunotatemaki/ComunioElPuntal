@@ -83,11 +83,6 @@ public class StartScreenActivity extends Activity {
             public void run() {
                 MainActivity.loadDatabase(horizontalProgressBar, descripcion);
                 finalizarActivity(RESULT_OK);
-                /*if (activity != null) {
-                    Log.d(TAG, "pongo ok y termino");
-                    activity.setResult(RESULT_OK);
-                    activity.finish();
-                }*/
             }
         }).start();
     }
@@ -109,7 +104,6 @@ public class StartScreenActivity extends Activity {
     public void onDestroy() {
         super.onDestroy();
         Log.d(TAG, "onDestroy");
-
     }
 
 

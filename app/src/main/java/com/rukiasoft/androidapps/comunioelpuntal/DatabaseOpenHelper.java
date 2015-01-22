@@ -32,7 +32,6 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper implements Serializable
     final public static String REMO_JUGADORES = "remo_jugadores";
     final public static String REMO_EQUIPO = "remo_equipo";
     final public static String REMO_TRUPITA = "remo_trupita";
-    final public static String FECHA = "fecha";
     final public static String NOMBRE = "nombre";
     final public static String COMPRADOR = "comprador";
     final public static String VENDEDOR = "vendedor";
@@ -50,16 +49,23 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper implements Serializable
     final public static String READ = "read";
     final public static String TIMESTAMP_SERVER = "timestamp_server";
     final public static String TIMESTAMP_NOTIFICATION = "timestamp_device";
-
+    final public static String OPTION = "option";
+    final public static String VALUE = "value";
+    final public static String JORNADA_INICIO = "j_inicio";
+    final public static String JORNADA_FINAL = "j_final";
+    final public static String PUNTOS_INICIO = "puntos_inicio";
+    final public static String PRIMA_INICIAL = "prima_inicial";
 
     final public static String[] columnsScore = {ID, JORNADA, PUNTUACION_JORNADA, POSICION_JORNADA, PRIMA_JORNADA,
             PUNTUACION_GENERAL, POSICION_GENERAL, PRIMA_GENERAL, PUBLICADO, GOLES, PORTERO, REMO_JUGADORES,
             REMO_EQUIPO, REMO_TRUPITA};
     final public static String[] columnsSignings = {ID, NOMBRE, COMPRADOR, VENDEDOR, PRECIO, JORNADA};
-    final public static String[] columnsGamers = {ID, NOMBRE, LOGIN, EMAIL, GCM_REGID, TABLA};
+    final public static String[] columnsGamers = {ID, NOMBRE, LOGIN, EMAIL, GCM_REGID, TABLA, JORNADA_INICIO,
+    JORNADA_FINAL, PUNTOS_INICIO, PRIMA_INICIAL};
     final public static String[] columnsTeams = {ID, NOMBRE, FOTO};
     final public static String[] columnsPlayers = {ID, NOMBRE, DEMARCACION, EQUIPO, PROPIETARIO};
     final public static String[] columnsNotifications = {ID, TIMESTAMP_NOTIFICATION, TIMESTAMP_SERVER, TITLE_MESSAGE, BODY_MESSAGE, READ};
+    final public static String[] columnsConfiguration = {ID, OPTION, VALUE};
 
     private final String CREATE_SIGNING_CMD = "CREATE TABLE " + ComunioConstants.TABLE_SIGNING + " (" + ID + " INTEGER, "
             + NOMBRE + " TEXT NOT NULL, "
@@ -73,7 +79,11 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper implements Serializable
             + LOGIN + " TEXT NOT NULL, "
             + EMAIL + " TEXT, "
             + GCM_REGID + " TEXT, "
-            + TABLA + " TEXT NOT NULL)";
+            + TABLA + " TEXT NOT NULL, "
+            + JORNADA_INICIO + " INTEGER, "
+            + JORNADA_FINAL + " INTEGER, "
+            + PUNTOS_INICIO + " INTEGER, "
+            + PRIMA_INICIAL + " INTEGER)";
 
     private final String CREATE_TEAMS_CMD = "CREATE TABLE " + ComunioConstants.TABLE_TEAMS + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + NOMBRE + " TEXT NOT NULL, "
@@ -91,6 +101,10 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper implements Serializable
             + TITLE_MESSAGE + " TEXT NOT NULL, "
             + BODY_MESSAGE + " TEXT NOT NULL, "
             + READ + " INTEGER)";
+
+    final private static String CREATE_CONFIGURATION_CMD = "CREATE TABLE " + ComunioConstants.TABLE_CONF + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + OPTION + " TEXT NOT NULL, "
+            + VALUE + " INTEGER)";
 
     final private static Integer VERSION = 1;
     final private Context mContext;
@@ -111,6 +125,8 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper implements Serializable
         db.execSQL(CREATE_TEAMS_CMD);
         db.execSQL(CREATE_PLAYERS_CMD);
         db.execSQL(CREATE_NOTIFICATIONS_CMD);
+        db.execSQL(CREATE_CONFIGURATION_CMD);
+
     }
 
     @Override
@@ -133,6 +149,8 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper implements Serializable
         db.execSQL(CREATE_PLAYERS_CMD);
         db.execSQL("DROP TABLE IF EXISTS " + ComunioConstants.TABLE_NOTIFICATIONS);
         db.execSQL(CREATE_NOTIFICATIONS_CMD);
+        db.execSQL("DROP TABLE IF EXISTS " + ComunioConstants.TABLE_CONF );
+        db.execSQL(CREATE_CONFIGURATION_CMD);
     }
 
     public void deleteDatabase() {
@@ -177,6 +195,10 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper implements Serializable
 
     public void createNotificationsTable() {
         this.getWritableDatabase().execSQL(CREATE_NOTIFICATIONS_CMD);
+    }
+
+    public void createConfigurationTable() {
+        this.getWritableDatabase().execSQL(CREATE_CONFIGURATION_CMD);
     }
 
 

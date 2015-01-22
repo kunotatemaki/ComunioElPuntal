@@ -56,7 +56,155 @@ public class DatabaseHandler implements Serializable {
     // Insert data in database
     private long insertData(JSONObject data) throws Exception {
         Log.d(TAG, "Insert data in database: ");
-        long resultado = 0;
+        long resultado;
+
+        //grabo las configuraciones
+        Integer value = data.getInt(ComunioConstants.BONUS_GOAL);
+        if (!isTableExists(ComunioConstants.TABLE_CONF)) {
+            mDbHelper.createConfigurationTable();
+        }
+        ContentValues option = new ContentValues();
+        option.put(DatabaseOpenHelper.OPTION, ComunioConstants.BONUS_GOAL);
+        option.put(DatabaseOpenHelper.VALUE, value);
+        String[] args = new String[]{ComunioConstants.BONUS_GOAL};
+        resultado = mDB.update(ComunioConstants.TABLE_CONF, option, DatabaseOpenHelper.OPTION + "=?", args);
+        if (resultado < 0)
+            throw new Exception("Error actualizando datos de configuracion");
+        else if (resultado == 0) {
+            resultado = mDB.insert(ComunioConstants.TABLE_CONF, null, option);
+            if (resultado < 0)
+                throw new Exception("Error actualizando datos de configuracion");
+        }
+
+        value = data.getInt(ComunioConstants.BONUS_GOALKEEPER);
+        option.put(DatabaseOpenHelper.OPTION, ComunioConstants.BONUS_GOALKEEPER);
+        option.put(DatabaseOpenHelper.VALUE, value);
+        args[0] = ComunioConstants.BONUS_GOALKEEPER;
+        resultado = mDB.update(ComunioConstants.TABLE_CONF, option, DatabaseOpenHelper.OPTION + "=?", args);
+        if (resultado < 0)
+            throw new Exception("Error actualizando datos de configuracion");
+        else if (resultado == 0) {
+            resultado = mDB.insert(ComunioConstants.TABLE_CONF, null, option);
+            if (resultado < 0)
+                throw new Exception("Error actualizando datos de configuracion");
+        }
+
+        value = data.getInt(ComunioConstants.BONUS_LAST_IN_ROUND);
+        option.put(DatabaseOpenHelper.OPTION, ComunioConstants.BONUS_LAST_IN_ROUND);
+        option.put(DatabaseOpenHelper.VALUE, value);
+        args[0] = ComunioConstants.BONUS_LAST_IN_ROUND;
+        resultado = mDB.update(ComunioConstants.TABLE_CONF, option, DatabaseOpenHelper.OPTION + "=?", args);
+        if (resultado < 0)
+            throw new Exception("Error actualizando datos de configuracion");
+        else if (resultado == 0) {
+            resultado = mDB.insert(ComunioConstants.TABLE_CONF, null, option);
+            if (resultado < 0)
+                throw new Exception("Error actualizando datos de configuracion");
+        }
+
+        value = data.getInt(ComunioConstants.BONUS_LAST_IN_CLASSIFICATION);
+        option.put(DatabaseOpenHelper.OPTION, ComunioConstants.BONUS_LAST_IN_CLASSIFICATION);
+        option.put(DatabaseOpenHelper.VALUE, value);
+        args[0] = ComunioConstants.BONUS_LAST_IN_CLASSIFICATION;
+        resultado = mDB.update(ComunioConstants.TABLE_CONF, option, DatabaseOpenHelper.OPTION + "=?", args);
+        if (resultado < 0)
+            throw new Exception("Error actualizando datos de configuracion");
+        else if (resultado == 0) {
+            resultado = mDB.insert(ComunioConstants.TABLE_CONF, null, option);
+            if (resultado < 0)
+                throw new Exception("Error actualizando datos de configuracion");
+        }
+
+        value = data.getInt(ComunioConstants.REMO_MAX_PLAYERS);
+        option.put(DatabaseOpenHelper.OPTION, ComunioConstants.REMO_MAX_PLAYERS);
+        option.put(DatabaseOpenHelper.VALUE, value);
+        args[0] = ComunioConstants.REMO_MAX_PLAYERS;
+        resultado = mDB.update(ComunioConstants.TABLE_CONF, option, DatabaseOpenHelper.OPTION + "=?", args);
+        if (resultado < 0)
+            throw new Exception("Error actualizando datos de configuracion");
+        else if (resultado == 0) {
+            resultado = mDB.insert(ComunioConstants.TABLE_CONF, null, option);
+            if (resultado < 0)
+                throw new Exception("Error actualizando datos de configuracion");
+        }
+
+        value = data.getInt(ComunioConstants.REMO_MAX_TEAMS);
+        option.put(DatabaseOpenHelper.OPTION, ComunioConstants.REMO_MAX_TEAMS);
+        option.put(DatabaseOpenHelper.VALUE, value);
+        args[0] = ComunioConstants.REMO_MAX_TEAMS;
+        resultado = mDB.update(ComunioConstants.TABLE_CONF, option, DatabaseOpenHelper.OPTION + "=?", args);
+        if (resultado < 0)
+            throw new Exception("Error actualizando datos de configuracion");
+        else if (resultado == 0) {
+            resultado = mDB.insert(ComunioConstants.TABLE_CONF, null, option);
+            if (resultado < 0)
+                throw new Exception("Error actualizando datos de configuracion");
+        }
+
+        value = data.getInt(ComunioConstants.REMO_TRUPITAS);
+        option.put(DatabaseOpenHelper.OPTION, ComunioConstants.REMO_TRUPITAS);
+        option.put(DatabaseOpenHelper.VALUE, value);
+        args[0] = ComunioConstants.REMO_TRUPITAS;
+        resultado = mDB.update(ComunioConstants.TABLE_CONF, option, DatabaseOpenHelper.OPTION + "=?", args);
+        if (resultado < 0)
+            throw new Exception("Error actualizando datos de configuracion");
+        else if (resultado == 0) {
+            resultado = mDB.insert(ComunioConstants.TABLE_CONF, null, option);
+            if (resultado < 0)
+                throw new Exception("Error actualizando datos de configuracion");
+        }
+
+        value = data.getInt(ComunioConstants.STARTING_MONEY);
+        option.put(DatabaseOpenHelper.OPTION, ComunioConstants.STARTING_MONEY);
+        option.put(DatabaseOpenHelper.VALUE, value);
+        args[0] = ComunioConstants.STARTING_MONEY;
+        resultado = mDB.update(ComunioConstants.TABLE_CONF, option, DatabaseOpenHelper.OPTION + "=?", args);
+        if (resultado < 0)
+            throw new Exception("Error actualizando datos de configuracion");
+        else if (resultado == 0) {
+            resultado = mDB.insert(ComunioConstants.TABLE_CONF, null, option);
+            if (resultado < 0)
+                throw new Exception("Error actualizando datos de configuracion");
+        }
+
+        value = data.getInt(ComunioConstants.BONUS_POINTS);
+        option.put(DatabaseOpenHelper.OPTION, ComunioConstants.BONUS_POINTS);
+        option.put(DatabaseOpenHelper.VALUE, value);
+        args[0] = ComunioConstants.BONUS_POINTS;
+        resultado = mDB.update(ComunioConstants.TABLE_CONF, option, DatabaseOpenHelper.OPTION + "=?", args);
+        if (resultado < 0)
+            throw new Exception("Error actualizando datos de configuracion");
+        else if (resultado == 0) {
+            resultado = mDB.insert(ComunioConstants.TABLE_CONF, null, option);
+            if (resultado < 0)
+                throw new Exception("Error actualizando datos de configuracion");
+        }
+
+        value = data.getInt(ComunioConstants.MAX_PLAYERS_TEAM);
+        option.put(DatabaseOpenHelper.OPTION, ComunioConstants.MAX_PLAYERS_TEAM);
+        option.put(DatabaseOpenHelper.VALUE, value);
+        args[0] = ComunioConstants.MAX_PLAYERS_TEAM;
+        resultado = mDB.update(ComunioConstants.TABLE_CONF, option, DatabaseOpenHelper.OPTION + "=?", args);
+        if (resultado < 0)
+            throw new Exception("Error actualizando datos de configuracion");
+        else if (resultado == 0) {
+            resultado = mDB.insert(ComunioConstants.TABLE_CONF, null, option);
+            if (resultado < 0)
+                throw new Exception("Error actualizando datos de configuracion");
+        }
+
+        value = data.getInt(ComunioConstants.MAX_PLAYERS_EACH_TEAM);
+        option.put(DatabaseOpenHelper.OPTION, ComunioConstants.MAX_PLAYERS_EACH_TEAM);
+        option.put(DatabaseOpenHelper.VALUE, value);
+        args[0] = ComunioConstants.MAX_PLAYERS_EACH_TEAM;
+        resultado = mDB.update(ComunioConstants.TABLE_CONF, option, DatabaseOpenHelper.OPTION + "=?", args);
+        if (resultado < 0)
+            throw new Exception("Error actualizando datos de configuracion");
+        else if (resultado == 0) {
+            resultado = mDB.insert(ComunioConstants.TABLE_CONF, null, option);
+            if (resultado < 0)
+                throw new Exception("Error actualizando datos de configuracion");
+        }
 
         //grabo los resultados de las jornadas
         JSONArray listResultadosJSON;
@@ -78,7 +226,7 @@ public class DatabaseHandler implements Serializable {
             values.put(DatabaseOpenHelper.REMO_JUGADORES, puntuacion.getRemo_jugadores());
             values.put(DatabaseOpenHelper.REMO_EQUIPO, puntuacion.getRemo_equipo());
             values.put(DatabaseOpenHelper.REMO_TRUPITA, puntuacion.getRemo_trupita());
-            String[] args = new String[]{puntuacion.getJornada().toString()};
+            args[0] = puntuacion.getJornada().toString();
             if (!isTableExists(puntuacion.getTabla())) {
                 mDbHelper.createScoreTable(puntuacion.getTabla());
             }
@@ -105,7 +253,7 @@ public class DatabaseHandler implements Serializable {
             values.put(DatabaseOpenHelper.VENDEDOR, fichaje.getVendedor());
             values.put(DatabaseOpenHelper.PRECIO, fichaje.getPrecio());
             values.put(DatabaseOpenHelper.JORNADA, fichaje.getJornada());
-            String[] args = new String[]{fichaje.getId().toString()};
+            args[0] = fichaje.getId().toString();
             if (!isTableExists(ComunioConstants.TABLE_SIGNING)) {
                 mDbHelper.createSigningTable();
             }
@@ -131,7 +279,11 @@ public class DatabaseHandler implements Serializable {
             values.put(DatabaseOpenHelper.EMAIL, participante.getEmail());
             values.put(DatabaseOpenHelper.GCM_REGID, participante.getGcm_regid());
             values.put(DatabaseOpenHelper.TABLA, participante.getTabla());
-            String[] args = new String[]{participante.getNombre()};
+            values.put(DatabaseOpenHelper.JORNADA_INICIO, participante.getJ_inicio());
+            values.put(DatabaseOpenHelper.JORNADA_FINAL, participante.getJ_final());
+            values.put(DatabaseOpenHelper.PUNTOS_INICIO, participante.getPuntos_inicio());
+            values.put(DatabaseOpenHelper.PRIMA_INICIAL, participante.getPrima_inicial());
+            args[0] = participante.getNombre();
             if (!isTableExists(ComunioConstants.TABLE_GAMERS)) {
                 mDbHelper.createGamersTable();
             }
@@ -154,7 +306,7 @@ public class DatabaseHandler implements Serializable {
             Teams team = mapper.readValue(listTeamsJSON.get(i).toString(), Teams.class);
             values.put(DatabaseOpenHelper.NOMBRE, team.getNombre());
             values.put(DatabaseOpenHelper.FOTO, team.getFoto());
-            String[] args = new String[]{team.getNombre()};
+            args[0] = team.getNombre();
             if (!isTableExists(ComunioConstants.TABLE_TEAMS)) {
                 mDbHelper.createTeamsTable();
             }
@@ -179,7 +331,7 @@ public class DatabaseHandler implements Serializable {
             values.put(DatabaseOpenHelper.DEMARCACION, player.getDemarcacion());
             values.put(DatabaseOpenHelper.EQUIPO, player.getEquipo());
             values.put(DatabaseOpenHelper.PROPIETARIO, player.getPropietario());
-            String[] args = new String[]{player.getNombre()};
+            args[0] = player.getNombre();
             if (!isTableExists(ComunioConstants.TABLE_PLAYERS)) {
                 mDbHelper.createPlayersTable();
             }
@@ -192,6 +344,9 @@ public class DatabaseHandler implements Serializable {
                     throw new Exception("Error actualizando datos de jugadores");
             }
         }
+
+
+
         Log.d(TAG, "resultado que devuelvo: " + resultado);
         return resultado;
     }
@@ -207,6 +362,32 @@ public class DatabaseHandler implements Serializable {
             cursor.close();
         }
         return false;
+    }
+
+    public Integer getOption(String option){
+        Integer valor = 0;
+        try {
+            mDbHelper = new DatabaseOpenHelper(context);
+            mDB = mDbHelper.getWritableDatabase();
+            String column = DatabaseOpenHelper.OPTION + "=?";
+            String[] args = new String[]{option};
+
+            Cursor c = mDB.query(ComunioConstants.TABLE_CONF,
+                    DatabaseOpenHelper.columnsConfiguration, column, args, null, null, null);
+
+            if (c.moveToFirst()) {
+                //Recorremos el cursor hasta que no haya más registros
+                do {
+                    valor = c.getInt(2);
+                } while (c.moveToNext());
+            }
+            c.close();
+            mDB.close();
+        } catch (Exception e) {
+            Log.d(TAG, "getPlayerList");
+            throw e;
+        }
+        return valor;
     }
 
     public List<Player> getPlayerList(String name, String _column) {

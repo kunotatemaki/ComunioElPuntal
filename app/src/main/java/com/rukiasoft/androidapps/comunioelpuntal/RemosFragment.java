@@ -67,8 +67,8 @@ public class RemosFragment extends Fragment implements Serializable {
         for (int i = 0; i < puntuaciones.size(); i++) {
             String precio;
             if (puntuaciones.get(i).getRemo_jugadores()) {
-                money += ComunioConstants.REMO_MAX_PLAYERS;
-                precio = ActivityTool.getFormatedCurrencyNumber(ComunioConstants.REMO_MAX_PLAYERS);
+                money += MainActivity.getdbHandler().getOption(ComunioConstants.REMO_MAX_PLAYERS);
+                precio = ActivityTool.getFormatedCurrencyNumber(MainActivity.getdbHandler().getOption(ComunioConstants.REMO_MAX_PLAYERS));
                 String frase = patron.replace("_sancion_", "<font color='darkred'>" + precio + "</font>");
                 frase = frase.replace("€", "<font color='darkred'>€</font>");
                 frase = frase.replace("_motivo_", "<font color='blue'>" + ComunioConstants.TIPOS_SANCIONES[0] + "</font>");
@@ -76,8 +76,8 @@ public class RemosFragment extends Fragment implements Serializable {
                 ((ArrayAdapter<Spanned>) listView.getAdapter()).add(Html.fromHtml("<b>" + frase + "</b>"));
             }
             if (puntuaciones.get(i).getRemo_equipo()) {
-                money += ComunioConstants.REMO_MAX_TEAMS;
-                precio = ActivityTool.getFormatedCurrencyNumber(ComunioConstants.REMO_MAX_TEAMS);
+                money += MainActivity.getdbHandler().getOption(ComunioConstants.REMO_MAX_TEAMS);
+                precio = ActivityTool.getFormatedCurrencyNumber(MainActivity.getdbHandler().getOption(ComunioConstants.REMO_MAX_TEAMS));
                 String frase = patron.replace("_sancion_", "<font color='darkred'>" + precio + "</font>");
                 frase = frase.replace("€", "<font color='darkred'>€</font>");
                 frase = frase.replace("_motivo_", "<font color='blue'>" + ComunioConstants.TIPOS_SANCIONES[1] + "</font>");
@@ -85,8 +85,8 @@ public class RemosFragment extends Fragment implements Serializable {
                 ((ArrayAdapter<Spanned>) listView.getAdapter()).add(Html.fromHtml("<b>" + frase + "</b>"));
             }
             if (puntuaciones.get(i).getRemo_equipo()) {
-                money += ComunioConstants.REMO_TRUPITAS;
-                precio = ActivityTool.getFormatedCurrencyNumber(ComunioConstants.REMO_TRUPITAS);
+                money += MainActivity.getdbHandler().getOption(ComunioConstants.REMO_TRUPITAS);
+                precio = ActivityTool.getFormatedCurrencyNumber(MainActivity.getdbHandler().getOption(ComunioConstants.REMO_TRUPITAS));
                 String frase = patron.replace("_sancion_", "<font color='darkred'>" + precio + "</font>");
                 frase = frase.replace("€", "<font color='darkred'>€</font>");
                 frase = frase.replace("_motivo_", "<font color='blue'>" + ComunioConstants.TIPOS_SANCIONES[2] + "</font>");

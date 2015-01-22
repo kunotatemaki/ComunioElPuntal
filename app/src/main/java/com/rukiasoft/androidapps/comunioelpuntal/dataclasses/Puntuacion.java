@@ -2,6 +2,7 @@ package com.rukiasoft.androidapps.comunioelpuntal.dataclasses;
 
 import java.io.Serializable;
 
+import com.rukiasoft.androidapps.comunioelpuntal.MainActivity;
 import com.rukiasoft.androidapps.comunioelpuntal.utils.ComunioConstants;
 
 public class Puntuacion implements Serializable {
@@ -10,6 +11,7 @@ public class Puntuacion implements Serializable {
 
     private Integer Id = null;
     private String tabla = null;
+    private String nombre = null;
     private Double jornada = null;
     private Integer puntuacion_jornada = null;
     private Integer posicion_jornada = null;
@@ -103,7 +105,7 @@ public class Puntuacion implements Serializable {
 
     public void setGoles(Integer goles) {
         this.goles = goles;
-        dinero_goles = this.goles * ComunioConstants.BONUS_GOAL;
+        dinero_goles = this.goles * MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_GOAL);
     }
 
     public Boolean getPortero() {
@@ -112,7 +114,7 @@ public class Puntuacion implements Serializable {
 
     public void setPortero(Boolean portero) {
         this.portero = portero;
-        dinero_portero = this.portero ? ComunioConstants.BONUS_GOALKEEPER : 0;
+        dinero_portero = this.portero ? MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_GOALKEEPER) : 0;
     }
 
     public Boolean getRemo_equipo() {
@@ -121,7 +123,7 @@ public class Puntuacion implements Serializable {
 
     public void setRemo_equipo(Boolean remo_equipo) {
         this.remo_equipo = remo_equipo;
-        dinero_remo_equipo = this.remo_equipo ? ComunioConstants.REMO_MAX_TEAMS : 0;
+        dinero_remo_equipo = this.remo_equipo ? MainActivity.getdbHandler().getOption(ComunioConstants.REMO_MAX_TEAMS) : 0;
     }
 
     public Boolean getRemo_jugadores() {
@@ -130,7 +132,7 @@ public class Puntuacion implements Serializable {
 
     public void setRemo_jugadores(Boolean remo_jugadores) {
         this.remo_jugadores = remo_jugadores;
-        dinero_remo_jugadores = this.remo_jugadores ? ComunioConstants.REMO_MAX_PLAYERS : 0;
+        dinero_remo_jugadores = this.remo_jugadores ? MainActivity.getdbHandler().getOption(ComunioConstants.REMO_MAX_PLAYERS) : 0;
     }
 
     public Boolean getRemo_trupita() {
@@ -139,7 +141,7 @@ public class Puntuacion implements Serializable {
 
     public void setRemo_trupita(Boolean remo_trupita) {
         this.remo_trupita = remo_trupita;
-        dinero_remo_trupita = this.remo_trupita ? ComunioConstants.REMO_TRUPITAS : 0;
+        dinero_remo_trupita = this.remo_trupita ? MainActivity.getdbHandler().getOption(ComunioConstants.REMO_TRUPITAS) : 0;
     }
 
     public Boolean getPrima_jornada() {
@@ -148,7 +150,7 @@ public class Puntuacion implements Serializable {
 
     public void setPrima_jornada(Boolean prima_jornada) {
         this.prima_jornada = prima_jornada;
-        dinero_prima_jornada = this.prima_jornada ? ComunioConstants.BONUS_LAST_IN_ROUND : 0;
+        dinero_prima_jornada = this.prima_jornada ? MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_LAST_IN_ROUND) : 0;
     }
 
     public Integer getPrima_general() {
@@ -157,7 +159,7 @@ public class Puntuacion implements Serializable {
 
     public void setPrima_general(Integer prima_general) {
         this.prima_general = prima_general;
-        dinero_prima_general = this.prima_general.equals(ComunioConstants.CODIGO_SI_COBRA_PRIMA) ? ComunioConstants.BONUS_LAST_IN_ROUND : 0;
+        dinero_prima_general = this.prima_general.equals(ComunioConstants.CODIGO_SI_COBRA_PRIMA) ? MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_LAST_IN_ROUND) : 0;
     }
 
     public Integer getDinero_prima_jornada() {
@@ -216,4 +218,11 @@ public class Puntuacion implements Serializable {
         this.dinero_remo_trupita = dinero_remo_trupita;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 }

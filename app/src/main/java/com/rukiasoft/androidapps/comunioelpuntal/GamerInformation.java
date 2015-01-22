@@ -35,7 +35,7 @@ public class GamerInformation implements Serializable {
     private Integer numeroJugadores = 0;
     private Integer puntosTotales = 0;
     private Integer currentRanking = 0;
-    //DatabaseHandler MainActivity.getdbHandler() = null;
+    private Integer primaInicial = 0;
     private Participante participante;
 
 
@@ -61,6 +61,7 @@ public class GamerInformation implements Serializable {
         dineroRemoEquipos = 0;
         dineroRemoTrupita = 0;
         currentRanking = 0;
+        primaInicial = 0;
 
         List<Player> players;
         try {
@@ -135,20 +136,22 @@ public class GamerInformation implements Serializable {
         for (int i = 0; i < puntuaciones.size(); i++) {
             Puntuacion puntuacion = puntuaciones.get(i);
             if (puntuacion.getPuntuacion_jornada() != null)
-                dineroPuntos += puntuacion.getPuntuacion_jornada() * ComunioConstants.BONUS_POINTS;
-            dineroPrimasGoles += puntuacion.getGoles() * ComunioConstants.BONUS_GOAL;
-            dineroPrimasPortero += puntuacion.getPortero() ? ComunioConstants.BONUS_GOALKEEPER : 0;
-            dineroPrimasJornada += puntuacion.getPrima_jornada() ? ComunioConstants.BONUS_LAST_IN_ROUND : 0;
-            dineroPrimasGeneral += puntuacion.getPrima_general().equals(ComunioConstants.CODIGO_SI_COBRA_PRIMA) ? ComunioConstants.BONUS_LAST_IN_CLASSIFICATION : 0;
-            dineroRemoJugadores += puntuacion.getRemo_jugadores() ? ComunioConstants.REMO_MAX_PLAYERS : 0;
-            dineroRemoEquipos += puntuacion.getRemo_equipo() ? ComunioConstants.REMO_MAX_TEAMS : 0;
-            dineroRemoTrupita += puntuacion.getRemo_trupita() ? ComunioConstants.REMO_TRUPITAS : 0;
+                dineroPuntos += puntuacion.getPuntuacion_jornada() * MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_POINTS);
+            dineroPrimasGoles += puntuacion.getGoles() * MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_GOAL);
+            dineroPrimasPortero += puntuacion.getPortero() ? MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_GOALKEEPER) : 0;
+            dineroPrimasJornada += puntuacion.getPrima_jornada() ? MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_LAST_IN_ROUND) : 0;
+            dineroPrimasGeneral += puntuacion.getPrima_general().equals(ComunioConstants.CODIGO_SI_COBRA_PRIMA) ? MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_LAST_IN_CLASSIFICATION) : 0;
+            dineroRemoJugadores += puntuacion.getRemo_jugadores() ? MainActivity.getdbHandler().getOption(ComunioConstants.REMO_MAX_PLAYERS) : 0;
+            dineroRemoEquipos += puntuacion.getRemo_equipo() ? MainActivity.getdbHandler().getOption(ComunioConstants.REMO_MAX_TEAMS) : 0;
+            dineroRemoTrupita += puntuacion.getRemo_trupita() ? MainActivity.getdbHandler().getOption(ComunioConstants.REMO_TRUPITAS) : 0;
             puntosTotales = puntuacion.getPuntuacion_general();
 
             currentRanking = puntuacion.getPosicion_general();
         }
 
-        dineroTotal = ComunioConstants.STARTING_MONEY - dineroFichajes + dineroPuntos
+        primaInicial = participante.getPrima_inicial();
+
+        dineroTotal = MainActivity.getdbHandler().getOption(ComunioConstants.STARTING_MONEY) + primaInicial - dineroFichajes + dineroPuntos
                 + dineroPrimasGoles + dineroPrimasPortero + dineroPrimasGeneral + dineroPrimasJornada
                 - dineroRemoEquipos - dineroRemoJugadores - dineroRemoTrupita + dineroVentas;
     }
@@ -277,5 +280,12 @@ public class GamerInformation implements Serializable {
         this.currentRanking = currentRanking;
     }
 
+    public Integer getPrimaInicial() {
+        return primaInicial;
+    }
+
+    public void setPrimaInicial(Integer primaInicial) {
+        this.primaInicial = primaInicial;
+    }
 
 }

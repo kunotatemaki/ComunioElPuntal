@@ -89,24 +89,24 @@ public class BonusFragment extends Fragment implements Serializable {
         for (int i = 0; i < puntuaciones.size(); i++) {
             BonusItem item = new BonusItem();
             item.setJornada(ActivityTool.getStringFromDouble(puntuaciones.get(i).getJornada()));
-            totalMoneyGoles += puntuaciones.get(i).getGoles() * ComunioConstants.BONUS_GOAL;
-            item.setGoles(ActivityTool.getFormatedCurrencyNumber(puntuaciones.get(i).getGoles() * ComunioConstants.BONUS_GOAL) + "€");
+            totalMoneyGoles += puntuaciones.get(i).getGoles() * MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_GOAL);
+            item.setGoles(ActivityTool.getFormatedCurrencyNumber(puntuaciones.get(i).getGoles() * MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_GOAL)) + "€");
 
             if (puntuaciones.get(i).getPortero()) {
-                totalMoneyPortero += ComunioConstants.BONUS_GOALKEEPER;
-                item.setPortero(ActivityTool.getFormatedCurrencyNumber(ComunioConstants.BONUS_GOALKEEPER) + "€");
+                totalMoneyPortero += MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_GOALKEEPER);
+                item.setPortero(ActivityTool.getFormatedCurrencyNumber(MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_GOALKEEPER)) + "€");
             } else
                 item.setPortero("0€");
 
             if (puntuaciones.get(i).getPrima_jornada()) {
-                totalMoneyTorpeJornada += ComunioConstants.BONUS_LAST_IN_ROUND;
-                item.setTorpeJornada(ActivityTool.getFormatedCurrencyNumber(ComunioConstants.BONUS_LAST_IN_ROUND) + "€");
+                totalMoneyTorpeJornada += MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_LAST_IN_ROUND);
+                item.setTorpeJornada(ActivityTool.getFormatedCurrencyNumber(MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_LAST_IN_ROUND)) + "€");
             } else
                 item.setTorpeJornada("0€");
 
             if (puntuaciones.get(i).getPrima_general().equals(ComunioConstants.CODIGO_SI_COBRA_PRIMA)) {
-                totalMoneyTorpeGeneral += ComunioConstants.BONUS_LAST_IN_CLASSIFICATION;
-                item.setTorpeGeneral(ActivityTool.getFormatedCurrencyNumber(ComunioConstants.BONUS_LAST_IN_CLASSIFICATION) + "€");
+                totalMoneyTorpeGeneral += MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_LAST_IN_CLASSIFICATION);
+                item.setTorpeGeneral(ActivityTool.getFormatedCurrencyNumber(MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_LAST_IN_CLASSIFICATION)) + "€");
             } else if (puntuaciones.get(i).getPrima_general().equals(ComunioConstants.CODIGO_NO_COBRA_PRIMA))
                 item.setTorpeGeneral("0€");
             else if (puntuaciones.get(i).getPrima_general().equals(ComunioConstants.CODIGO_NO_COBRA_PRIMA_POR_REITERACION))

@@ -125,7 +125,7 @@ class CommunityListAdapter extends BaseAdapter {
         holder.numOfPlayersView.setText(nItem.getNumeroJugadores().toString());
         if (nItem.getNumeroJugadores().equals(ComunioConstants.MAX_PLAYERS_TEAM))
             holder.numOfPlayersView.setTextColor(mContext.getResources().getColor(R.color.players_on_limit));
-        else if (nItem.getNumeroJugadores() > ComunioConstants.MAX_PLAYERS_TEAM)
+        else if (nItem.getNumeroJugadores() > MainActivity.getdbHandler().getOption(ComunioConstants.MAX_PLAYERS_TEAM))
             holder.numOfPlayersView.setTextColor(mContext.getResources().getColor(R.color.players_over_limit));
         else {
             holder.numOfPlayersView.setTextColor(mContext.getResources().getColor(R.color.players_ok));
