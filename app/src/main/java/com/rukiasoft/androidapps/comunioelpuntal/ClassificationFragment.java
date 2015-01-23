@@ -21,6 +21,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import com.rukiasoft.androidapps.comunioelpuntal.utils.ActivityTool;
+import com.rukiasoft.androidapps.comunioelpuntal.utils.ComunioConstants;
 
 public class ClassificationFragment extends Fragment implements Serializable {
 
@@ -186,7 +187,8 @@ public class ClassificationFragment extends Fragment implements Serializable {
         for (int i = 0; i < gamers.size(); i++) {
             participantes.add(gamers.get(i));
         }
-
+        Integer jInicial = MainActivity.getdbHandler().getOption(ComunioConstants.START_ROUND);
+        Integer jActual = MainActivity.getdbHandler().getOption(ComunioConstants.CURRENT_ROUND);
         datosSpinner.clear();
         if (gamers.size() > 0) {
             GamerInformation gamer = gamers.get(0);

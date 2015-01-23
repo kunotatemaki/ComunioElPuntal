@@ -193,6 +193,45 @@ public class DatabaseHandler implements Serializable {
                 throw new Exception("Error actualizando datos de configuracion");
         }
 
+        value = data.getInt(ComunioConstants.START_ROUND);
+        option.put(DatabaseOpenHelper.OPTION, ComunioConstants.START_ROUND);
+        option.put(DatabaseOpenHelper.VALUE, value);
+        args[0] = ComunioConstants.START_ROUND;
+        resultado = mDB.update(ComunioConstants.TABLE_CONF, option, DatabaseOpenHelper.OPTION + "=?", args);
+        if (resultado < 0)
+            throw new Exception("Error actualizando datos de configuracion");
+        else if (resultado == 0) {
+            resultado = mDB.insert(ComunioConstants.TABLE_CONF, null, option);
+            if (resultado < 0)
+                throw new Exception("Error actualizando datos de configuracion");
+        }
+
+        value = data.getInt(ComunioConstants.FINAL_ROUND);
+        option.put(DatabaseOpenHelper.OPTION, ComunioConstants.FINAL_ROUND);
+        option.put(DatabaseOpenHelper.VALUE, value);
+        args[0] = ComunioConstants.FINAL_ROUND;
+        resultado = mDB.update(ComunioConstants.TABLE_CONF, option, DatabaseOpenHelper.OPTION + "=?", args);
+        if (resultado < 0)
+            throw new Exception("Error actualizando datos de configuracion");
+        else if (resultado == 0) {
+            resultado = mDB.insert(ComunioConstants.TABLE_CONF, null, option);
+            if (resultado < 0)
+                throw new Exception("Error actualizando datos de configuracion");
+        }
+
+        value = data.getInt(ComunioConstants.CURRENT_ROUND);
+        option.put(DatabaseOpenHelper.OPTION, ComunioConstants.CURRENT_ROUND);
+        option.put(DatabaseOpenHelper.VALUE, value);
+        args[0] = ComunioConstants.CURRENT_ROUND;
+        resultado = mDB.update(ComunioConstants.TABLE_CONF, option, DatabaseOpenHelper.OPTION + "=?", args);
+        if (resultado < 0)
+            throw new Exception("Error actualizando datos de configuracion");
+        else if (resultado == 0) {
+            resultado = mDB.insert(ComunioConstants.TABLE_CONF, null, option);
+            if (resultado < 0)
+                throw new Exception("Error actualizando datos de configuracion");
+        }
+
         value = data.getInt(ComunioConstants.MAX_PLAYERS_EACH_TEAM);
         option.put(DatabaseOpenHelper.OPTION, ComunioConstants.MAX_PLAYERS_EACH_TEAM);
         option.put(DatabaseOpenHelper.VALUE, value);
@@ -497,6 +536,10 @@ public class DatabaseHandler implements Serializable {
                     participante.setEmail(c.getString(3));
                     participante.setGcm_regid(c.getString(4));
                     participante.setTabla(c.getString(5));
+                    participante.setJ_inicio(c.getDouble(6));
+                    participante.setJ_final(c.getDouble(7));
+                    participante.setPuntos_inicio(c.getInt(8));
+                    participante.setPrima_inicial(c.getInt(9));
                     participantes.add(participante);
                 } while (c.moveToNext());
             }
