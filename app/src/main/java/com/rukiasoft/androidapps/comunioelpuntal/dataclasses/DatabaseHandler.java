@@ -245,6 +245,19 @@ public class DatabaseHandler implements Serializable {
                 throw new Exception("Error actualizando datos de configuracion");
         }
 
+        JSONObject jornadas = data.getJSONObject(ComunioConstants.JORNADAS);
+        option.put(DatabaseOpenHelper.OPTION, ComunioConstants.JORNADAS);
+        option.put(DatabaseOpenHelper.VALUE, jornadas.toString());
+        args[0] = ComunioConstants.JORNADAS;
+        resultado = mDB.update(ComunioConstants.TABLE_CONF, option, DatabaseOpenHelper.OPTION + "=?", args);
+        if (resultado < 0)
+            throw new Exception("Error actualizando datos de configuracion");
+        else if (resultado == 0) {
+            resultado = mDB.insert(ComunioConstants.TABLE_CONF, null, option);
+            if (resultado < 0)
+                throw new Exception("Error actualizando datos de configuracion");
+        }
+
         //grabo los resultados de las jornadas
         JSONArray listResultadosJSON;
         listResultadosJSON = data.getJSONArray("score");

@@ -56,6 +56,7 @@ public class ComunioConstants {
     public static final Integer CODIGO_NO_COBRA_PRIMA = 0;
     public static final Integer CODIGO_SI_COBRA_PRIMA = 1;
     public static final Integer CODIGO_NO_COBRA_PRIMA_POR_REITERACION = 2;
+    public static final String JORNADAS = "jornadas";
 
     public static final Integer ERROR_NO_PUSH = 3;	//nadie está suscrito
 
