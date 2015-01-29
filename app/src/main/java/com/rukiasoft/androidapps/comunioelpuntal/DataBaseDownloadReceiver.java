@@ -45,7 +45,7 @@ public class DataBaseDownloadReceiver extends BroadcastReceiver {
         @Override
         protected Void doInBackground(Void... params) {
             libre = false;
-            MainActivity.loadDatabase(null, null);
+            //MainActivity.loadDatabase(null, null);
             return null;
 
         }

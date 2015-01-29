@@ -251,6 +251,38 @@ public class DatabaseHandler implements Serializable {
         JSONObject jornadas = data.getJSONObject(ComunioConstants.PROPERTY_JORNADAS);
         ActivityTool.savePreferences(context, ComunioConstants.PROPERTY_JORNADAS, jornadas.toString());
 
+        //grabo los participantes
+        JSONArray listGamersJSON;
+        listGamersJSON = data.getJSONArray("participants");
+        Log.d(TAG, "participants");
+        if (!isTableExists(ComunioConstants.TABLE_GAMERS)) {
+            mDbHelper.createGamersTable();
+        }
+        for (int i = 0; i < listGamersJSON.length(); i++) {
+            Participante participante = mapper.readValue(listGamersJSON.get(i).toString(), Participante.class);
+            ContentValues values = new ContentValues();
+            values.put(DatabaseOpenHelper.NOMBRE, participante.getNombre());
+            values.put(DatabaseOpenHelper.EMAIL, participante.getEmail());
+            values.put(DatabaseOpenHelper.GCM_REGID, participante.getGcm_regid());
+            values.put(DatabaseOpenHelper.TABLA, participante.getTabla());
+            values.put(DatabaseOpenHelper.JORNADA_INICIO, participante.getJ_inicio());
+            values.put(DatabaseOpenHelper.JORNADA_FINAL, participante.getJ_final());
+            values.put(DatabaseOpenHelper.PUNTOS_INICIO, participante.getPuntos_inicio());
+            values.put(DatabaseOpenHelper.PRIMA_INICIAL, participante.getPrima_inicial());
+            args[0] = participante.getNombre();
+
+            if (!isTableExists(participante.getTabla())) {
+                mDbHelper.createScoreTable(participante.getTabla());
+            }
+            resultado = mDB.update(ComunioConstants.TABLE_GAMERS, values, DatabaseOpenHelper.NOMBRE + "=?", args);
+            if (resultado < 0)
+                throw new Exception("Error actualizando datos de participantes");
+            else if (resultado == 0) {
+                resultado = mDB.insert(ComunioConstants.TABLE_GAMERS, null, values);
+                if (resultado < 0)
+                    throw new Exception("Error actualizando datos de participantes");
+            }
+        }
 
         //grabo los resultados de las jornadas
         JSONArray listResultadosJSON;
@@ -273,9 +305,7 @@ public class DatabaseHandler implements Serializable {
             values.put(DatabaseOpenHelper.REMO_EQUIPO, puntuacion.getRemo_equipo());
             values.put(DatabaseOpenHelper.REMO_TRUPITA, puntuacion.getRemo_trupita());
             args[0] = puntuacion.getJornada().toString();
-            if (!isTableExists(puntuacion.getTabla())) {
-                mDbHelper.createScoreTable(puntuacion.getTabla());
-            }
+
             resultado = mDB.update(puntuacion.getTabla(), values, DatabaseOpenHelper.JORNADA + "=?", args);
             if (resultado < 0)
                 throw new Exception("Error actualizando datos de: " + puntuacion.getTabla());
@@ -313,34 +343,6 @@ public class DatabaseHandler implements Serializable {
             }
         }
 
-        //grabo los participantes
-        JSONArray listGamersJSON;
-        listGamersJSON = data.getJSONArray("participants");
-        Log.d(TAG, "participants");
-        for (int i = 0; i < listGamersJSON.length(); i++) {
-            Participante participante = mapper.readValue(listGamersJSON.get(i).toString(), Participante.class);
-            ContentValues values = new ContentValues();
-            values.put(DatabaseOpenHelper.NOMBRE, participante.getNombre());
-            values.put(DatabaseOpenHelper.EMAIL, participante.getEmail());
-            values.put(DatabaseOpenHelper.GCM_REGID, participante.getGcm_regid());
-            values.put(DatabaseOpenHelper.TABLA, participante.getTabla());
-            values.put(DatabaseOpenHelper.JORNADA_INICIO, participante.getJ_inicio());
-            values.put(DatabaseOpenHelper.JORNADA_FINAL, participante.getJ_final());
-            values.put(DatabaseOpenHelper.PUNTOS_INICIO, participante.getPuntos_inicio());
-            values.put(DatabaseOpenHelper.PRIMA_INICIAL, participante.getPrima_inicial());
-            args[0] = participante.getNombre();
-            if (!isTableExists(ComunioConstants.TABLE_GAMERS)) {
-                mDbHelper.createGamersTable();
-            }
-            resultado = mDB.update(ComunioConstants.TABLE_GAMERS, values, DatabaseOpenHelper.NOMBRE + "=?", args);
-            if (resultado < 0)
-                throw new Exception("Error actualizando datos de participantes");
-            else if (resultado == 0) {
-                resultado = mDB.insert(ComunioConstants.TABLE_GAMERS, null, values);
-                if (resultado < 0)
-                    throw new Exception("Error actualizando datos de participantes");
-            }
-        }
 
         //grabo los equipos
         JSONArray listTeamsJSON;
@@ -644,7 +646,7 @@ public class DatabaseHandler implements Serializable {
 
     }
 
-    public long insertNotification(Bundle extras) throws Exception {
+    public long insertNotification(Bundle extras) {
         Log.d(TAG, "Insert notification in database: ");
         long resultado;
         try {

@@ -330,6 +330,17 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
         super.onResume();
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        setIntent(intent);
+        handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent) {
+        //if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            int i = 0;
+        //}
+    }
 
     @SuppressLint("NewApi")
     @Override
@@ -814,7 +825,7 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
         }
     }
 
-    public static void loadDatabase(ProgressBar horizontalProgressBar, TextView textView) {
+    public void loadDatabase(final ProgressBar horizontalProgressBar, final TextView textView) {
         Log.d(TAG, "loaddatabase");
 
         if (horizontalProgressBar instanceof ProgressBar) {
@@ -837,13 +848,22 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
                 setProgress(horizontalProgressBar, 10 + i * 70 / participantes.size());
             }
 
+           /* if (progressBar instanceof ProgressBar) {
+                progressBar.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        progressBar.setProgress(porcentaje);
+                    }
+                });
+            }*/
             Log.d(TAG, "leyendo players");
             texto = context.getResources().getString(R.string.load_players);
             setTextProgress(texto, textView);
+
             playersFragment.clearAdapter();
             List<Player> jugadores = dbHandler.getPlayerList(null, null);
 
-            for (int i = 0; i < 6/*jugadores.size()*/; i++) {
+            for (int i = 0; i < jugadores.size(); i++) {
                 PlayerItem item = new PlayerItem(jugadores.get(i), context);
                 playersFragment.addItem(item);
                 if (0 < jugadores.size())
@@ -852,7 +872,7 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
             players = playersFragment.getPlayerItems();
             setProgress(horizontalProgressBar, 100);
             databaseLoaded = true;
-            MainActivity.setJornadasJSON(null);
+            MainActivity.resetJornadasJSON();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -933,10 +953,7 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
 
     public static Boolean isGamerSelected(){
         myNameGamer = ActivityTool.getStringFromPreferences(context, ComunioConstants.PROPERTY_MY_TEAM);
-        if (myNameGamer.compareTo("") == 0)
-            return false;
-        else
-            return true;
+        return myNameGamer.compareTo("") != 0;
     }
 
     public static JSONObject getJornadasJSON() {
@@ -946,7 +963,12 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
         return jornadasJSON;
     }
 
-    public static void setJornadasJSON(JSONObject jornadasJSON) {
-        MainActivity.jornadasJSON = jornadasJSON;
+    public static void resetJornadasJSON(){
+        MainActivity.jornadasJSON = null;
     }
+
 }
+
+http://stackoverflow.com/questions/7876043/android-new-intent-start-particular-method
+        http://stackoverflow.com/questions/5946171/how-to-call-a-method-using-intent
+        http://stackoverflow.com/questions/16653867/android-call-method-from-an-other-activity

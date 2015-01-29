@@ -1,6 +1,7 @@
 package com.rukiasoft.androidapps.comunioelpuntal;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -81,7 +82,11 @@ public class StartScreenActivity extends Activity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                MainActivity.loadDatabase(horizontalProgressBar, descripcion);
+                Intent i=new Intent(activity, MainActivity.class);
+                i.putExtra("methodName","loadDatabase");//goes to previous Intent
+                ((Activity)MainActivity.getContext()).startActivity(i);//will trigger only Mymethod in MainActivity
+
+                //MainActivity.loadDatabase(horizontalProgressBar, descripcion);
                 finalizarActivity(RESULT_OK);
             }
         }).start();
