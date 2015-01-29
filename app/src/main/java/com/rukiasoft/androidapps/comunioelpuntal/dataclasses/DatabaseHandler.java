@@ -246,9 +246,11 @@ public class DatabaseHandler implements Serializable {
                 throw new Exception("Error actualizando datos de configuracion");
         }
 
+
         //grabo los nombres de las jornadas almacenadas
         JSONObject jornadas = data.getJSONObject(ComunioConstants.PROPERTY_JORNADAS);
         ActivityTool.savePreferences(context, ComunioConstants.PROPERTY_JORNADAS, jornadas.toString());
+
 
         //grabo los resultados de las jornadas
         JSONArray listResultadosJSON;

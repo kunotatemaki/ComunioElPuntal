@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE configuration>
 <configuration>
 
-    <server_gcm host="192.168.2.171" port="9080"
+
+    <server_gcm host="192.168.2.171" port="8080"
         url="http://host:port/comunio-server/rest/comunio_server_non_secure/"
         method_name_register="register_user/"
         method_name_get_updated_database="get_updated_database/"
