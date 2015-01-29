@@ -14,17 +14,17 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.rukiasoft.androidapps.comunioelpuntal.utils.ActivityTool;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
-
-import com.rukiasoft.androidapps.comunioelpuntal.utils.ActivityTool;
-import com.rukiasoft.androidapps.comunioelpuntal.utils.ComunioConstants;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class ClassificationFragment extends Fragment implements Serializable {
 
@@ -38,6 +38,7 @@ public class ClassificationFragment extends Fragment implements Serializable {
     private Comparator<GamerInformation> comparator = null;
     private final ArrayList<String> datosSpinner = new ArrayList<>();
     private Integer index = 0;
+
 
     public static enum OrderType {
         GENERAL, LAST_ROUND, ROUND
@@ -103,28 +104,27 @@ public class ClassificationFragment extends Fragment implements Serializable {
 
         if (mAdapter.getCount() == 0)
             loadItems();
+        label.setText(getResources().getString(R.string.classification));
         if (order == OrderType.ROUND) {
             jornada.setVisibility(View.VISIBLE);
-            label.setText(getResources().getString(R.string.round));
         } else {
             jornada.setVisibility(View.INVISIBLE);
-            label.setText(getResources().getString(R.string.classification));
             return;
         }
         ArrayAdapter<String> adapter =
                 new ArrayAdapter<>(getActivity(),
                         R.layout.spinner_main_item, datosSpinner);
-        ArrayAdapter<String> adaptador =
+        /*ArrayAdapter<String> adaptador =
                 new ArrayAdapter<>(getActivity(),
                         android.R.layout.simple_spinner_item, datosSpinner);
 
-        adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adaptador.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);*/
         jornada.setAdapter(adapter);
         jornada.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
                     public void onItemSelected(AdapterView<?> parent, android.view.View v,
                                                int position, long id) {
-                        selectedRound = Double.parseDouble(datosSpinner.get(position));
+                        selectedRound = ActivityTool.getRoundValueFromRoundName(MainActivity.getJornadasJSON(), datosSpinner.get(position));
                         //Log.d(TAG, "selectedRound: " + selectedRound);
                         refresh();
                     }
@@ -185,33 +185,39 @@ public class ClassificationFragment extends Fragment implements Serializable {
     }
 
     public void setGamerList(List<GamerInformation> gamers, OrderType order) {
-        //Log.d(TAG,  "setGamerList");
-        String jornadas = ActivityTool.getStringFromPreferences(getActivity().getApplicationContext(), ComunioConstants.PROPERTY_JORNADAS);
-        try {
-            JSONObject jornadasJSON = new JSONObject(jornadas);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+
 
         participantes.clear();
         for (int i = 0; i < gamers.size(); i++) {
             participantes.add(gamers.get(i));
         }
-        Integer jInicial = MainActivity.getdbHandler().getOption(ComunioConstants.START_ROUND);
-        Integer jActual = MainActivity.getdbHandler().getOption(ComunioConstants.CURRENT_ROUND);
-        datosSpinner.clear();
-        if (gamers.size() > 0) {
-            GamerInformation gamer = gamers.get(0);
-            for (int i = 0; i < gamer.getPuntuaciones().size(); i++) {
-                datosSpinner.add(ActivityTool.getStringFromDouble(gamer.getPuntuaciones().get(i).getJornada()));
-            }
-        }
+
+
         this.order = order;
         if (order == OrderType.GENERAL) {
             comparator = new GeneralComparator();
         } else if (order == OrderType.LAST_ROUND) {
             comparator = new LastRoundComparator();
         } else if (order == OrderType.ROUND) {
+            JSONObject jornadasJSON = MainActivity.getJornadasJSON();
+            Iterator<?> keys = jornadasJSON.keys();
+            List<Double> valores = new ArrayList<>();
+            while( keys.hasNext() ){
+                String key = (String)keys.next();
+                try {
+                    valores.add(jornadasJSON.getDouble(key));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            Collections.sort(valores);
+
+            datosSpinner.clear();
+            if (gamers.size() > 0) {
+                for (int i = 0; i < valores.size(); i++) {
+                    datosSpinner.add(ActivityTool.getRoundNameFromRoundValue(jornadasJSON, valores.get(i)));
+                }
+            }
             comparator = new RoundComparator();
         } else {
             this.order = OrderType.GENERAL;
@@ -222,6 +228,7 @@ public class ClassificationFragment extends Fragment implements Serializable {
 
     private void refresh() {
         //Collections.sort(this.participantes, this.comparator);
+        Log.d(TAG, "refresh");
         loadItems();
     }
 

@@ -32,6 +32,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import org.json.JSONObject;
 import org.xml.sax.SAXException;
 
 import java.io.File;
@@ -102,6 +103,9 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
     private final ArrayList<String> titulos = new ArrayList<>();
 
     private static SmoothProgressBar mProgressBar;
+    private static JSONObject jornadasJSON = null;
+
+
 
     public enum Orientation {
         LANDSCAPE(0),
@@ -838,7 +842,8 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
             setTextProgress(texto, textView);
             playersFragment.clearAdapter();
             List<Player> jugadores = dbHandler.getPlayerList(null, null);
-            for (int i = 0; i < jugadores.size(); i++) {
+
+            for (int i = 0; i < 6/*jugadores.size()*/; i++) {
                 PlayerItem item = new PlayerItem(jugadores.get(i), context);
                 playersFragment.addItem(item);
                 if (0 < jugadores.size())
@@ -847,9 +852,11 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
             players = playersFragment.getPlayerItems();
             setProgress(horizontalProgressBar, 100);
             databaseLoaded = true;
+            MainActivity.setJornadasJSON(null);
+
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException(e);
+            //throw new RuntimeException(e);
         }
 
     }
@@ -932,4 +939,14 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
             return true;
     }
 
+    public static JSONObject getJornadasJSON() {
+        if(jornadasJSON == null){
+            jornadasJSON = ActivityTool.getJornadasJSON(MainActivity.getContext());
+        }
+        return jornadasJSON;
+    }
+
+    public static void setJornadasJSON(JSONObject jornadasJSON) {
+        MainActivity.jornadasJSON = jornadasJSON;
+    }
 }

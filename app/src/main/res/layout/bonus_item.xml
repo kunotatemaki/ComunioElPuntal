@@ -6,36 +6,24 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/bonus_jornada_label"
+        android:id="@+id/bonus_jornada_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
-        android:text="@string/round"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/text_over_background"
         android:textStyle="bold"/>
 
-    <TextView
-        android:id="@+id/bonus_jornada_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:layout_alignBaseline="@+id/bonus_jornada_label"
-        android:layout_toRightOf="@+id/bonus_jornada_label"
-        android:contentDescription="@string/description"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/text_over_background"
-        android:textStyle="bold"/>
+
 
     <TextView
         android:id="@+id/bonus_goles_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bonus_jornada_label"
+        android:layout_below="@+id/bonus_jornada_view"
         android:layout_alignParentLeft="true"
         android:paddingLeft="10dp"
         android:text="@string/goles"

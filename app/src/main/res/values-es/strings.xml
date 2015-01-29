@@ -89,7 +89,7 @@
     <string name="recognize">Reconocimiento de voz</string>
     <string name="remos">Golpes de Remo</string>
     <string name="remos_colon">Golpes de Remo:</string>
-    <string name="remos_pattern">_sancion_€ por _motivo_ en jornada: _jornada_</string>
+    <string name="remos_pattern">_sancion_€ por _motivo_ en la _jornada_</string>
     <string name="round">Jornada:</string>
     <string name="sales">Ventas</string>
     <string name="sales_colon">Ventas:</string>
@@ -99,7 +99,7 @@
     <string name="settings">Ajustes</string>
     <string name="signings">Fichajes</string>
     <string name="signings_colon">Fichajes:</string>
-    <string name="signings_pattern">_precio_€ en la jornada: _jornada_ _salto_ Comprador: _comprador_ _salto_ Vendedor: _vendedor_</string>
+    <string name="signings_pattern">_precio_€ en la _jornada_ _salto_ Comprador: _comprador_ _salto_ Vendedor: _vendedor_</string>
     <string name="score">Puntuaciones</string>
     <string name="state">Estado:</string>
     <string name="subject">Asunto</string>

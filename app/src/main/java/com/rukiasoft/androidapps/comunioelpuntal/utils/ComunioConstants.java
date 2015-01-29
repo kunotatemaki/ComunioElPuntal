@@ -29,7 +29,7 @@ public class ComunioConstants {
     public static final String PROPERTY_VERSION_APP_FOR_DOWNLOADING = "version_app_for_downloading";
     public static final String PROPERTY_JORNADAS = "jornadas";
 
-    public static final Integer DATABASE_REFRESH = 1000 * 3600 * 24;
+    public static final Integer DATABASE_REFRESH = 1000 * 3600 * 12;
 
      public static final String DIRECTORY_APP = "/ComunioElPuntal/";
     public static final String NOMBRE_APP = "ComunioElPuntal.apk";
@@ -57,7 +57,6 @@ public class ComunioConstants {
     public static final Integer CODIGO_NO_COBRA_PRIMA = 0;
     public static final Integer CODIGO_SI_COBRA_PRIMA = 1;
     public static final Integer CODIGO_NO_COBRA_PRIMA_POR_REITERACION = 2;
-    public static final String JORNADAS = "jornadas";
 
     public static final Integer ERROR_NO_PUSH = 3;	//nadie está suscrito
 

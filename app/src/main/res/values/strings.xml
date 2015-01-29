@@ -86,7 +86,7 @@
     <string name="recognize">Voice Search</string>
     <string name="remos">Sanctions</string>
     <string name="remos_colon">Sanctions:</string>
-    <string name="remos_pattern">€_sanction_ because of _motivo_ in round: _jornada_</string>
+    <string name="remos_pattern">€_sanction_ because of _motivo_ in _jornada_</string>
     <string name="ranking">Ranking:</string>
     <string name="ranking_round">Ranking round:</string>
     <string name="ranking_general">Ranking general:</string>
@@ -99,7 +99,7 @@
     <string name="settings">Settings</string>
     <string name="signings">Signings</string>
     <string name="signings_colon">Signings:</string>
-    <string name="signings_pattern">_precio_€ in round: _jornada_ _linea_ Buyer: _comprador_ _linea_ Seller: _vendedor_</string>
+    <string name="signings_pattern">_precio_€ in _jornada_ _linea_ Buyer: _comprador_ _linea_ Seller: _vendedor_</string>
     <string name="score">Scores</string>
     <string name="state">Estado:</string>
     <string name="subject">Subject</string>

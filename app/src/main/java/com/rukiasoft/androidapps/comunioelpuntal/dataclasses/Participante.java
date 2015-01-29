@@ -7,7 +7,6 @@ public class Participante implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer Id;
     private String nombre;
-    private String login;
     private String email;
     private String gcm_regid;
     private String tabla;
@@ -30,14 +29,6 @@ public class Participante implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public String getEmail() {

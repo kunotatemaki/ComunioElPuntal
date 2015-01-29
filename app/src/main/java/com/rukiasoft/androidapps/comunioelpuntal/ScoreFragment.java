@@ -82,7 +82,7 @@ public class ScoreFragment extends Fragment implements Serializable {
             return;
         for (int i = 0; i < puntuaciones.size(); i++) {
             ScoreItem item = new ScoreItem();
-            item.setJornada(ActivityTool.getStringFromDouble(puntuaciones.get(i).getJornada()));
+            item.setJornada(ActivityTool.getRoundNameFromRoundValue(MainActivity.getJornadasJSON(), puntuaciones.get(i).getJornada()));
             item.setPointsGeneral(puntuaciones.get(i).getPuntuacion_general().toString());
             if (puntuaciones.get(i).getPuntuacion_jornada() != null)
                 item.setPointsRound(puntuaciones.get(i).getPuntuacion_jornada().toString());

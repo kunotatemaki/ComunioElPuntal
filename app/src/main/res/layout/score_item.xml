@@ -11,7 +11,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/score_jornada_label"
+            android:id="@+id/score_jornada_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
@@ -21,18 +21,6 @@
             android:textColor="@color/text_over_background"
             android:textStyle="bold"/>
 
-        <TextView
-            android:id="@+id/score_jornada_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:layout_alignBaseline="@+id/score_jornada_label"
-            android:layout_toRightOf="@+id/score_jornada_label"
-            android:contentDescription="@string/description"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/text_over_background"
-            android:textStyle="bold"/>
     </RelativeLayout>
 
     <LinearLayout

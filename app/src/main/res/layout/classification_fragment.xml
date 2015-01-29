@@ -32,7 +32,7 @@
             android:id="@+id/classification_spinner"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
             android:popupBackground="@color/spinner_list"

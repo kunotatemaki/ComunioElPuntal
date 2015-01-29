@@ -135,10 +135,14 @@ public class GamerInformation implements Serializable {
         }
         for (int i = 0; i < puntuaciones.size(); i++) {
             Puntuacion puntuacion = puntuaciones.get(i);
-            if (puntuacion.getPuntuacion_jornada() != null)
+
+            if (puntuacion.getPuntuacion_jornada() != null && puntuacion.getPuntuacion_jornada() > 0)
                 dineroPuntos += puntuacion.getPuntuacion_jornada() * MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_POINTS);
-            dineroPrimasGoles += puntuacion.getGoles() * MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_GOAL);
-            dineroPrimasPortero += puntuacion.getPortero() ? MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_GOALKEEPER) : 0;
+            Integer publicado = 0;
+            if(puntuacion.getPublicado() && puntuacion.getPuntuacion_jornada() != null)
+                publicado = 1;
+            dineroPrimasGoles += publicado * puntuacion.getGoles() * MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_GOAL);
+            dineroPrimasPortero += puntuacion.getPortero() ? publicado * MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_GOALKEEPER) : 0;
             dineroPrimasJornada += puntuacion.getPrima_jornada() ? MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_LAST_IN_ROUND) : 0;
             dineroPrimasGeneral += puntuacion.getPrima_general().equals(ComunioConstants.CODIGO_SI_COBRA_PRIMA) ? MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_LAST_IN_CLASSIFICATION) : 0;
             dineroRemoJugadores += puntuacion.getRemo_jugadores() ? MainActivity.getdbHandler().getOption(ComunioConstants.REMO_MAX_PLAYERS) : 0;

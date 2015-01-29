@@ -72,7 +72,7 @@ public class RemosFragment extends Fragment implements Serializable {
                 String frase = patron.replace("_sancion_", "<font color='darkred'>" + precio + "</font>");
                 frase = frase.replace("€", "<font color='darkred'>€</font>");
                 frase = frase.replace("_motivo_", "<font color='blue'>" + ComunioConstants.TIPOS_SANCIONES[0] + "</font>");
-                frase = frase.replace("_jornada_", "" + ActivityTool.getStringFromDouble(puntuaciones.get(i).getJornada()) + "");
+                frase = frase.replace("_jornada_", "" + ActivityTool.getRoundNameFromRoundValue(MainActivity.getJornadasJSON(), puntuaciones.get(i).getJornada()) + "");
                 ((ArrayAdapter<Spanned>) listView.getAdapter()).add(Html.fromHtml("<b>" + frase + "</b>"));
             }
             if (puntuaciones.get(i).getRemo_equipo()) {
@@ -81,18 +81,19 @@ public class RemosFragment extends Fragment implements Serializable {
                 String frase = patron.replace("_sancion_", "<font color='darkred'>" + precio + "</font>");
                 frase = frase.replace("€", "<font color='darkred'>€</font>");
                 frase = frase.replace("_motivo_", "<font color='blue'>" + ComunioConstants.TIPOS_SANCIONES[1] + "</font>");
-                frase = frase.replace("_jornada_", "" + puntuaciones.get(i).getJornada() + "");
+                frase = frase.replace("_jornada_", "" + ActivityTool.getRoundNameFromRoundValue(MainActivity.getJornadasJSON(), puntuaciones.get(i).getJornada()) + "");
                 ((ArrayAdapter<Spanned>) listView.getAdapter()).add(Html.fromHtml("<b>" + frase + "</b>"));
             }
-            if (puntuaciones.get(i).getRemo_equipo()) {
+            if (puntuaciones.get(i).getRemo_trupita()) {
                 money += MainActivity.getdbHandler().getOption(ComunioConstants.REMO_TRUPITAS);
                 precio = ActivityTool.getFormatedCurrencyNumber(MainActivity.getdbHandler().getOption(ComunioConstants.REMO_TRUPITAS));
                 String frase = patron.replace("_sancion_", "<font color='darkred'>" + precio + "</font>");
                 frase = frase.replace("€", "<font color='darkred'>€</font>");
                 frase = frase.replace("_motivo_", "<font color='blue'>" + ComunioConstants.TIPOS_SANCIONES[2] + "</font>");
-                frase = frase.replace("_jornada_", "" + puntuaciones.get(i).getJornada() + "");
+                frase = frase.replace("_jornada_", "" + ActivityTool.getRoundNameFromRoundValue(MainActivity.getJornadasJSON(), puntuaciones.get(i).getJornada()) + "");
                 ((ArrayAdapter<Spanned>) listView.getAdapter()).add(Html.fromHtml("<b>" + frase + "</b>"));
             }
+
         }
         if (listView.getAdapter().getCount() == 0)
             ((ArrayAdapter<Spanned>) listView.getAdapter()).add(Html.fromHtml("<b>" + getActivity().getResources().getString(R.string.no_remos_pattern) + "</b>"));

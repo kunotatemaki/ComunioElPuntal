@@ -321,7 +321,6 @@ public class DatabaseHandler implements Serializable {
             Participante participante = mapper.readValue(listGamersJSON.get(i).toString(), Participante.class);
             ContentValues values = new ContentValues();
             values.put(DatabaseOpenHelper.NOMBRE, participante.getNombre());
-            values.put(DatabaseOpenHelper.LOGIN, participante.getLogin());
             values.put(DatabaseOpenHelper.EMAIL, participante.getEmail());
             values.put(DatabaseOpenHelper.GCM_REGID, participante.getGcm_regid());
             values.put(DatabaseOpenHelper.TABLA, participante.getTabla());
@@ -510,10 +509,13 @@ public class DatabaseHandler implements Serializable {
                 do {
                     participante.setId(c.getInt(0));
                     participante.setNombre(c.getString(1));
-                    participante.setLogin(c.getString(2));
-                    participante.setEmail(c.getString(3));
-                    participante.setGcm_regid(c.getString(4));
-                    participante.setTabla(c.getString(5));
+                    participante.setEmail(c.getString(2));
+                    participante.setGcm_regid(c.getString(3));
+                    participante.setTabla(c.getString(4));
+                    participante.setJ_inicio(c.getDouble(5));
+                    participante.setJ_final(c.getDouble(6));
+                    participante.setPuntos_inicio(c.getInt(7));
+                    participante.setPrima_inicial(c.getInt(8));
                 } while (c.moveToNext());
             }
             c.close();
@@ -539,14 +541,13 @@ public class DatabaseHandler implements Serializable {
                     Participante participante = new Participante();
                     participante.setId(c.getInt(0));
                     participante.setNombre(c.getString(1));
-                    participante.setLogin(c.getString(2));
-                    participante.setEmail(c.getString(3));
-                    participante.setGcm_regid(c.getString(4));
-                    participante.setTabla(c.getString(5));
-                    participante.setJ_inicio(c.getDouble(6));
-                    participante.setJ_final(c.getDouble(7));
-                    participante.setPuntos_inicio(c.getInt(8));
-                    participante.setPrima_inicial(c.getInt(9));
+                    participante.setEmail(c.getString(2));
+                    participante.setGcm_regid(c.getString(3));
+                    participante.setTabla(c.getString(4));
+                    participante.setJ_inicio(c.getDouble(5));
+                    participante.setJ_final(c.getDouble(6));
+                    participante.setPuntos_inicio(c.getInt(7));
+                    participante.setPrima_inicial(c.getInt(8));
                     participantes.add(participante);
                 } while (c.moveToNext());
             }

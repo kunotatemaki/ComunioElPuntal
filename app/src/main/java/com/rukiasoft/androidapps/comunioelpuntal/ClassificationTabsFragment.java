@@ -42,12 +42,12 @@ public class ClassificationTabsFragment extends Fragment implements Serializable
 
         fGeneral.setGamerList(MainActivity.getGamers(),
                 ClassificationFragment.OrderType.GENERAL);
-        Log.d(TAG, "creadoGeneral");
+        Log.d(TAG, "creadofLastRound");
         if (fLastRound == null)
             fLastRound = new ClassificationFragment();
         fLastRound.setGamerList(MainActivity.getGamers(),
                 ClassificationFragment.OrderType.LAST_ROUND);
-        Log.d(TAG, "creadofLastRound");
+        Log.d(TAG, "creadofRound");
         if (fRound == null)
             fRound = new ClassificationFragment();
         fRound.setGamerList(MainActivity.getGamers(),

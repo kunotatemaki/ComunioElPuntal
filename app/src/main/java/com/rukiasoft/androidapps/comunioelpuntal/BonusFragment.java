@@ -88,13 +88,16 @@ public class BonusFragment extends Fragment implements Serializable {
             return;
         for (int i = 0; i < puntuaciones.size(); i++) {
             BonusItem item = new BonusItem();
-            item.setJornada(ActivityTool.getStringFromDouble(puntuaciones.get(i).getJornada()));
-            totalMoneyGoles += puntuaciones.get(i).getGoles() * MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_GOAL);
-            item.setGoles(ActivityTool.getFormatedCurrencyNumber(puntuaciones.get(i).getGoles() * MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_GOAL)) + "€");
+            item.setJornada(ActivityTool.getRoundNameFromRoundValue(MainActivity.getJornadasJSON(), puntuaciones.get(i).getJornada()));
+            Integer publicado = 0;
+            if(puntuaciones.get(i).getPublicado() && puntuaciones.get(i).getPuntuacion_jornada() != null)
+                publicado = 1;
+            totalMoneyGoles += publicado * puntuaciones.get(i).getGoles() * MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_GOAL);
+            item.setGoles(ActivityTool.getFormatedCurrencyNumber(publicado * puntuaciones.get(i).getGoles() * MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_GOAL)) + "€");
 
             if (puntuaciones.get(i).getPortero()) {
-                totalMoneyPortero += MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_GOALKEEPER);
-                item.setPortero(ActivityTool.getFormatedCurrencyNumber(MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_GOALKEEPER)) + "€");
+                totalMoneyPortero += publicado * MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_GOALKEEPER);
+                item.setPortero(ActivityTool.getFormatedCurrencyNumber(publicado * MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_GOALKEEPER)) + "€");
             } else
                 item.setPortero("0€");
 

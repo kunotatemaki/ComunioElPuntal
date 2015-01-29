@@ -40,7 +40,6 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper implements Serializable
     final public static String EQUIPO = "equipo";
     final public static String FOTO = "foto";
     final public static String PROPIETARIO = "propietario";
-    final public static String LOGIN = "login";
     final public static String EMAIL = "email";
     final public static String GCM_REGID = "gcm_regid";
     final public static String TABLA = "tabla";
@@ -60,49 +59,48 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper implements Serializable
             PUNTUACION_GENERAL, POSICION_GENERAL, PRIMA_GENERAL, PUBLICADO, GOLES, PORTERO, REMO_JUGADORES,
             REMO_EQUIPO, REMO_TRUPITA};
     final public static String[] columnsSignings = {ID, NOMBRE, COMPRADOR, VENDEDOR, PRECIO, JORNADA};
-    final public static String[] columnsGamers = {ID, NOMBRE, LOGIN, EMAIL, GCM_REGID, TABLA, JORNADA_INICIO,
+    final public static String[] columnsGamers = {ID, NOMBRE, EMAIL, GCM_REGID, TABLA, JORNADA_INICIO,
     JORNADA_FINAL, PUNTOS_INICIO, PRIMA_INICIAL};
     final public static String[] columnsTeams = {ID, NOMBRE, FOTO};
     final public static String[] columnsPlayers = {ID, NOMBRE, DEMARCACION, EQUIPO, PROPIETARIO};
     final public static String[] columnsNotifications = {ID, TIMESTAMP_NOTIFICATION, TIMESTAMP_SERVER, TITLE_MESSAGE, BODY_MESSAGE, READ};
     final public static String[] columnsConfiguration = {ID, OPTION, VALUE};
 
-    private final String CREATE_SIGNING_CMD = "CREATE TABLE " + ComunioConstants.TABLE_SIGNING + " (" + ID + " INTEGER, "
+    private final String CREATE_SIGNING_CMD = "CREATE TABLE IF NOT EXISTS " + ComunioConstants.TABLE_SIGNING + " (" + ID + " INTEGER, "
             + NOMBRE + " TEXT NOT NULL, "
             + COMPRADOR + " TEXT NOT NULL, "
             + VENDEDOR + " TEXT NOT NULL, "
             + PRECIO + " INTEGER, "
             + JORNADA + " REAL)";
 
-    private final String CREATE_GAMERS_CMD = "CREATE TABLE " + ComunioConstants.TABLE_GAMERS + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+    private final String CREATE_GAMERS_CMD = "CREATE TABLE IF NOT EXISTS " + ComunioConstants.TABLE_GAMERS + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + NOMBRE + " TEXT NOT NULL, "
-            + LOGIN + " TEXT NOT NULL, "
             + EMAIL + " TEXT, "
             + GCM_REGID + " TEXT, "
             + TABLA + " TEXT NOT NULL, "
-            + JORNADA_INICIO + " INTEGER, "
-            + JORNADA_FINAL + " INTEGER, "
+            + JORNADA_INICIO + " REAL, "
+            + JORNADA_FINAL + " REAL, "
             + PUNTOS_INICIO + " INTEGER, "
             + PRIMA_INICIAL + " INTEGER)";
 
-    private final String CREATE_TEAMS_CMD = "CREATE TABLE " + ComunioConstants.TABLE_TEAMS + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+    private final String CREATE_TEAMS_CMD = "CREATE TABLE IF NOT EXISTS " + ComunioConstants.TABLE_TEAMS + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + NOMBRE + " TEXT NOT NULL, "
             + FOTO + " TEXT NOT NULL)";
 
-    private final String CREATE_PLAYERS_CMD = "CREATE TABLE " + ComunioConstants.TABLE_PLAYERS + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+    private final String CREATE_PLAYERS_CMD = "CREATE TABLE IF NOT EXISTS " + ComunioConstants.TABLE_PLAYERS + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + NOMBRE + " TEXT NOT NULL, "
             + DEMARCACION + " TEXT NOT NULL, "
             + EQUIPO + " TEXT NOT NULL, "
             + PROPIETARIO + " TEXT NOT NULL)";
 
-    final private static String CREATE_NOTIFICATIONS_CMD = "CREATE TABLE " + ComunioConstants.TABLE_NOTIFICATIONS + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+    final private static String CREATE_NOTIFICATIONS_CMD = "CREATE TABLE IF NOT EXISTS " + ComunioConstants.TABLE_NOTIFICATIONS + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + TIMESTAMP_NOTIFICATION + " TEXT NOT NULL, "
             + TIMESTAMP_SERVER + " TEXT NOT NULL, "
             + TITLE_MESSAGE + " TEXT NOT NULL, "
             + BODY_MESSAGE + " TEXT NOT NULL, "
             + READ + " INTEGER)";
 
-    final private static String CREATE_CONFIGURATION_CMD = "CREATE TABLE " + ComunioConstants.TABLE_CONF + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+    final private static String CREATE_CONFIGURATION_CMD = "CREATE TABLE IF NOT EXISTS " + ComunioConstants.TABLE_CONF + " (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + OPTION + " TEXT NOT NULL, "
             + VALUE + " INTEGER)";
 
@@ -159,7 +157,7 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper implements Serializable
     }
 
     public void createScoreTable(String tableName) {
-        String CREATE_SCORE_CMD = "CREATE TABLE %table_name (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+        String CREATE_SCORE_CMD = "CREATE TABLE IF NOT EXISTS %table_name (" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + JORNADA + " REAL, "
                 + PUNTUACION_JORNADA + " INTEGER, "
                 + POSICION_JORNADA + " INTEGER, "

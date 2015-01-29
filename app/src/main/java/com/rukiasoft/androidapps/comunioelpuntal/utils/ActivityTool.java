@@ -22,12 +22,19 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
+
+import com.rukiasoft.androidapps.comunioelpuntal.MainActivity;
 import com.rukiasoft.androidapps.comunioelpuntal.MainActivity.Orientation;
 import com.rukiasoft.androidapps.comunioelpuntal.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class ActivityTool {
@@ -281,4 +288,53 @@ public class ActivityTool {
         else if (orientation == Orientation.LANDSCAPE)
             activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     }
+
+    public static String getRoundNameFromRoundValue(JSONObject jornadas, Double referencia){
+        Iterator<?> keys = jornadas.keys();
+        String name = "";
+        while( keys.hasNext() ){
+            try {
+                String key = (String)keys.next();
+                Double valor = jornadas.getDouble(key);
+                if(valor.compareTo(referencia)==0) {
+                    name = key;
+                    break;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return "";
+            }
+        }
+        return name;
+    }
+
+    public static Double getRoundValueFromRoundName(JSONObject jornadas, String referencia){
+        Iterator<?> keys = jornadas.keys();
+        Double value = 0.0;
+        while( keys.hasNext() ){
+            try {
+                String key = (String)keys.next();
+                if(key.compareTo(referencia) == 0) {
+                    value = jornadas.getDouble(key);
+                    break;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return 0.0;
+            }
+        }
+        return value;
+    }
+
+    public static JSONObject getJornadasJSON(Context context){
+        String jornadas = ActivityTool.getStringFromPreferences(context, ComunioConstants.PROPERTY_JORNADAS);
+        JSONObject jornadasJSON = null;
+        try {
+            jornadasJSON = new JSONObject(jornadas);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jornadasJSON;
+    }
+
 }
