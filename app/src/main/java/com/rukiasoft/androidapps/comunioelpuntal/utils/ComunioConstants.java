@@ -27,6 +27,7 @@ public class ComunioConstants {
     //public static final String PROPERTY_DOWNLOADING_DATABASE = "downloading_database";
     public static final String PROPERTY_VERSION_APP_DOWNLOADED = "version_app_downloaded";
     public static final String PROPERTY_VERSION_APP_FOR_DOWNLOADING = "version_app_for_downloading";
+    public static final String PROPERTY_JORNADAS = "jornadas";
 
     public static final Integer DATABASE_REFRESH = 1000 * 3600 * 24;
 

@@ -23,6 +23,9 @@ import java.util.List;
 import com.rukiasoft.androidapps.comunioelpuntal.utils.ActivityTool;
 import com.rukiasoft.androidapps.comunioelpuntal.utils.ComunioConstants;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class ClassificationFragment extends Fragment implements Serializable {
 
     /**
@@ -183,6 +186,13 @@ public class ClassificationFragment extends Fragment implements Serializable {
 
     public void setGamerList(List<GamerInformation> gamers, OrderType order) {
         //Log.d(TAG,  "setGamerList");
+        String jornadas = ActivityTool.getStringFromPreferences(getActivity().getApplicationContext(), ComunioConstants.PROPERTY_JORNADAS);
+        try {
+            JSONObject jornadasJSON = new JSONObject(jornadas);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         participantes.clear();
         for (int i = 0; i < gamers.size(); i++) {
             participantes.add(gamers.get(i));
