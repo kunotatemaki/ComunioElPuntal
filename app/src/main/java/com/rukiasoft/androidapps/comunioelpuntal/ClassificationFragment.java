@@ -171,7 +171,9 @@ public class ClassificationFragment extends Fragment implements Serializable {
                     localIndex = participantes.get(i).getPuntuaciones().size() - 1;
                 else if (order == OrderType.ROUND)
                     localIndex = index;
-                Integer points = participantes.get(i).getPuntuaciones().get(localIndex).getPuntuacion_jornada();
+                Integer points = null;
+                if(localIndex > 0 && localIndex < participantes.get(i).getPuntuaciones().size())
+                    points = participantes.get(i).getPuntuaciones().get(localIndex).getPuntuacion_jornada();
                 if (points != null)
                     item.setPoints(ActivityTool.getFormatedCurrencyNumber(points));
                 else
@@ -235,6 +237,8 @@ public class ClassificationFragment extends Fragment implements Serializable {
     private class GeneralComparator implements java.util.Comparator<GamerInformation> {
         @Override
         public int compare(GamerInformation p1, GamerInformation p2) {
+            if(p1.getCurrentRanking() == null || p2.getCurrentRanking() == null)
+                return 1;
             return p1.getCurrentRanking().compareTo(p2.getCurrentRanking());
         }
     }
@@ -242,6 +246,11 @@ public class ClassificationFragment extends Fragment implements Serializable {
     private class LastRoundComparator implements java.util.Comparator<GamerInformation> {
         @Override
         public int compare(GamerInformation p1, GamerInformation p2) {
+            if(p1.getPuntuaciones() == null || p2.getPuntuaciones() == null)
+                return 1;
+
+            if(p1.getPuntuaciones().size() == 0 || p2.getPuntuaciones().size() == 0)
+                return 1;
             return p1.getPuntuaciones().get(p1.getPuntuaciones().size() - 1).getPosicion_jornada().compareTo(
                     p2.getPuntuaciones().get(p2.getPuntuaciones().size() - 1).getPosicion_jornada());
         }
@@ -251,6 +260,9 @@ public class ClassificationFragment extends Fragment implements Serializable {
         @Override
         public int compare(GamerInformation p1, GamerInformation p2) {
             //busco la jornada
+            if(p1.getPuntuaciones().size() == 0 || p2.getPuntuaciones().size() == 0)
+                return 1;
+
             Integer size;
             if (p1.getPuntuaciones().size() <= p2.getPuntuaciones().size())
                 size = p1.getPuntuaciones().size();

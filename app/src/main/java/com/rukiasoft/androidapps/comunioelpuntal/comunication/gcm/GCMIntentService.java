@@ -8,9 +8,9 @@ import android.util.Log;
 
 import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.rukiasoft.androidapps.comunioelpuntal.dataclasses.DatabaseHandler;
+import com.rukiasoft.androidapps.comunioelpuntal.utils.ComunioConstants;
 
 public class GCMIntentService extends IntentService {
-    private static final String CUSTOM_INTENT = "ruler.elpuntal.comunio.androidapp.NOTIFICATION";
 
     private static final String TAG = "GCMIntentService";
     //DataBase
@@ -26,7 +26,7 @@ public class GCMIntentService extends IntentService {
 
         String messageType = gcm.getMessageType(intent);
         Bundle extras = intent.getExtras();
-        Intent second_intent = new Intent(CUSTOM_INTENT);
+        Intent second_intent = new Intent(ComunioConstants.NOTIFICATION_ACTION_INTENT);
         second_intent = second_intent.putExtras(extras);
         //Log.d(TAG, "Mando el intent GCM: " + messageType);
         if (!extras.isEmpty()) {

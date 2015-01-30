@@ -288,8 +288,7 @@ public class ServerClient {
 
         @Override
         protected void onPostExecute(String type) {
-            String CUSTOM_INTENT = "ruler.elpuntal.comunio.androidapp.DATABASE";
-            Intent intent = new Intent(CUSTOM_INTENT);
+            Intent intent = new Intent(ComunioConstants.DATABASE_DOWNLOADED_ACTION_INTENT);
             intent = intent.putExtra("type", type);
             Log.d(TAG, "Mando el broadcast");
             context.sendBroadcast(intent, null);

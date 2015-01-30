@@ -17,7 +17,7 @@ import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 
 public class AppDownloaderIntentService extends IntentService {
-    static final String CUSTOM_INTENT = "ruler.elpuntal.comunio.androidapp.NOTIFICATION";
+
 
     private static final String TAG = "AppDownloaderIntentService";
     //DataBase

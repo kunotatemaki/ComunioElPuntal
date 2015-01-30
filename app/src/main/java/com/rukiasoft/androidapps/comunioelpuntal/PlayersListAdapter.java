@@ -77,8 +77,12 @@ class PlayersListAdapter extends BaseAdapter implements Filterable {
     // Notify observers that the data set has changed
 
     public void add(PlayerItem item) {
-        mItems.add(item);
+        addWithoutRefresh(item);
         refresh();
+    }
+
+    public void addWithoutRefresh(PlayerItem item) {
+        mItems.add(item);
     }
 
     public void refresh() {
@@ -94,8 +98,13 @@ class PlayersListAdapter extends BaseAdapter implements Filterable {
 
     public void clear() {
         //Log.d(TAG, "metodo clear");
-        mItems.clear();
+        clearWithoutRefresh();
         refresh();
+    }
+
+    public void clearWithoutRefresh() {
+        //Log.d(TAG, "metodo clear");
+        mItems.clear();
     }
 
     public void remove(int pos) {

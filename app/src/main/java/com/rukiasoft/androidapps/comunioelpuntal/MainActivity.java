@@ -1,8 +1,11 @@
 package com.rukiasoft.androidapps.comunioelpuntal;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.res.AssetManager;
 import android.content.res.Configuration;
@@ -81,22 +84,20 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
     private static List<GamerInformation> gamers = new ArrayList<>();
     private static List<PlayerItem> players = new ArrayList<>();
 
-    private static boolean databaseLoaded = false;
-
-    private static boolean created = false;
+    private static Boolean databaseLoaded = false;
+    private static Boolean databaseDownloading = false;
+    private static Boolean created = false;
     private static ServerClient serverClient;
     private FragmentManager mFragmentManager;
     private FragmentTransaction mFragmentTransaction;
     private Fragment mMainFragment = null;
     private Fragment mSecondaryFragment = null;
     public final static ArrayList<String> options = new ArrayList<>();
-    //private static ComunioFragmentAndDataManager comunioFragmentAndDataManager = null;
     private static Context context;
     private static DrawerLayout mDrawerLayout;
     private static ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
     private NavigationDrawerAdapter navigationDrawerAdapter;
-    //private CharSequence mTitle;
     private Boolean firstStart = true;
     private static String myNameGamer = "";
     private Integer arrowCounter = 0;
@@ -133,6 +134,33 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
         }
     }
 
+    protected class MainActivityListener extends BroadcastReceiver {
+
+        Activity activity;
+
+        MainActivityListener(Activity _activity){
+            this.activity = _activity;
+        }
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(ComunioConstants.START_SELECT_PLAYER_ACTIVITY))
+            {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent secondIntent = new Intent(activity, SelectGamerActivity.class);
+                        secondIntent.putExtra("type", StartScreenActivity.class.getSimpleName());
+                        startActivity(secondIntent);
+                    }
+                });
+
+            }
+        }
+    }
+
+    MainActivityListener mListener;
+
     //private static Orientation defaultOrientation = Orientation.PORTRAIT;
 
     @SuppressWarnings("unchecked")
@@ -140,6 +168,9 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate");
         //supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+
+        mListener = new MainActivityListener(this);
+        registerReceiver(mListener, new IntentFilter(ComunioConstants.START_SELECT_PLAYER_ACTIVITY));
 
         if (savedInstanceState != null) {
             if (savedInstanceState.containsKey("gamers")) {
@@ -330,18 +361,6 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
         super.onResume();
     }
 
-    @Override
-    protected void onNewIntent(Intent intent) {
-        setIntent(intent);
-        handleIntent(intent);
-    }
-
-    private void handleIntent(Intent intent) {
-        //if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            int i = 0;
-        //}
-    }
-
     @SuppressLint("NewApi")
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intentData) {
@@ -368,10 +387,7 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
             }else
                 Log.d(TAG, "vuelvo sin haber puesto ok");
         } else if (requestCode == RESULT_SELECT_ACTIVITY) {
-            if(resultCode == RESULT_LOAD_START_SCREEN) {
-                Intent intent = new Intent(MainActivity.this, StartScreenActivity.class);
-                startActivityForResult(intent, RESULT_START_ACTIVITY);
-            }else if(resultCode == RESULT_OK)
+            if(resultCode == RESULT_OK)
                 if (!isCreated())
                     new Handler().post(new Runnable() {
                         public void run() {
@@ -438,10 +454,8 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
 
     @Override
     protected void onPause() {
-
         super.onPause();
         Log.d(TAG, "onPause");
-
     }
 
     @Override
@@ -449,7 +463,7 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
         super.onDestroy();
         Log.d(TAG, "onDestroy");
         created = false;
-
+        unregisterReceiver(mListener);
     }
 
     public static boolean isCreated() {
@@ -825,61 +839,6 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
         }
     }
 
-    public void loadDatabase(final ProgressBar horizontalProgressBar, final TextView textView) {
-        Log.d(TAG, "loaddatabase");
-
-        if (horizontalProgressBar instanceof ProgressBar) {
-            setProgress(horizontalProgressBar, 0);
-        }
-        try {
-            Log.d(TAG, "leyendo participantes");
-            String texto = context.getResources().getString(R.string.load_gamers);
-            setTextProgress(texto, textView);
-            List<Participante> participantes = dbHandler.getAllGamers();
-            setProgress(horizontalProgressBar, 10);
-            gamers.clear();
-            gamerFragment.setGamer(null);
-            //Log.d(TAG, "cargando participantes");
-            for (int i = 0; i < participantes.size(); i++) {
-                GamerInformation gamer = new GamerInformation();
-                gamer.setGamerInfo(participantes.get(i));
-                gamers.add(gamer);
-                setTextProgress(texto + " " + gamer.getParticipante().getNombre(), textView);
-                setProgress(horizontalProgressBar, 10 + i * 70 / participantes.size());
-            }
-
-           /* if (progressBar instanceof ProgressBar) {
-                progressBar.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        progressBar.setProgress(porcentaje);
-                    }
-                });
-            }*/
-            Log.d(TAG, "leyendo players");
-            texto = context.getResources().getString(R.string.load_players);
-            setTextProgress(texto, textView);
-
-            playersFragment.clearAdapter();
-            List<Player> jugadores = dbHandler.getPlayerList(null, null);
-
-            for (int i = 0; i < jugadores.size(); i++) {
-                PlayerItem item = new PlayerItem(jugadores.get(i), context);
-                playersFragment.addItem(item);
-                if (0 < jugadores.size())
-                    setProgress(horizontalProgressBar, 80 + i * 20 / jugadores.size());
-            }
-            players = playersFragment.getPlayerItems();
-            setProgress(horizontalProgressBar, 100);
-            databaseLoaded = true;
-            MainActivity.resetJornadasJSON();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            //throw new RuntimeException(e);
-        }
-
-    }
 
     public static List<Participante> loadGamerNamesFromDatabase() {
 
@@ -967,8 +926,31 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
         MainActivity.jornadasJSON = null;
     }
 
-}
+    public static GamerFragment getGamerFragment() {
+        return gamerFragment;
+    }
 
-http://stackoverflow.com/questions/7876043/android-new-intent-start-particular-method
-        http://stackoverflow.com/questions/5946171/how-to-call-a-method-using-intent
-        http://stackoverflow.com/questions/16653867/android-call-method-from-an-other-activity
+    public static PlayersFragment getPlayersFragment() {
+        return playersFragment;
+    }
+
+    public static List<PlayerItem> getPlayers() {
+        return players;
+    }
+
+    public static void setPlayers(List<PlayerItem> players) {
+        MainActivity.players = players;
+    }
+
+    public static void setDatabaseLoaded(boolean databaseLoaded) {
+        MainActivity.databaseLoaded = databaseLoaded;
+    }
+
+    public static Boolean getDatabaseDownloading() {
+        return databaseDownloading;
+    }
+
+    public static void setDatabaseDownloading(Boolean databaseDownloading) {
+        MainActivity.databaseDownloading = databaseDownloading;
+    }
+}

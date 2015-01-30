@@ -4,7 +4,7 @@
         <Preference
             android:title="@string/pick_my_team"
             android:summary="@string/pick_my_team_description">
-            <intent android:action="ruler.action.SELECT_WHO_YOU_ARE" />
+            <intent android:action="com.rukiasoft.androidapps.comunioelpuntal.action.SELECT_WHO_YOU_ARE" />
         </Preference>
         <CheckBoxPreference
             android:key="option_update_wifi"

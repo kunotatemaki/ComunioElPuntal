@@ -1,6 +1,7 @@
 package com.rukiasoft.androidapps.comunioelpuntal;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -76,9 +77,17 @@ public class SelectGamerActivity extends Activity {
                 if (nombre.compareTo("") == 0)
                     ActivityTool.showToast(getParent(), getResources().getString(R.string.pick_no_team));
                 else {
-                    if(getIntent().hasExtra("mode"))
-                        setResult(getIntent().getExtras().getInt("mode"));
-                    else
+                    if(getIntent().hasExtra("type")) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intent = new Intent(ComunioConstants.DATABASE_DOWNLOADED_ACTION_INTENT);
+                                intent = intent.putExtra("type", getIntent().getExtras().getString("type"));
+                                sendBroadcast(intent);
+                            }
+                        });
+
+                    }else
                         setResult(RESULT_OK);
                     finish();
                 }

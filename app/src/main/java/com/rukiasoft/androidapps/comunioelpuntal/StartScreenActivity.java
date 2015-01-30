@@ -1,7 +1,10 @@
 package com.rukiasoft.androidapps.comunioelpuntal;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,11 +22,38 @@ import com.rukiasoft.androidapps.comunioelpuntal.utils.ComunioConstants;
  */
 public class StartScreenActivity extends Activity {
     private final static String TAG = "StartScreenActivity";
-    private static ProgressBar horizontalProgressBar;
-    private static ProgressBar indefiniteProgressBar;
-    private static TextView descripcion;
-    private static AnimationDrawable frameAnimation;
-    private static Activity activity;
+    private ProgressBar horizontalProgressBar;
+    private ProgressBar indefiniteProgressBar;
+    private TextView descripcion;
+    private AnimationDrawable frameAnimation;
+    private Activity activity;
+
+    protected class ProgressListener extends BroadcastReceiver {
+
+        Activity activity;
+
+        ProgressListener(Activity _activity){
+            this.activity = _activity;
+        }
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(ComunioConstants.SET_PROGRESS_BAR_ACTION_INTENT)) {
+                Integer progress = intent.getExtras().getInt("progress");
+                ((StartScreenActivity) activity).setProgress(progress);
+            }else if (intent.getAction().equals(ComunioConstants.SET_TEXT_PROGRESS_ACTION_INTENT)) {
+                String text = intent.getExtras().getString("text");
+                ((StartScreenActivity) activity).setTextProgress(text);
+            }else if (intent.getAction().equals(ComunioConstants.START_LOAD_ON_START_SCREEN)) {
+                ((StartScreenActivity) activity).startLoad();
+            }else if (intent.getAction().equals(ComunioConstants.FINISH_LOAD_ON_START_SCREEN)) {
+                ((StartScreenActivity) activity).finishLoad();
+            }
+
+        }
+    }
+
+    ProgressListener mListener;
 
     @Override
     public void onCreate(Bundle bundle) {
@@ -41,6 +71,13 @@ public class StartScreenActivity extends Activity {
             ActivityTool.setOrientation(this, MainActivity.Orientation.PORTRAIT);
         else
             ActivityTool.setOrientation(this, MainActivity.Orientation.LANDSCAPE);
+
+        mListener = new ProgressListener(this);
+        registerReceiver(mListener, new IntentFilter(ComunioConstants.SET_PROGRESS_BAR_ACTION_INTENT));
+        registerReceiver(mListener, new IntentFilter(ComunioConstants.SET_TEXT_PROGRESS_ACTION_INTENT));
+        registerReceiver(mListener, new IntentFilter(ComunioConstants.START_LOAD_ON_START_SCREEN));
+        registerReceiver(mListener, new IntentFilter(ComunioConstants.FINISH_LOAD_ON_START_SCREEN));
+
         ImageView img = (ImageView) findViewById(R.id.start_screen_image_view);
         horizontalProgressBar = (ProgressBar) findViewById(R.id.start_screen_horizontal_progress_bar);
         indefiniteProgressBar = (ProgressBar) findViewById(R.id.start_screen_indefinite_progress_bar);
@@ -63,9 +100,14 @@ public class StartScreenActivity extends Activity {
             indefiniteProgressBar.setVisibility(View.VISIBLE);
             descripcion.setText(getResources().getString(R.string.database_download));
             MainActivity.GetServerClient().connectToDownloadDatabase(fecha, true);
-        } else
-            loadData();
+        } else {
+            Intent intent = new Intent(ComunioConstants.DATABASE_DOWNLOADED_ACTION_INTENT);
+            intent = intent.putExtra("type", StartScreenActivity.class.getSimpleName());
+            sendBroadcast(intent);
+            //loadData();
+        }
     }
+
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -75,27 +117,11 @@ public class StartScreenActivity extends Activity {
             frameAnimation.stop();
     }
 
-    public static void loadData() {
-        Log.d(TAG, "entro en loadData");
-        indefiniteProgressBar.setVisibility(View.INVISIBLE);
-        horizontalProgressBar.setVisibility(View.VISIBLE);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Intent i=new Intent(activity, MainActivity.class);
-                i.putExtra("methodName","loadDatabase");//goes to previous Intent
-                ((Activity)MainActivity.getContext()).startActivity(i);//will trigger only Mymethod in MainActivity
-
-                //MainActivity.loadDatabase(horizontalProgressBar, descripcion);
-                finalizarActivity(RESULT_OK);
-            }
-        }).start();
-    }
-
-    public static void finalizarActivity(int mode){
+    public void finalizarActivity(int mode){
         if (activity != null) {
             Log.d(TAG, "pongo ok y termino");
             activity.setResult(mode);
+            unregisterReceiver(mListener);
             activity.finish();
         }
     }
@@ -111,5 +137,21 @@ public class StartScreenActivity extends Activity {
         Log.d(TAG, "onDestroy");
     }
 
+    private void setTextProgress(String text) {
+        descripcion.setText(text);
+    }
+
+    private void setProgress(Integer porcentaje) {
+        horizontalProgressBar.setProgress(porcentaje);
+    }
+
+    private void startLoad() {
+        indefiniteProgressBar.setVisibility(View.INVISIBLE);
+        horizontalProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    private void finishLoad() {
+        finalizarActivity(RESULT_OK);
+    }
 
 }

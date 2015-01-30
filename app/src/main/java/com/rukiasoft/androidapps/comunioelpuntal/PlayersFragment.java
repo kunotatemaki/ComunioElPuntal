@@ -134,8 +134,16 @@ public class PlayersFragment extends ListFragment implements OnQueryTextListener
         mAdapter.clear();
     }
 
+    public void clearAdapterWithoutRefresh() {
+        mAdapter.clearWithoutRefresh();
+    }
+
     public void addItem(PlayerItem item) {
         mAdapter.add(item);
+    }
+
+    public void addItemWithoutRefresh(PlayerItem item) {
+        mAdapter.addWithoutRefresh(item);
     }
 
     public void refresh() {

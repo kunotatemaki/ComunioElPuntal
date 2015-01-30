@@ -10,9 +10,9 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <!-- Creates a custom permission so only this app can receive its messages. -->
     <permission
-        android:name="ruler.elpuntal.comunio.androidapp.comunication.gcm.permission.C2D_MESSAGE"
+        android:name="com.rukiasoft.androidapps.comunioelpuntal.comunication.gcm.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
-    <uses-permission android:name="ruler.elpuntal.comunio.androidapp.comunication.gcm.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.rukiasoft.androidapps.comunioelpuntal.comunication.gcm.permission.C2D_MESSAGE" />
     <!-- This app has permission to register and receive data message. -->
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
     <uses-permission android:name="com.google.android.c2dm.permission.SEND" />
@@ -53,7 +53,7 @@
             android:label="@string/app_name"
             android:theme="@style/Theme.ComunioTheme">
             <intent-filter>
-                <action android:name="ruler.action.SELECT_WHO_YOU_ARE" />
+                <action android:name="com.rukiasoft.androidapps.comunioelpuntal.action.SELECT_WHO_YOU_ARE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -61,6 +61,7 @@
         <activity
             android:name=".StartScreenActivity"
             android:label="@string/app_name"/>
+
 
         <activity
             android:name=".NotificationActivity"
@@ -100,7 +101,7 @@
             android:name=".NotNotificationOpenReceiver"
             android:exported="false">
             <intent-filter android:priority="0">
-                <action android:name="ruler.elpuntal.comunio.androidapp.NOTIFICATION" />
+                <action android:name="com.rukiasoft.androidapps.comunioelpuntal.action.NOTIFICATION" />
             </intent-filter>
         </receiver>
 
@@ -108,15 +109,14 @@
             android:name=".DataBaseDownloadReceiver"
             android:exported="false">
             <intent-filter android:priority="0">
-                <action android:name="ruler.elpuntal.comunio.androidapp.DATABASE" />
+                <action android:name="com.rukiasoft.androidapps.comunioelpuntal.action.DATABASE" />
             </intent-filter>
         </receiver>
 
         <service android:name=".comunication.gcm.GCMIntentService" />
         <service android:name=".comunication.gcm.AppDownloaderIntentService" />
-
         <service android:name=".NotNotificationOpenService" />
-
+        <service android:name=".LoadDatabaseService" />
 
         <meta-data
             android:name="com.google.android.gms.version"
