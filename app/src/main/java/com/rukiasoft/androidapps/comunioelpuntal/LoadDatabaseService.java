@@ -2,17 +2,8 @@ package com.rukiasoft.androidapps.comunioelpuntal;
 
 import android.app.Activity;
 import android.app.IntentService;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -60,7 +51,7 @@ public class LoadDatabaseService extends IntentService {
         GCMBroadcastReceiver.completeWakefulIntent(intent);
     }
 
-    public void loadDatabase() {
+    void loadDatabase() {
         Log.d(TAG, "loadDatabaseService");
         try {
             Log.d(TAG, "leyendo participantes");
@@ -95,10 +86,10 @@ public class LoadDatabaseService extends IntentService {
 
             List<Player> jugadores = MainActivity.getdbHandler().getPlayerList(null, null);
 
-            for (int i = 0; i < 16; i++) {
+            for (int i = 0; i < jugadores.size(); i++) {
                 PlayerItem item = new PlayerItem(jugadores.get(i), MainActivity.getContext());
                 MainActivity.getPlayersFragment().addItemWithoutRefresh(item);
-                if(1%10 == 0 && mostrarProgreso)
+                if(i%20 == 0 && mostrarProgreso)
                     setProgress(80 + i * 20 / jugadores.size());
             }
 
@@ -121,8 +112,8 @@ public class LoadDatabaseService extends IntentService {
                     }
                 });
             }
-            MainActivity.setDatabaseDownloading(false);
-            MainActivity.setDatabaseLoaded(true);
+            MainActivity.setDatabaseDownloading();
+            MainActivity.setDatabaseLoaded();
             MainActivity.resetJornadasJSON();
 
         } catch (Exception e) {

@@ -17,6 +17,7 @@ class ClassificationListAdapter extends BaseAdapter {
 
     //private static final String TAG = "ClassificationListAdapter";
     private List<ClassificationItem> mItems = new ArrayList<>();
+    private List<ClassificationItem> showedItems = new ArrayList<>();
     private final Context mContext;
 
     public ClassificationListAdapter(Context context) {

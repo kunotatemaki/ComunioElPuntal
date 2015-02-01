@@ -21,6 +21,7 @@ import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -335,6 +336,32 @@ public class ActivityTool {
             e.printStackTrace();
         }
         return jornadasJSON;
+    }
+
+    public static List<Double> readValoresJornadas() {
+        //if(valoresJornadas == null) {
+        JSONObject jornadasJSON = MainActivity.getJornadasJSON();
+        Iterator<?> keys = jornadasJSON.keys();
+        List<Double> valoresJornadas = new ArrayList<>();
+        while (keys.hasNext()) {
+            String key = (String) keys.next();
+            try {
+                valoresJornadas.add(jornadasJSON.getDouble(key));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        Collections.sort(valoresJornadas);
+        return valoresJornadas;
+
+    }
+
+    public static Double getValorJornadaActual(){
+        List<Double> valoresJornadas = readValoresJornadas();
+        if(valoresJornadas.size() == 0)
+            return null;
+        return valoresJornadas.get(valoresJornadas.size()-1);
+
     }
 
 }

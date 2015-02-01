@@ -53,7 +53,7 @@ public class StartScreenActivity extends Activity {
         }
     }
 
-    ProgressListener mListener;
+    private ProgressListener mListener;
 
     @Override
     public void onCreate(Bundle bundle) {
@@ -117,10 +117,10 @@ public class StartScreenActivity extends Activity {
             frameAnimation.stop();
     }
 
-    public void finalizarActivity(int mode){
+    void finalizarActivity(){
         if (activity != null) {
             Log.d(TAG, "pongo ok y termino");
-            activity.setResult(mode);
+            activity.setResult(Activity.RESULT_OK);
             unregisterReceiver(mListener);
             activity.finish();
         }
@@ -151,7 +151,7 @@ public class StartScreenActivity extends Activity {
     }
 
     private void finishLoad() {
-        finalizarActivity(RESULT_OK);
+        finalizarActivity();
     }
 
 }

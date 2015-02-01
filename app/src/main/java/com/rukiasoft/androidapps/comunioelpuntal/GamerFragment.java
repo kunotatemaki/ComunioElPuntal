@@ -116,7 +116,7 @@ public class GamerFragment extends Fragment implements Serializable {
                 dineroTotalView.setTextColor(getActivity().getResources().getColor(R.color.money_positive_over_color_header));
             numeroJugadoresLabel.setTextColor(getActivity().getResources().getColor(R.color.text_over_header));
             numeroJugadoresView.setText(gamer.getNumeroJugadores().toString());
-            if (gamer.getNumeroJugadores().equals(ComunioConstants.MAX_PLAYERS_TEAM))
+            if (gamer.getNumeroJugadores().equals(MainActivity.getdbHandler().getOption(ComunioConstants.MAX_PLAYERS_TEAM)))
                 numeroJugadoresView.setTextColor(getActivity().getResources().getColor(R.color.players_on_limit_over_color_header));
             else if (gamer.getNumeroJugadores() > MainActivity.getdbHandler().getOption(ComunioConstants.MAX_PLAYERS_TEAM))
                 numeroJugadoresView.setTextColor(getActivity().getResources().getColor(R.color.players_over_limit_over_color_header));

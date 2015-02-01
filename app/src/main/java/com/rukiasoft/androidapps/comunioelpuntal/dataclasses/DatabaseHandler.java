@@ -1,5 +1,6 @@
 package com.rukiasoft.androidapps.comunioelpuntal.dataclasses;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -607,6 +608,7 @@ public class DatabaseHandler implements Serializable {
             Cursor c = mDB.query(participante.getTabla(),
                     DatabaseOpenHelper.columnsScore, null, null, null, null,
                     order);
+            Double jActual = ActivityTool.getValorJornadaActual();
             if (c.moveToFirst()) {
                 //Recorremos el cursor hasta que no haya más registros
                 do {
@@ -618,21 +620,25 @@ public class DatabaseHandler implements Serializable {
                         puntuacion.setPuntuacion_general(c.getInt(5));
                     puntuacion.setId(c.getInt(0));
                     puntuacion.setJornada(c.getDouble(1));
-                    if (c.isNull(2))
-                        puntuacion.setPuntuacion_jornada(null);
-                    else
-                        puntuacion.setPuntuacion_jornada(c.getInt(2));
-                    puntuacion.setPosicion_jornada(c.getInt(3));
-                    puntuacion.setPrima_jornada(c.getInt(4) != 0);
-                    puntuacion.setPosicion_general(c.getInt(6));
-                    puntuacion.setPrima_general(c.getInt(7));
-                    puntuacion.setPublicado(c.getInt(8) != 0);
-                    puntuacion.setGoles(c.getInt(9));
-                    puntuacion.setPortero(c.getInt(10) != 0);
-                    puntuacion.setRemo_jugadores(c.getInt(11) != 0);
-                    puntuacion.setRemo_equipo(c.getInt(12) != 0);
-                    puntuacion.setRemo_trupita(c.getInt(13) != 0);
-                    puntuaciones.add(puntuacion);
+                    if(puntuacion.getJornada() <= participante.getJ_final()
+                            && puntuacion.getJornada() >= participante.getJ_inicio()
+                            && puntuacion.getJornada() <= jActual) {
+                        if (c.isNull(2))
+                            puntuacion.setPuntuacion_jornada(null);
+                        else
+                            puntuacion.setPuntuacion_jornada(c.getInt(2));
+                        puntuacion.setPosicion_jornada(c.getInt(3));
+                        puntuacion.setPrima_jornada(c.getInt(4) != 0);
+                        puntuacion.setPosicion_general(c.getInt(6));
+                        puntuacion.setPrima_general(c.getInt(7));
+                        puntuacion.setPublicado(c.getInt(8) != 0);
+                        puntuacion.setGoles(c.getInt(9));
+                        puntuacion.setPortero(c.getInt(10) != 0);
+                        puntuacion.setRemo_jugadores(c.getInt(11) != 0);
+                        puntuacion.setRemo_equipo(c.getInt(12) != 0);
+                        puntuacion.setRemo_trupita(c.getInt(13) != 0);
+                        puntuaciones.add(puntuacion);
+                    }
 
                 } while (c.moveToNext());
             }

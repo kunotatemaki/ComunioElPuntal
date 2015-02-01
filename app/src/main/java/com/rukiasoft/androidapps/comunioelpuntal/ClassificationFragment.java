@@ -34,10 +34,12 @@ public class ClassificationFragment extends Fragment implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final String TAG = "ClassificationFragment";
     private final List<GamerInformation> participantes = new ArrayList<>();
+    private final List<ClassificationItem> participantesMostrados = new ArrayList<>();
     private ClassificationListAdapter mAdapter = null;
-    private Comparator<GamerInformation> comparator = null;
+    private Comparator<ClassificationItem> comparator = null;
     private final ArrayList<String> datosSpinner = new ArrayList<>();
     private Integer index = 0;
+    private List<Double> valoresJornadas = null;
 
 
     public static enum OrderType {
@@ -156,31 +158,54 @@ public class ClassificationFragment extends Fragment implements Serializable {
             //Log.d(TAG,  "No era null");
             mAdapter.clear();
         }
-        //Log.d(TAG, "hay: " + mAdapter.getCount());
-        Collections.sort(participantes, comparator);
+
+        if (order == OrderType.GENERAL || order == OrderType.LAST_ROUND) {
+            selectedRound = ActivityTool.getValorJornadaActual();
+        }
+
+        participantesMostrados.clear();
+        Integer points = 0;
         for (int i = 0; i < participantes.size(); i++) {
-            Integer posicion = i + 1;
             ClassificationItem item = new ClassificationItem();
-            item.setPosition(posicion.toString());
-            item.setName(participantes.get(i).getParticipante().getNombre());
-            if (order == OrderType.GENERAL) {
-                item.setPoints(ActivityTool.getFormatedCurrencyNumber(participantes.get(i).getPuntosTotales()));
-            } else {
-                Integer localIndex = 0;
-                if (order == OrderType.LAST_ROUND)
-                    localIndex = participantes.get(i).getPuntuaciones().size() - 1;
-                else if (order == OrderType.ROUND)
-                    localIndex = index;
-                Integer points = null;
-                if(localIndex > 0 && localIndex < participantes.get(i).getPuntuaciones().size())
-                    points = participantes.get(i).getPuntuaciones().get(localIndex).getPuntuacion_jornada();
-                if (points != null)
-                    item.setPoints(ActivityTool.getFormatedCurrencyNumber(points));
-                else
-                    item.setPoints("-");
+            if(selectedRound == null){
+                item.setName(participantes.get(i).getParticipante().getNombre());
+                item.setPoints("-");
+                item.setGamerInformation(participantes.get(i));
+                Integer pos = i+1;
+                item.setPosition(pos.toString());
+                mAdapter.add(item);
+            }else if (participantes.get(i).getParticipante().getJ_final() >= selectedRound &&
+                    participantes.get(i).getParticipante().getJ_inicio() <= selectedRound) {
+                item.setName(participantes.get(i).getParticipante().getNombre());
+                if (order == OrderType.GENERAL) {
+                    points = participantes.get(i).getPuntosTotales();
+                }else if (order == OrderType.LAST_ROUND) {
+                    points = participantes.get(i).getPuntuaciones().get(participantes.get(i).getPuntuaciones().size()-1).getPuntuacion_jornada();
+                }else {
+                    for (int j = 0; j < participantes.get(i).getPuntuaciones().size(); j++) {
+                        if (participantes.get(i).getPuntuaciones().get(j).getJornada().compareTo(selectedRound) == 0) {
+                            points = participantes.get(i).getPuntuaciones().get(j).getPuntuacion_jornada();
+                            break;
+                        }
+                    }
+                }
+                item.setPoints(points.toString());
+                item.setGamerInformation(participantes.get(i));
+                participantesMostrados.add(item);
             }
-            item.setGamerInformation(participantes.get(i));
-            mAdapter.add(item);
+        }
+
+        if(selectedRound == null)
+            return;
+
+        Collections.sort(participantesMostrados, comparator);
+
+
+        for (int i = 0; i < participantesMostrados.size(); i++) {
+            Integer position = i+1;
+            participantesMostrados.get(i).setPosition(position.toString());
+            participantesMostrados.get(i).setPoints(ActivityTool.getFormatedCurrencyNumber(Integer.parseInt(participantesMostrados.get(i).getPoints())));
+            mAdapter.add(participantesMostrados.get(i));
         }
         //Log.d(TAG, "hay: " + mAdapter.getCount());
 
@@ -196,11 +221,7 @@ public class ClassificationFragment extends Fragment implements Serializable {
 
 
         this.order = order;
-        if (order == OrderType.GENERAL) {
-            comparator = new GeneralComparator();
-        } else if (order == OrderType.LAST_ROUND) {
-            comparator = new LastRoundComparator();
-        } else if (order == OrderType.ROUND) {
+        if (order == OrderType.ROUND) {
             JSONObject jornadasJSON = MainActivity.getJornadasJSON();
             Iterator<?> keys = jornadasJSON.keys();
             List<Double> valores = new ArrayList<>();
@@ -220,11 +241,9 @@ public class ClassificationFragment extends Fragment implements Serializable {
                     datosSpinner.add(ActivityTool.getRoundNameFromRoundValue(jornadasJSON, valores.get(i)));
                 }
             }
-            comparator = new RoundComparator();
-        } else {
-            this.order = OrderType.GENERAL;
-            comparator = new GeneralComparator();
+
         }
+        comparator = new ClassificationComparator();
     }
 
 
@@ -234,51 +253,18 @@ public class ClassificationFragment extends Fragment implements Serializable {
         loadItems();
     }
 
-    private class GeneralComparator implements java.util.Comparator<GamerInformation> {
+    private class ClassificationComparator implements java.util.Comparator<ClassificationItem> {
         @Override
-        public int compare(GamerInformation p1, GamerInformation p2) {
-            if(p1.getCurrentRanking() == null || p2.getCurrentRanking() == null)
-                return 1;
-            return p1.getCurrentRanking().compareTo(p2.getCurrentRanking());
+        public int compare(ClassificationItem p1, ClassificationItem p2) {
+
+            Integer v1 = Integer.parseInt(p1.getPoints());
+            Integer v2 = Integer.parseInt(p2.getPoints());
+
+            return v1.compareTo(v2);
         }
     }
 
-    private class LastRoundComparator implements java.util.Comparator<GamerInformation> {
-        @Override
-        public int compare(GamerInformation p1, GamerInformation p2) {
-            if(p1.getPuntuaciones() == null || p2.getPuntuaciones() == null)
-                return 1;
 
-            if(p1.getPuntuaciones().size() == 0 || p2.getPuntuaciones().size() == 0)
-                return 1;
-            return p1.getPuntuaciones().get(p1.getPuntuaciones().size() - 1).getPosicion_jornada().compareTo(
-                    p2.getPuntuaciones().get(p2.getPuntuaciones().size() - 1).getPosicion_jornada());
-        }
-    }
 
-    private class RoundComparator implements java.util.Comparator<GamerInformation> {
-        @Override
-        public int compare(GamerInformation p1, GamerInformation p2) {
-            //busco la jornada
-            if(p1.getPuntuaciones().size() == 0 || p2.getPuntuaciones().size() == 0)
-                return 1;
-
-            Integer size;
-            if (p1.getPuntuaciones().size() <= p2.getPuntuaciones().size())
-                size = p1.getPuntuaciones().size();
-            else
-                size = p2.getPuntuaciones().size();
-
-            for (int i = 0; i < size; i++) {
-                if (p1.getPuntuaciones().get(i).getJornada().compareTo(selectedRound) == 0) {
-                    index = i;
-                    break;
-                }
-            }
-
-            return p1.getPuntuaciones().get(index).getPosicion_jornada().compareTo(
-                    p2.getPuntuaciones().get(index).getPosicion_jornada());
-        }
-    }
 
 }

@@ -112,7 +112,7 @@ class CommunityListAdapter extends BaseAdapter {
         if (ownName.compareTo(nItem.getParticipante().getNombre()) == 0) {
             holder.imagen.setImageResource(R.drawable.chicho);
         } else {
-            holder.imagen.setImageResource(0);
+            holder.imagen.setImageDrawable(null);
         }
         holder.moneyView.setText(ActivityTool.getFormatedCurrencyNumber(nItem.getDineroTotal()) + "€");
         if (nItem.getDineroTotal() < 0)
@@ -123,7 +123,7 @@ class CommunityListAdapter extends BaseAdapter {
             holder.moneyView.setTextColor(mContext.getResources().getColor(R.color.money_positive));
         }
         holder.numOfPlayersView.setText(nItem.getNumeroJugadores().toString());
-        if (nItem.getNumeroJugadores().equals(ComunioConstants.MAX_PLAYERS_TEAM))
+        if (nItem.getNumeroJugadores().equals(MainActivity.getdbHandler().getOption(ComunioConstants.MAX_PLAYERS_TEAM)))
             holder.numOfPlayersView.setTextColor(mContext.getResources().getColor(R.color.players_on_limit));
         else if (nItem.getNumeroJugadores() > MainActivity.getdbHandler().getOption(ComunioConstants.MAX_PLAYERS_TEAM))
             holder.numOfPlayersView.setTextColor(mContext.getResources().getColor(R.color.players_over_limit));

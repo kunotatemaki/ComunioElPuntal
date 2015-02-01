@@ -54,7 +54,6 @@ import com.rukiasoft.androidapps.comunioelpuntal.comunication.gcm.ServerClient;
 import com.rukiasoft.androidapps.comunioelpuntal.crashlogs.ExceptionHandler;
 import com.rukiasoft.androidapps.comunioelpuntal.dataclasses.DatabaseHandler;
 import com.rukiasoft.androidapps.comunioelpuntal.dataclasses.Participante;
-import com.rukiasoft.androidapps.comunioelpuntal.dataclasses.Player;
 import com.rukiasoft.androidapps.comunioelpuntal.dataclasses.Puntuacion;
 import com.rukiasoft.androidapps.comunioelpuntal.utils.ActivityTool;
 import com.rukiasoft.androidapps.comunioelpuntal.utils.ComunioConstants;
@@ -942,15 +941,15 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
         MainActivity.players = players;
     }
 
-    public static void setDatabaseLoaded(boolean databaseLoaded) {
-        MainActivity.databaseLoaded = databaseLoaded;
+    public static void setDatabaseLoaded() {
+        MainActivity.databaseLoaded = true;
     }
 
     public static Boolean getDatabaseDownloading() {
         return databaseDownloading;
     }
 
-    public static void setDatabaseDownloading(Boolean databaseDownloading) {
-        MainActivity.databaseDownloading = databaseDownloading;
+    public static void setDatabaseDownloading() {
+        MainActivity.databaseDownloading = false;
     }
 }

@@ -1,18 +1,12 @@
 package com.rukiasoft.androidapps.comunioelpuntal;
 
 
-import android.app.Activity;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.content.WakefulBroadcastReceiver;
 import android.util.Log;
-
-import com.rukiasoft.androidapps.comunioelpuntal.utils.ActivityTool;
-import com.rukiasoft.androidapps.comunioelpuntal.utils.ComunioConstants;
 
 public class DataBaseDownloadReceiver extends WakefulBroadcastReceiver {
 
