@@ -107,6 +107,8 @@ class CommunityListAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+        if(!nItem.getActivo())
+            convertView.setBackgroundColor(mContext.getResources().getColor(R.color.holo_yellow_dark));
         String ownName = ActivityTool.getStringFromPreferences(mContext, ComunioConstants.PROPERTY_MY_TEAM);
         holder.name.setText(nItem.getParticipante().getNombre());
         if (ownName.compareTo(nItem.getParticipante().getNombre()) == 0) {

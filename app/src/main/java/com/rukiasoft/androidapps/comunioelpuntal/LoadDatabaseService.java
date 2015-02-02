@@ -89,7 +89,7 @@ public class LoadDatabaseService extends IntentService {
             for (int i = 0; i < jugadores.size(); i++) {
                 PlayerItem item = new PlayerItem(jugadores.get(i), MainActivity.getContext());
                 MainActivity.getPlayersFragment().addItemWithoutRefresh(item);
-                if(i%20 == 0 && mostrarProgreso)
+                if(i%30 == 0 && mostrarProgreso)
                     setProgress(80 + i * 20 / jugadores.size());
             }
 

@@ -167,7 +167,7 @@ public class ClassificationFragment extends Fragment implements Serializable {
         Integer points = 0;
         for (int i = 0; i < participantes.size(); i++) {
             ClassificationItem item = new ClassificationItem();
-            if(selectedRound == null){
+            if(selectedRound.doubleValue() == 0.0){
                 item.setName(participantes.get(i).getParticipante().getNombre());
                 item.setPoints("-");
                 item.setGamerInformation(participantes.get(i));

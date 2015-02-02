@@ -359,7 +359,7 @@ public class ActivityTool {
     public static Double getValorJornadaActual(){
         List<Double> valoresJornadas = readValoresJornadas();
         if(valoresJornadas.size() == 0)
-            return null;
+            return 0.0;
         return valoresJornadas.get(valoresJornadas.size()-1);
 
     }

@@ -4,6 +4,7 @@ import com.rukiasoft.androidapps.comunioelpuntal.dataclasses.Participante;
 import com.rukiasoft.androidapps.comunioelpuntal.dataclasses.Player;
 import com.rukiasoft.androidapps.comunioelpuntal.dataclasses.Puntuacion;
 import com.rukiasoft.androidapps.comunioelpuntal.dataclasses.Signing;
+import com.rukiasoft.androidapps.comunioelpuntal.utils.ActivityTool;
 import com.rukiasoft.androidapps.comunioelpuntal.utils.ComunioConstants;
 
 import java.io.Serializable;
@@ -36,6 +37,7 @@ public class GamerInformation implements Serializable {
     private Integer puntosTotales = 0;
     private Integer currentRanking = 0;
     private Integer primaInicial = 0;
+    private Boolean activo = true;
     private Participante participante;
 
 
@@ -158,6 +160,12 @@ public class GamerInformation implements Serializable {
         dineroTotal = MainActivity.getdbHandler().getOption(ComunioConstants.STARTING_MONEY) + primaInicial - dineroFichajes + dineroPuntos
                 + dineroPrimasGoles + dineroPrimasPortero + dineroPrimasGeneral + dineroPrimasJornada
                 - dineroRemoEquipos - dineroRemoJugadores - dineroRemoTrupita + dineroVentas;
+        Double jActual = ActivityTool.getValorJornadaActual().doubleValue();
+        if(jActual == 0)
+            activo = true;
+        else if(participante.getJ_final().doubleValue()<jActual.doubleValue()
+                || participante.getJ_inicio()>jActual)
+            activo = false;
     }
 
     public Integer getDineroTotal() {
@@ -292,4 +300,7 @@ public class GamerInformation implements Serializable {
         this.primaInicial = primaInicial;
     }
 
+    public Boolean getActivo() {
+        return activo;
+    }
 }
