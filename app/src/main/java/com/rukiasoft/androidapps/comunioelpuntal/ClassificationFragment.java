@@ -189,7 +189,10 @@ public class ClassificationFragment extends Fragment implements Serializable {
                         }
                     }
                 }
-                item.setPoints(points.toString());
+                if(points != null)
+                    item.setPoints(points.toString());
+                else
+                    item.setPoints("-");
                 item.setGamerInformation(participantes.get(i));
                 participantesMostrados.add(item);
             }
@@ -204,7 +207,8 @@ public class ClassificationFragment extends Fragment implements Serializable {
         for (int i = 0; i < participantesMostrados.size(); i++) {
             Integer position = i+1;
             participantesMostrados.get(i).setPosition(position.toString());
-            participantesMostrados.get(i).setPoints(ActivityTool.getFormatedCurrencyNumber(Integer.parseInt(participantesMostrados.get(i).getPoints())));
+            if(participantesMostrados.get(i).getPoints().compareTo("-") != 0)
+                participantesMostrados.get(i).setPoints(ActivityTool.getFormatedCurrencyNumber(Integer.parseInt(participantesMostrados.get(i).getPoints())));
             mAdapter.add(participantesMostrados.get(i));
         }
         //Log.d(TAG, "hay: " + mAdapter.getCount());
@@ -256,11 +260,18 @@ public class ClassificationFragment extends Fragment implements Serializable {
     private class ClassificationComparator implements java.util.Comparator<ClassificationItem> {
         @Override
         public int compare(ClassificationItem p1, ClassificationItem p2) {
-
-            Integer v1 = Integer.parseInt(p1.getPoints());
-            Integer v2 = Integer.parseInt(p2.getPoints());
-
-            return v1.compareTo(v2);
+            Integer v1=0, v2=0;
+            try {
+                v1 = Integer.parseInt(p1.getPoints());
+            }catch(NumberFormatException e){
+                return 1;
+            }
+            try {
+                v2 = Integer.parseInt(p2.getPoints());
+            }catch(NumberFormatException e){
+                return -1;
+            }
+            return v2.compareTo(v1);
         }
     }
 
