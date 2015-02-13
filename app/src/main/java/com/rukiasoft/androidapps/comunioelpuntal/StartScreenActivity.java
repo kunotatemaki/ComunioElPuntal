@@ -87,7 +87,7 @@ public class StartScreenActivity extends Activity {
         if (!ActivityTool.isForTablet(this))    //una sola pantalla
             img.setBackgroundResource(R.drawable.homer_animation);
         else
-            img.setBackgroundResource(R.drawable.homer_animation);
+            img.setBackgroundResource(R.drawable.homer_animation_tablet);
 
         // Get the background, which has been compiled to an AnimationDrawable object.
         frameAnimation = (AnimationDrawable) img.getBackground();
