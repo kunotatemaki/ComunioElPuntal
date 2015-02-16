@@ -22,7 +22,7 @@
     <color name="money_positive_under_limit_over_color_header">#ffffff</color>
     <color name="money_positive_over_color_header">#ffffff</color>
     <color name="players_ok">#3f51b5</color>
-    <color name="players_on_limit">#e91e63</color>
+    <color name="players_on_limit">#ff8800</color>
     <color name="players_over_limit">#f44336</color>
     <color name="players_ok_over_color_header">#ffffff</color>
     <color name="players_on_limit_over_color_header">#ffffff</color>
