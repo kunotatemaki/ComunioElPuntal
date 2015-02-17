@@ -23,7 +23,7 @@ public class DataBaseDownloadReceiver extends WakefulBroadcastReceiver {
         }
         String type = extras.getString("type");
         if (type.compareTo(MainActivity.class.getSimpleName()) == 0) {
-            if (MainActivity.getDatabaseDownloading() == false) {
+            if (MainActivity.getDatabaseDownloading() == true) {
                 ComponentName comp =
                         new ComponentName(context.getPackageName(),
                                 LoadDatabaseService.class.getName());

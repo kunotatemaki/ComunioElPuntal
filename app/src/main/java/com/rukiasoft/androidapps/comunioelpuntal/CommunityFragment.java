@@ -132,4 +132,10 @@ public class CommunityFragment extends ListFragment implements Serializable {
         }
     }
 
+    public void restartFragment(){
+        mAdapter.clear();
+        loadItems();
+    }
+
+
 }

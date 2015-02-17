@@ -297,6 +297,7 @@ public class ServerClient {
 
     private String downloadDataBase(String fecha, String type) {
         try {
+            MainActivity.setDatabaseDownloading(true);
             // registramos las notificaciones
             JSONObject respuesta = downloadDatabaseFromComunioServer(fecha);
 
@@ -313,6 +314,7 @@ public class ServerClient {
             }
         } catch (Exception ex) {
             Log.d(TAG, "Error descargando base de datos ComunioServer:" + ex.getMessage());
+            MainActivity.setDatabaseDownloading(false);
         }
         return type;
     }

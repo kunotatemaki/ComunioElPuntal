@@ -5,8 +5,6 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.rukiasoft.androidapps.comunioelpuntal.comunication.gcm.GCMBroadcastReceiver;
 import com.rukiasoft.androidapps.comunioelpuntal.dataclasses.Participante;
@@ -25,8 +23,7 @@ public class LoadDatabaseService extends IntentService {
     public LoadDatabaseService() {
         super("LoadDatabaseService");
     }
-    private TextView textView= null;
-    private ProgressBar progressBar = null;
+
 
     @Override
     protected void onHandleIntent(Intent intent) {
@@ -35,9 +32,9 @@ public class LoadDatabaseService extends IntentService {
 
         if (!extras.isEmpty()) {
             String type = extras.getString("type");
-            if (type.compareTo(MainActivity.class.getSimpleName()) == 0)
+            if (type.compareTo(MainActivity.class.getSimpleName()) == 0) {
                 mostrarProgreso = false;
-            else if (type.compareTo(StartScreenActivity.class.getSimpleName()) == 0)
+            }else if (type.compareTo(StartScreenActivity.class.getSimpleName()) == 0)
                 mostrarProgreso = true;
             else if(type.compareTo(SelectGamerActivity.class.getSimpleName()) == 0){
                 Intent i = new Intent();
@@ -52,6 +49,7 @@ public class LoadDatabaseService extends IntentService {
     }
 
     void loadDatabase() {
+        MainActivity.setDatabaseLoaded(false);
         Log.d(TAG, "loadDatabaseService");
         try {
             Log.d(TAG, "leyendo participantes");
@@ -109,11 +107,12 @@ public class LoadDatabaseService extends IntentService {
                     @Override
                     public void run() {
                         ActivityTool.HideProgress(MainActivity.getProgressBar(), MainActivity.getContext());
+                        restartInterface();
                     }
                 });
             }
-            MainActivity.setDatabaseDownloading();
-            MainActivity.setDatabaseLoaded();
+            MainActivity.setDatabaseDownloading(false);
+            MainActivity.setDatabaseLoaded(true);
             MainActivity.resetJornadasJSON();
 
         } catch (Exception e) {
@@ -145,6 +144,12 @@ public class LoadDatabaseService extends IntentService {
     private void finishLoad(){
         Intent i = new Intent();
         i.setAction(ComunioConstants.FINISH_LOAD_ON_START_SCREEN);
+        sendBroadcast(i);
+    }
+
+    private void restartInterface(){
+        Intent i = new Intent();
+        i.setAction(ComunioConstants.RESTART_INTEFACE_IN_MY_TEAM);
         sendBroadcast(i);
     }
 

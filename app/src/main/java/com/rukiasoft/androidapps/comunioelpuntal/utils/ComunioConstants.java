@@ -13,7 +13,6 @@ public class ComunioConstants {
     public static final Integer MIN_MONEY_GREEN = 1000000;
 
     //para los intents
-    public  static final String LOAD_DATABASE_ACTION_INTENT = "com.rukiasoft.androidapps.comunioelpuntal.action.LOAD_DATABASE_ACTION_INTENT";
     public  static final String DATABASE_DOWNLOADED_ACTION_INTENT = "com.rukiasoft.androidapps.comunioelpuntal.action.DATABASE";
     public static final String NOTIFICATION_ACTION_INTENT = "com.rukiasoft.androidapps.comunioelpuntal.action.NOTIFICATION";
     public static final String START_LOAD_ON_START_SCREEN = "com.rukiasoft.androidapps.comunioelpuntal.action.START_LOAD_ON_START_SCREEN";
@@ -21,7 +20,7 @@ public class ComunioConstants {
     public static final String SET_TEXT_PROGRESS_ACTION_INTENT = "com.rukiasoft.androidapps.comunioelpuntal.action.SET_TEXT_PROGRESS_ACTION_INTENT";
     public static final String SET_PROGRESS_BAR_ACTION_INTENT = "com.rukiasoft.androidapps.comunioelpuntal.action.SET_PROGRESS_BAR_ACTION_INTENT";
     public static final String START_SELECT_PLAYER_ACTIVITY = "com.rukiasoft.androidapps.comunioelpuntal.action.START_SELECT_PLAYER_ACTIVITY";
-
+    public static final String RESTART_INTEFACE_IN_MY_TEAM = "com.rukiasoft.androidapps.comunioelpuntal.action.RESTART_INTEFACE_IN_MY_TEAM";
 
     public static final String FORMAT_DATE_TIME = "yyyy/MM/dd HH:mm:ss";
     public static final String FORMAT_DATE_TIME_LOG = "yyyy-MM-dd__HH-mm-ss";

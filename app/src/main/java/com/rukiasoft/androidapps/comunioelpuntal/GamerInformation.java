@@ -160,10 +160,10 @@ public class GamerInformation implements Serializable {
         dineroTotal = MainActivity.getdbHandler().getOption(ComunioConstants.STARTING_MONEY) + primaInicial - dineroFichajes + dineroPuntos
                 + dineroPrimasGoles + dineroPrimasPortero + dineroPrimasGeneral + dineroPrimasJornada
                 - dineroRemoEquipos - dineroRemoJugadores - dineroRemoTrupita + dineroVentas;
-        Double jActual = ActivityTool.getValorJornadaActual().doubleValue();
+        Double jActual = ActivityTool.getValorJornadaActual();
         if(jActual == 0)
             activo = true;
-        else if(participante.getJ_final().doubleValue()<jActual.doubleValue()
+        else if(participante.getJ_final() < jActual
                 || participante.getJ_inicio()>jActual)
             activo = false;
     }
@@ -172,88 +172,50 @@ public class GamerInformation implements Serializable {
         return dineroTotal;
     }
 
-    public void setDineroTotal(Integer dineroTotal) {
-        this.dineroTotal = dineroTotal;
-    }
-
     public Integer getDineroPrimasGoles() {
         return dineroPrimasGoles;
     }
 
-    public void setDineroPrimasGoles(Integer dineroPrimasGoles) {
-        this.dineroPrimasGoles = dineroPrimasGoles;
-    }
+
 
     public Integer getDineroPrimasPortero() {
         return dineroPrimasPortero;
     }
 
-    public void setDineroPrimasPortero(Integer dineroPrimasPortero) {
-        this.dineroPrimasPortero = dineroPrimasPortero;
-    }
 
     public Integer getDineroPrimasJornada() {
         return dineroPrimasJornada;
     }
 
-    public void setDineroPrimasJornada(Integer dineroPrimasJornada) {
-        this.dineroPrimasJornada = dineroPrimasJornada;
-    }
 
     public Integer getDineroPrimasGeneral() {
         return dineroPrimasGeneral;
     }
 
-    public void setDineroPrimasGeneral(Integer dineroPrimasGeneral) {
-        this.dineroPrimasGeneral = dineroPrimasGeneral;
-    }
 
     public Integer getDineroFichajes() {
         return dineroFichajes;
     }
 
-    public void setDineroFichajes(Integer dineroFichajes) {
-        this.dineroFichajes = dineroFichajes;
-    }
 
     public Integer getDineroVentas() {
         return dineroVentas;
-    }
-
-    public void setDineroVentas(Integer dineroVentas) {
-        this.dineroVentas = dineroVentas;
     }
 
     public Integer getDineroRemoJugadores() {
         return dineroRemoJugadores;
     }
 
-    public void setDineroRemoJugadores(Integer dineroRemoJugadores) {
-        this.dineroRemoJugadores = dineroRemoJugadores;
-    }
-
     public Integer getDineroRemoEquipos() {
         return dineroRemoEquipos;
-    }
-
-    public void setDineroRemoEquipos(Integer dineroRemoEquipos) {
-        this.dineroRemoEquipos = dineroRemoEquipos;
     }
 
     public Integer getDineroRemoTrupita() {
         return dineroRemoTrupita;
     }
 
-    public void setDineroRemoTrupita(Integer dineroRemoTrupita) {
-        this.dineroRemoTrupita = dineroRemoTrupita;
-    }
-
     public Integer getDineroPuntos() {
         return dineroPuntos;
-    }
-
-    public void setDineroPuntos(Integer dineroPuntos) {
-        this.dineroPuntos = dineroPuntos;
     }
 
     public Participante getParticipante() {
@@ -286,18 +248,6 @@ public class GamerInformation implements Serializable {
 
     public Integer getCurrentRanking() {
         return currentRanking;
-    }
-
-    public void setCurrentRanking(Integer currentRanking) {
-        this.currentRanking = currentRanking;
-    }
-
-    public Integer getPrimaInicial() {
-        return primaInicial;
-    }
-
-    public void setPrimaInicial(Integer primaInicial) {
-        this.primaInicial = primaInicial;
     }
 
     public Boolean getActivo() {

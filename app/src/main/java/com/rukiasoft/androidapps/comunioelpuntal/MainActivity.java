@@ -154,6 +154,9 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
                     }
                 });
 
+            }else if (intent.getAction().equals(ComunioConstants.RESTART_INTEFACE_IN_MY_TEAM)) {
+                ((MainActivity) activity).loadItemsNavigationDrawer();
+                getCommunityFragment().restartFragment();
             }
         }
     }
@@ -170,6 +173,7 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
 
         mListener = new MainActivityListener(this);
         registerReceiver(mListener, new IntentFilter(ComunioConstants.START_SELECT_PLAYER_ACTIVITY));
+        registerReceiver(mListener, new IntentFilter(ComunioConstants.RESTART_INTEFACE_IN_MY_TEAM));
 
         if (savedInstanceState != null) {
             if (savedInstanceState.containsKey("gamers")) {
@@ -929,6 +933,14 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
         return gamerFragment;
     }
 
+    public static CommunityFragment getCommunityFragment() {
+        return communityFragment;
+    }
+
+    public static ClassificationTabsFragment getClassificationTabsFragment() {
+        return classificationTabsFragment;
+    }
+
     public static PlayersFragment getPlayersFragment() {
         return playersFragment;
     }
@@ -941,15 +953,17 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
         MainActivity.players = players;
     }
 
-    public static void setDatabaseLoaded() {
-        MainActivity.databaseLoaded = true;
+    public static void setDatabaseLoaded(Boolean state) {
+        MainActivity.databaseLoaded = state;
     }
 
     public static Boolean getDatabaseDownloading() {
         return databaseDownloading;
     }
 
-    public static void setDatabaseDownloading() {
-        MainActivity.databaseDownloading = false;
+    public static void setDatabaseDownloading(Boolean state) {
+        MainActivity.databaseDownloading = state;
     }
+
+
 }
