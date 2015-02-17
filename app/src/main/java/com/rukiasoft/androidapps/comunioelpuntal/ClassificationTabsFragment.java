@@ -40,18 +40,15 @@ public class ClassificationTabsFragment extends Fragment implements Serializable
             fGeneral = new ClassificationFragment();
         Log.d(TAG, "creandoGeneral");
 
-        fGeneral.setGamerList(MainActivity.getGamers(),
-                ClassificationFragment.OrderType.GENERAL);
+        fGeneral.setGamerList(ClassificationFragment.OrderType.GENERAL);
         Log.d(TAG, "creadofLastRound");
         if (fLastRound == null)
             fLastRound = new ClassificationFragment();
-        fLastRound.setGamerList(MainActivity.getGamers(),
-                ClassificationFragment.OrderType.LAST_ROUND);
+        fLastRound.setGamerList(ClassificationFragment.OrderType.LAST_ROUND);
         Log.d(TAG, "creadofRound");
         if (fRound == null)
             fRound = new ClassificationFragment();
-        fRound.setGamerList(MainActivity.getGamers(),
-                ClassificationFragment.OrderType.ROUND);
+        fRound.setGamerList(ClassificationFragment.OrderType.ROUND);
     }
 
     @Override
@@ -108,6 +105,13 @@ public class ClassificationTabsFragment extends Fragment implements Serializable
         return rootView;
     }
 
+    public void restartFragment() {
+        fGeneral.resetFragment();
+        fLastRound.resetFragment();
+        fRound.resetFragment();
+
+    }
+
     public static class AppSectionsPagerAdapter extends FragmentPagerAdapter {
 
         final FragmentManager fragmentManager;
@@ -147,6 +151,8 @@ public class ClassificationTabsFragment extends Fragment implements Serializable
         public CharSequence getPageTitle(int position) {
             return "Section " + (position + 1);
         }
+
+
     }
 }
 

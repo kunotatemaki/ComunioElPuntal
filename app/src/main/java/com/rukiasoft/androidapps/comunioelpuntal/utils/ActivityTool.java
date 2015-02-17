@@ -292,7 +292,7 @@ public class ActivityTool {
 
     public static String getRoundNameFromRoundValue(JSONObject jornadas, Double referencia){
         Iterator<?> keys = jornadas.keys();
-        String name = "";
+        String name = "Próxima Jornada";
         while( keys.hasNext() ){
             try {
                 String key = (String)keys.next();

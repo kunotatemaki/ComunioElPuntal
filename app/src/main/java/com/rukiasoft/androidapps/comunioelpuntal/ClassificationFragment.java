@@ -179,8 +179,6 @@ public class ClassificationFragment extends Fragment implements Serializable {
                 item.setName(participantes.get(i).getParticipante().getNombre());
                 if (order == OrderType.GENERAL) {
                     points = participantes.get(i).getPuntosTotales();
-                }else if (order == OrderType.LAST_ROUND) {
-                    points = participantes.get(i).getPuntuaciones().get(participantes.get(i).getPuntuaciones().size()-1).getPuntuacion_jornada();
                 }else {
                     for (int j = 0; j < participantes.get(i).getPuntuaciones().size(); j++) {
                         if (participantes.get(i).getPuntuaciones().get(j).getJornada().compareTo(selectedRound) == 0) {
@@ -215,9 +213,9 @@ public class ClassificationFragment extends Fragment implements Serializable {
 
     }
 
-    public void setGamerList(List<GamerInformation> gamers, OrderType order) {
+    public void setGamerList(OrderType order) {
 
-
+        List<GamerInformation> gamers = MainActivity.getGamers();
         participantes.clear();
         for (int i = 0; i < gamers.size(); i++) {
             participantes.add(gamers.get(i));
@@ -226,35 +224,42 @@ public class ClassificationFragment extends Fragment implements Serializable {
 
         this.order = order;
         if (order == OrderType.ROUND) {
-            JSONObject jornadasJSON = MainActivity.getJornadasJSON();
-            Iterator<?> keys = jornadasJSON.keys();
-            List<Double> valores = new ArrayList<>();
-            while( keys.hasNext() ){
-                String key = (String)keys.next();
-                try {
-                    valores.add(jornadasJSON.getDouble(key));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-            Collections.sort(valores);
-
-            datosSpinner.clear();
-            if (gamers.size() > 0) {
-                for (int i = 0; i < valores.size(); i++) {
-                    datosSpinner.add(ActivityTool.getRoundNameFromRoundValue(jornadasJSON, valores.get(i)));
-                }
-            }
-
+            setSpinner();
         }
         comparator = new ClassificationComparator();
     }
 
+    private void setSpinner(){
+        JSONObject jornadasJSON = MainActivity.getJornadasJSON();
+        Iterator<?> keys = jornadasJSON.keys();
+        List<Double> valores = new ArrayList<>();
+        while( keys.hasNext() ){
+            String key = (String)keys.next();
+            try {
+                valores.add(jornadasJSON.getDouble(key));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        Collections.sort(valores);
+
+        datosSpinner.clear();
+        if (MainActivity.getGamers().size() > 0) {
+            for (int i = 0; i < valores.size(); i++) {
+                datosSpinner.add(ActivityTool.getRoundNameFromRoundValue(jornadasJSON, valores.get(i)));
+            }
+        }
+    }
 
     private void refresh() {
         //Collections.sort(this.participantes, this.comparator);
         Log.d(TAG, "refresh");
         loadItems();
+    }
+
+    public void resetFragment(){
+        setSpinner();
+        refresh();
     }
 
     private class ClassificationComparator implements java.util.Comparator<ClassificationItem> {

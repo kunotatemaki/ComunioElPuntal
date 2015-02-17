@@ -138,6 +138,12 @@ public class GamerInformation implements Serializable {
         for (int i = 0; i < puntuaciones.size(); i++) {
             Puntuacion puntuacion = puntuaciones.get(i);
 
+            dineroRemoJugadores += puntuacion.getRemo_jugadores() ? MainActivity.getdbHandler().getOption(ComunioConstants.REMO_MAX_PLAYERS) : 0;
+            dineroRemoEquipos += puntuacion.getRemo_equipo() ? MainActivity.getdbHandler().getOption(ComunioConstants.REMO_MAX_TEAMS) : 0;
+            dineroRemoTrupita += puntuacion.getRemo_trupita() ? MainActivity.getdbHandler().getOption(ComunioConstants.REMO_TRUPITAS) : 0;
+            if(puntuacion.getPosicion_general() == null){
+                continue;
+            }
             if (puntuacion.getPuntuacion_jornada() != null && puntuacion.getPuntuacion_jornada() > 0)
                 dineroPuntos += puntuacion.getPuntuacion_jornada() * MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_POINTS);
             Integer publicado = 0;
@@ -147,9 +153,6 @@ public class GamerInformation implements Serializable {
             dineroPrimasPortero += puntuacion.getPortero() ? publicado * MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_GOALKEEPER) : 0;
             dineroPrimasJornada += puntuacion.getPrima_jornada() ? MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_LAST_IN_ROUND) : 0;
             dineroPrimasGeneral += puntuacion.getPrima_general().equals(ComunioConstants.CODIGO_SI_COBRA_PRIMA) ? MainActivity.getdbHandler().getOption(ComunioConstants.BONUS_LAST_IN_CLASSIFICATION) : 0;
-            dineroRemoJugadores += puntuacion.getRemo_jugadores() ? MainActivity.getdbHandler().getOption(ComunioConstants.REMO_MAX_PLAYERS) : 0;
-            dineroRemoEquipos += puntuacion.getRemo_equipo() ? MainActivity.getdbHandler().getOption(ComunioConstants.REMO_MAX_TEAMS) : 0;
-            dineroRemoTrupita += puntuacion.getRemo_trupita() ? MainActivity.getdbHandler().getOption(ComunioConstants.REMO_TRUPITAS) : 0;
             puntosTotales = puntuacion.getPuntuacion_general();
 
             currentRanking = puntuacion.getPosicion_general();

@@ -614,26 +614,24 @@ public class DatabaseHandler implements Serializable {
                 do {
                     Puntuacion puntuacion = new Puntuacion();
                     //cargo primero la puntuacion general para saber si esa jornada ya está metida o no
-                    if (c.isNull(5))
-                        continue;
-                    else
-                        puntuacion.setPuntuacion_general(c.getInt(5));
                     puntuacion.setId(c.getInt(0));
                     puntuacion.setJornada(c.getDouble(1));
                     if(puntuacion.getJornada() <= participante.getJ_final()
-                            && puntuacion.getJornada() >= participante.getJ_inicio()
-                            && puntuacion.getJornada() <= jActual) {
-                        if (c.isNull(2))
-                            puntuacion.setPuntuacion_jornada(null);
-                        else
-                            puntuacion.setPuntuacion_jornada(c.getInt(2));
-                        puntuacion.setPosicion_jornada(c.getInt(3));
-                        puntuacion.setPrima_jornada(c.getInt(4) != 0);
-                        puntuacion.setPosicion_general(c.getInt(6));
-                        puntuacion.setPrima_general(c.getInt(7));
-                        puntuacion.setPublicado(c.getInt(8) != 0);
-                        puntuacion.setGoles(c.getInt(9));
-                        puntuacion.setPortero(c.getInt(10) != 0);
+                            && puntuacion.getJornada() >= participante.getJ_inicio()) {
+                        if(puntuacion.getJornada() <= jActual) {
+                            if (c.isNull(2))
+                                puntuacion.setPuntuacion_jornada(null);
+                            else
+                                puntuacion.setPuntuacion_jornada(c.getInt(2));
+                            puntuacion.setPuntuacion_general(c.getInt(5));
+                            puntuacion.setPosicion_jornada(c.getInt(3));
+                            puntuacion.setPrima_jornada(c.getInt(4) != 0);
+                            puntuacion.setPosicion_general(c.getInt(6));
+                            puntuacion.setPrima_general(c.getInt(7));
+                            puntuacion.setPublicado(c.getInt(8) != 0);
+                            puntuacion.setGoles(c.getInt(9));
+                            puntuacion.setPortero(c.getInt(10) != 0);
+                        }
                         puntuacion.setRemo_jugadores(c.getInt(11) != 0);
                         puntuacion.setRemo_equipo(c.getInt(12) != 0);
                         puntuacion.setRemo_trupita(c.getInt(13) != 0);

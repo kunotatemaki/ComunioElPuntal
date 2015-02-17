@@ -157,6 +157,7 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
             }else if (intent.getAction().equals(ComunioConstants.RESTART_INTEFACE_IN_MY_TEAM)) {
                 ((MainActivity) activity).loadItemsNavigationDrawer();
                 getCommunityFragment().restartFragment();
+                getClassificationTabsFragment().restartFragment();
             }
         }
     }
