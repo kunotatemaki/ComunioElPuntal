@@ -1,6 +1,5 @@
 package com.rukiasoft.androidapps.comunioelpuntal.dataclasses;
 
-import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -9,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.rukiasoft.androidapps.comunioelpuntal.DatabaseOpenHelper;
+import com.rukiasoft.androidapps.comunioelpuntal.MainActivity;
 import com.rukiasoft.androidapps.comunioelpuntal.NotificationItem;
 import com.rukiasoft.androidapps.comunioelpuntal.utils.ActivityTool;
 import com.rukiasoft.androidapps.comunioelpuntal.utils.ComunioConstants;
@@ -195,45 +195,6 @@ public class DatabaseHandler implements Serializable {
                 throw new Exception("Error actualizando datos de configuracion");
         }
 
-        value = data.getInt(ComunioConstants.START_ROUND);
-        option.put(DatabaseOpenHelper.OPTION, ComunioConstants.START_ROUND);
-        option.put(DatabaseOpenHelper.VALUE, value);
-        args[0] = ComunioConstants.START_ROUND;
-        resultado = mDB.update(ComunioConstants.TABLE_CONF, option, DatabaseOpenHelper.OPTION + "=?", args);
-        if (resultado < 0)
-            throw new Exception("Error actualizando datos de configuracion");
-        else if (resultado == 0) {
-            resultado = mDB.insert(ComunioConstants.TABLE_CONF, null, option);
-            if (resultado < 0)
-                throw new Exception("Error actualizando datos de configuracion");
-        }
-
-        value = data.getInt(ComunioConstants.FINAL_ROUND);
-        option.put(DatabaseOpenHelper.OPTION, ComunioConstants.FINAL_ROUND);
-        option.put(DatabaseOpenHelper.VALUE, value);
-        args[0] = ComunioConstants.FINAL_ROUND;
-        resultado = mDB.update(ComunioConstants.TABLE_CONF, option, DatabaseOpenHelper.OPTION + "=?", args);
-        if (resultado < 0)
-            throw new Exception("Error actualizando datos de configuracion");
-        else if (resultado == 0) {
-            resultado = mDB.insert(ComunioConstants.TABLE_CONF, null, option);
-            if (resultado < 0)
-                throw new Exception("Error actualizando datos de configuracion");
-        }
-
-        value = data.getInt(ComunioConstants.CURRENT_ROUND);
-        option.put(DatabaseOpenHelper.OPTION, ComunioConstants.CURRENT_ROUND);
-        option.put(DatabaseOpenHelper.VALUE, value);
-        args[0] = ComunioConstants.CURRENT_ROUND;
-        resultado = mDB.update(ComunioConstants.TABLE_CONF, option, DatabaseOpenHelper.OPTION + "=?", args);
-        if (resultado < 0)
-            throw new Exception("Error actualizando datos de configuracion");
-        else if (resultado == 0) {
-            resultado = mDB.insert(ComunioConstants.TABLE_CONF, null, option);
-            if (resultado < 0)
-                throw new Exception("Error actualizando datos de configuracion");
-        }
-
         value = data.getInt(ComunioConstants.MAX_PLAYERS_EACH_TEAM);
         option.put(DatabaseOpenHelper.OPTION, ComunioConstants.MAX_PLAYERS_EACH_TEAM);
         option.put(DatabaseOpenHelper.VALUE, value);
@@ -247,10 +208,19 @@ public class DatabaseHandler implements Serializable {
                 throw new Exception("Error actualizando datos de configuracion");
         }
 
+        Double dValue = data.getDouble(ComunioConstants.PROPERTY_START_ROUND);
+        ActivityTool.savePreferences(context, ComunioConstants.PROPERTY_START_ROUND, dValue);
+
+        dValue = data.getDouble(ComunioConstants.PROPERTY_FINAL_ROUND);
+        ActivityTool.savePreferences(context, ComunioConstants.PROPERTY_FINAL_ROUND, dValue);
+
+        dValue = data.getDouble(ComunioConstants.PROPERTY_CURRENT_ROUND);
+        ActivityTool.savePreferences(context, ComunioConstants.PROPERTY_CURRENT_ROUND, dValue);
 
         //grabo los nombres de las jornadas almacenadas
         JSONObject jornadas = data.getJSONObject(ComunioConstants.PROPERTY_JORNADAS);
         ActivityTool.savePreferences(context, ComunioConstants.PROPERTY_JORNADAS, jornadas.toString());
+        MainActivity.resetJornadasJSON();
 
         //grabo los participantes
         JSONArray listGamersJSON;
@@ -608,7 +578,7 @@ public class DatabaseHandler implements Serializable {
             Cursor c = mDB.query(participante.getTabla(),
                     DatabaseOpenHelper.columnsScore, null, null, null, null,
                     order);
-            Double jActual = ActivityTool.getValorJornadaActual();
+            Double jActual = ActivityTool.getValorJornadaActual(context);
             if (c.moveToFirst()) {
                 //Recorremos el cursor hasta que no haya más registros
                 do {

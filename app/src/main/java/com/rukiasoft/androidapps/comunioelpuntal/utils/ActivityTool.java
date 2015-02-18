@@ -112,11 +112,20 @@ public class ActivityTool {
 
     }
 
-    public static void savePreferences(Context context, long value) {
+    public static void savePreferences(Context context, String name, long value) {
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor ed = preferences.edit();
-        ed.putLong(ComunioConstants.PROPERTY_EXPIRATION_TIME, value);
+        ed.putLong(name, value);
+        ed.apply();
+
+    }
+
+    public static void savePreferences(Context context, String name, Double value) {
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor ed = preferences.edit();
+        ed.putFloat(name, value.floatValue());
         ed.apply();
 
     }
@@ -174,6 +183,13 @@ public class ActivityTool {
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getInt(name, 0);
+
+    }
+
+    public static Double getDoubleFromPreferences(Context context, String name) {
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return Double.valueOf(preferences.getFloat(name, 0));
 
     }
 
@@ -356,12 +372,8 @@ public class ActivityTool {
 
     }
 
-    public static Double getValorJornadaActual(){
-        List<Double> valoresJornadas = readValoresJornadas();
-        if(valoresJornadas.size() == 0)
-            return 0.0;
-        return valoresJornadas.get(valoresJornadas.size()-1);
-
+    public static Double getValorJornadaActual(Context context){
+        return ActivityTool.getDoubleFromPreferences(context, ComunioConstants.PROPERTY_CURRENT_ROUND);
     }
 
 }

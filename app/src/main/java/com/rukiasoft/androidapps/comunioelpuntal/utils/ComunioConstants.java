@@ -37,6 +37,9 @@ public class ComunioConstants {
     public static final String PROPERTY_VERSION_APP_DOWNLOADED = "version_app_downloaded";
     public static final String PROPERTY_VERSION_APP_FOR_DOWNLOADING = "version_app_for_downloading";
     public static final String PROPERTY_JORNADAS = "jornadas";
+    public static final String PROPERTY_START_ROUND = "ronda_inicial";
+    public static final String PROPERTY_FINAL_ROUND = "ronda_final";
+    public static final String PROPERTY_CURRENT_ROUND = "current_round";
 
     public static final Integer DATABASE_REFRESH = 1000 * 3600 * 12;
 
@@ -48,9 +51,6 @@ public class ComunioConstants {
     public static final String COMPUTER = "Computer";
     public static final String[] TIPOS_SANCIONES = {"Máximo número de Jugadores","Máximo de jugadores por equipo","Trúpitas"};
 
-    public static final String START_ROUND = "ronda_inicial";
-    public static final String FINAL_ROUND = "ronda_final";
-    public static final String CURRENT_ROUND = "current_round";
     public static final String BONUS_GOAL = "prima_gol";
     public static final String BONUS_GOALKEEPER = "prima_portero";
     public static final String BONUS_LAST_IN_ROUND = "prima_torpe_jornada";

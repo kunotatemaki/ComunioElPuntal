@@ -163,7 +163,7 @@ public class GamerInformation implements Serializable {
         dineroTotal = MainActivity.getdbHandler().getOption(ComunioConstants.STARTING_MONEY) + primaInicial - dineroFichajes + dineroPuntos
                 + dineroPrimasGoles + dineroPrimasPortero + dineroPrimasGeneral + dineroPrimasJornada
                 - dineroRemoEquipos - dineroRemoJugadores - dineroRemoTrupita + dineroVentas;
-        Double jActual = ActivityTool.getValorJornadaActual();
+        Double jActual = ActivityTool.getValorJornadaActual(MainActivity.getContext());
         if(jActual == 0)
             activo = true;
         else if(participante.getJ_final() < jActual

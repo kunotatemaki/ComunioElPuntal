@@ -106,9 +106,12 @@ public class ClassificationTabsFragment extends Fragment implements Serializable
     }
 
     public void restartFragment() {
-        fGeneral.resetFragment();
-        fLastRound.resetFragment();
-        fRound.resetFragment();
+        if(fGeneral != null)
+            fGeneral.resetFragment();
+        if(fLastRound != null)
+            fLastRound.resetFragment();
+        if(fRound != null)
+            fRound.resetFragment();
 
     }
 

@@ -325,7 +325,7 @@ public class ServerClient {
         ActivityTool.savePreferences(context, ComunioConstants.PROPERTY_EMAIL, user);
         ActivityTool.savePreferences(context, ComunioConstants.PROPERTY_REG_ID, regId);
         ActivityTool.savePreferences(context, ComunioConstants.PROPERTY_APP_VERSION, appVersion);
-        ActivityTool.savePreferences(context, System.currentTimeMillis() + EXPIRATION_TIME_MS);
+        ActivityTool.savePreferences(context, ComunioConstants.PROPERTY_EXPIRATION_TIME, System.currentTimeMillis() + EXPIRATION_TIME_MS);
     }
 
     private boolean registerGCMIDInComunioServer(String usuario, String regId) {

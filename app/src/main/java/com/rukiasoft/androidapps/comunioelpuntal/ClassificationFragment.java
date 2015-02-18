@@ -33,7 +33,6 @@ public class ClassificationFragment extends Fragment implements Serializable {
      */
     private static final long serialVersionUID = 1L;
     private static final String TAG = "ClassificationFragment";
-    private final List<GamerInformation> participantes = new ArrayList<>();
     private final List<ClassificationItem> participantesMostrados = new ArrayList<>();
     private ClassificationListAdapter mAdapter = null;
     private Comparator<ClassificationItem> comparator = null;
@@ -160,29 +159,29 @@ public class ClassificationFragment extends Fragment implements Serializable {
         }
 
         if (order == OrderType.GENERAL || order == OrderType.LAST_ROUND) {
-            selectedRound = ActivityTool.getValorJornadaActual();
+            selectedRound = ActivityTool.getValorJornadaActual(MainActivity.getContext());
         }
 
         participantesMostrados.clear();
         Integer points = 0;
-        for (int i = 0; i < participantes.size(); i++) {
+        for (int i = 0; i < MainActivity.getGamers().size(); i++) {
             ClassificationItem item = new ClassificationItem();
             if(selectedRound.doubleValue() == 0.0){
-                item.setName(participantes.get(i).getParticipante().getNombre());
+                item.setName(MainActivity.getGamers().get(i).getParticipante().getNombre());
                 item.setPoints("-");
-                item.setGamerInformation(participantes.get(i));
+                item.setGamerInformation(MainActivity.getGamers().get(i));
                 Integer pos = i+1;
                 item.setPosition(pos.toString());
                 mAdapter.add(item);
-            }else if (participantes.get(i).getParticipante().getJ_final() >= selectedRound &&
-                    participantes.get(i).getParticipante().getJ_inicio() <= selectedRound) {
-                item.setName(participantes.get(i).getParticipante().getNombre());
+            }else if (MainActivity.getGamers().get(i).getParticipante().getJ_final() >= selectedRound &&
+                    MainActivity.getGamers().get(i).getParticipante().getJ_inicio() <= selectedRound) {
+                item.setName(MainActivity.getGamers().get(i).getParticipante().getNombre());
                 if (order == OrderType.GENERAL) {
-                    points = participantes.get(i).getPuntosTotales();
+                    points = MainActivity.getGamers().get(i).getPuntosTotales();
                 }else {
-                    for (int j = 0; j < participantes.get(i).getPuntuaciones().size(); j++) {
-                        if (participantes.get(i).getPuntuaciones().get(j).getJornada().compareTo(selectedRound) == 0) {
-                            points = participantes.get(i).getPuntuaciones().get(j).getPuntuacion_jornada();
+                    for (int j = 0; j < MainActivity.getGamers().get(i).getPuntuaciones().size(); j++) {
+                        if (MainActivity.getGamers().get(i).getPuntuaciones().get(j).getJornada().compareTo(selectedRound) == 0) {
+                            points = MainActivity.getGamers().get(i).getPuntuaciones().get(j).getPuntuacion_jornada();
                             break;
                         }
                     }
@@ -191,7 +190,7 @@ public class ClassificationFragment extends Fragment implements Serializable {
                     item.setPoints(points.toString());
                 else
                     item.setPoints("-");
-                item.setGamerInformation(participantes.get(i));
+                item.setGamerInformation(MainActivity.getGamers().get(i));
                 participantesMostrados.add(item);
             }
         }
@@ -214,13 +213,6 @@ public class ClassificationFragment extends Fragment implements Serializable {
     }
 
     public void setGamerList(OrderType order) {
-
-        List<GamerInformation> gamers = MainActivity.getGamers();
-        participantes.clear();
-        for (int i = 0; i < gamers.size(); i++) {
-            participantes.add(gamers.get(i));
-        }
-
 
         this.order = order;
         if (order == OrderType.ROUND) {
@@ -252,7 +244,6 @@ public class ClassificationFragment extends Fragment implements Serializable {
     }
 
     private void refresh() {
-        //Collections.sort(this.participantes, this.comparator);
         Log.d(TAG, "refresh");
         loadItems();
     }
