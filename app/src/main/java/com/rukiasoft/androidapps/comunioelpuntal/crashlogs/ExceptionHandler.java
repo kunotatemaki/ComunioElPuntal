@@ -37,7 +37,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.AssetManager;
 import android.os.Build;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import org.json.JSONObject;
@@ -49,6 +48,7 @@ import java.io.FilenameFilter;
 
 import com.rukiasoft.androidapps.comunioelpuntal.MainActivity;
 import com.rukiasoft.androidapps.comunioelpuntal.comunication.gcm.ServerClient;
+import com.rukiasoft.androidapps.comunioelpuntal.utils.ActivityTool;
 
 public class ExceptionHandler {
 
@@ -91,7 +91,7 @@ public class ExceptionHandler {
             G.SERIAL = Build.SERIAL;
 
             //IMEI
-            G.IMEI = ((TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+            G.IMEI = ActivityTool.getImei(context);
 
         } catch (NameNotFoundException e) {
             e.printStackTrace();

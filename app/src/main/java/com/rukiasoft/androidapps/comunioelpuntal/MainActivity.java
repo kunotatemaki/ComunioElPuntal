@@ -225,10 +225,11 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
             }
         }
 
-        ExceptionHandler.register(this);
-
         //registro el código, por si no lo he hecho antes.
         serverClient.conectar(ServerClient.AccessMode.ACTIVITY);
+
+        ExceptionHandler.register(this);
+
 
         if (ActivityTool.getAppVersion(this) == ActivityTool.getIntegerFromPreferences(this, ComunioConstants.PROPERTY_VERSION_APP_DOWNLOADED)) {
             Log.d(TAG, "ya puedo borrar la versión descargada");
@@ -442,7 +443,7 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
 
         super.onBackPressed();
         showPreviousTitle();
-
+//int i = 1/0;
     }
 
     @Override

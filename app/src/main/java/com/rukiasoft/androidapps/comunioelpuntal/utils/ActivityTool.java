@@ -10,6 +10,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
@@ -374,6 +375,10 @@ public class ActivityTool {
 
     public static Double getValorJornadaActual(Context context){
         return ActivityTool.getDoubleFromPreferences(context, ComunioConstants.PROPERTY_CURRENT_ROUND);
+    }
+
+    public static String getImei(Context context){
+        return ((TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
     }
 
 }
