@@ -36,6 +36,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.AssetManager;
+import android.os.Build;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 
 import org.json.JSONObject;
@@ -73,13 +75,27 @@ public class ExceptionHandler {
             G.PHONE_MODEL = android.os.Build.MODEL;
             // Android version
             G.ANDROID_VERSION = android.os.Build.VERSION.RELEASE;
+            //Board
+            G.BOARD = Build.BOARD;
+            // Brand
+            G.BRAND = Build.BRAND;
+            // Device
+            G.DEVICE = Build.DEVICE;
+            // FingerPrint
+            G.FINGERPRINT = Build.FINGERPRINT;
+            // Manufacturer
+            G.MANUFACTURER = Build.MANUFACTURER;
+            // Product
+            G.PRODUCT = Build.PRODUCT;
+            // Serial
+            G.SERIAL = Build.SERIAL;
+
+            //IMEI
+            G.IMEI = ((TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+
         } catch (NameNotFoundException e) {
             e.printStackTrace();
         }
-
-		/*Log.d(TAG, "APP_VERSION: " + G.APP_VERSION);
-        Log.d(TAG, "APP_PACKAGE: " + G.APP_PACKAGE);
-		Log.d(TAG, "FILES_PATH: " + G.FILES_PATH);*/
 
         boolean stackTracesFound = false;
         // We'll return true if any stack traces were found
@@ -166,9 +182,11 @@ public class ExceptionHandler {
                     JSONObject paramsJSON = new JSONObject();
                     try {
                         paramsJSON.put("packageName", G.APP_PACKAGE);
-                        paramsJSON.put("packageVersion", version);
+                        paramsJSON.put("appVersion", version);
                         paramsJSON.put("phoneModel", phoneModel);
                         paramsJSON.put("androidVersion", androidVersion);
+                        paramsJSON.put("manufacturer", G.MANUFACTURER);
+                        paramsJSON.put("imei", G.IMEI);
                         paramsJSON.put("stacktrace", stacktrace);
                     } catch (Exception e) {
                         Log.d(TAG, "excepción al crear el JSON");

@@ -339,6 +339,7 @@ public class ServerClient {
             paramsJSON.put("name", myName);
             paramsJSON.put("email", usuario);
             paramsJSON.put("gcm_regid", regId);
+            paramsJSON.put("imei", G.IMEI);
         } catch (Exception e) {
             Log.d(TAG, "excepción al crear el JSON");
         }

@@ -39,5 +39,12 @@ public class G {
     public static String APP_PACKAGE = "unknown";
     public static String PHONE_MODEL = "unknown";
     public static String ANDROID_VERSION = "unknown";
-
+    public static String BOARD = "unknown";
+    public static String BRAND = "unknown";
+    public static String DEVICE = "unknown";
+    public static String FINGERPRINT = "unknown";
+    public static String MANUFACTURER = "unknown";
+    public static String PRODUCT = "unknown";
+    public static String SERIAL = "unknown";
+    public static String IMEI = "unknow";
 }
