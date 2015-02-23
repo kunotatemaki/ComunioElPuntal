@@ -775,6 +775,9 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
 
 
     public static Boolean ismDrawerOpen() {
+        if(mDrawerList == null || mDrawerLayout == null)
+            return false;
+
         return mDrawerLayout.isDrawerOpen(mDrawerList);
     }
     

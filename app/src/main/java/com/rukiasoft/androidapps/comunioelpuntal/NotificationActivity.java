@@ -2,6 +2,7 @@ package com.rukiasoft.androidapps.comunioelpuntal;
 
 
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -11,7 +12,15 @@ import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.rukiasoft.androidapps.comunioelpuntal.comunication.gcm.ServerClient;
+import com.rukiasoft.androidapps.comunioelpuntal.crashlogs.ExceptionHandler;
 import com.rukiasoft.androidapps.comunioelpuntal.utils.ActivityTool;
+
+import org.xml.sax.SAXException;
+
+import java.io.IOException;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 
@@ -21,10 +30,27 @@ public class NotificationActivity extends ActionBarActivity {
     private static final String STATE_SELECTED_NAVIGATION_ITEM = "selected_navigation_item";
     private static final String TAG = "NotificationActivity";
     private NotificationFragment fNotification;
+    private ServerClient serverClient = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (serverClient == null) {
+            try {
+                AssetManager am = getAssets();
+                serverClient = new ServerClient(this, am.open("application.xml"));
+                //am.close();
+            } catch (IOException e) {
+                Log.i(TAG, "Excepción al crear cliente: IOException");
+            } catch (SAXException e) {
+                Log.i(TAG, "Excepción al crear cliente: SAXException");
+            } catch (ParserConfigurationException e) {
+                Log.i(TAG, "Excepción al crear cliente: ParserConfigurationException");
+            } catch (Exception e) {
+                Log.i(TAG, "Excepción no controlada al crear cliente");
+            }
+        }
+        ExceptionHandler.register(this);
         setContentView(R.layout.notification_activity);
         // Create a new TodoListAdapter for this ListActivity's ListView
         if (!ActivityTool.isForTablet(this))    //una sola pantalla
