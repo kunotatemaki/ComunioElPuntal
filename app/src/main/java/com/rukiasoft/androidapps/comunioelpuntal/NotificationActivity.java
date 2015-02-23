@@ -69,8 +69,6 @@ public class NotificationActivity extends ActionBarActivity {
         ActivityTool.HideProgress(mProgressBar, this);
 
         fNotification = new NotificationFragment();
-
-        fNotification = new NotificationFragment();
         FragmentManager mFragmentManager = getSupportFragmentManager();
         FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
         mFragmentTransaction.replace(R.id.notification_fragment_container, fNotification);

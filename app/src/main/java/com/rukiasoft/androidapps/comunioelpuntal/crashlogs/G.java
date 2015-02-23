@@ -46,5 +46,5 @@ public class G {
     public static String MANUFACTURER = "unknown";
     public static String PRODUCT = "unknown";
     public static String SERIAL = "unknown";
-    public static String IMEI = "unknow";
+    public static String UNIQUEID = "unknow";
 }

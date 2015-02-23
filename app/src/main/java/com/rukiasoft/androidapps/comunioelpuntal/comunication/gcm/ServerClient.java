@@ -336,10 +336,9 @@ public class ServerClient {
             String myName = ActivityTool.getStringFromPreferences(context,
                     ComunioConstants.PROPERTY_MY_TEAM);
 
-            paramsJSON.put("name", myName);
             paramsJSON.put("email", usuario);
             paramsJSON.put("gcm_regid", regId);
-            paramsJSON.put("imei", G.IMEI);
+            paramsJSON.put("uniqueId", ActivityTool.getUniqueID(context));
         } catch (Exception e) {
             Log.d(TAG, "excepción al crear el JSON");
         }

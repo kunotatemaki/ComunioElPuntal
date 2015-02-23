@@ -91,7 +91,7 @@ public class ExceptionHandler {
             G.SERIAL = Build.SERIAL;
 
             //IMEI
-            G.IMEI = ActivityTool.getImei(context);
+            G.UNIQUEID = ActivityTool.getUniqueID(context);
 
         } catch (NameNotFoundException e) {
             e.printStackTrace();
@@ -186,7 +186,7 @@ public class ExceptionHandler {
                         paramsJSON.put("phoneModel", phoneModel);
                         paramsJSON.put("androidVersion", androidVersion);
                         paramsJSON.put("manufacturer", G.MANUFACTURER);
-                        paramsJSON.put("imei", G.IMEI);
+                        paramsJSON.put("uniqueId", G.UNIQUEID);
                         paramsJSON.put("stacktrace", stacktrace);
                     } catch (Exception e) {
                         Log.d(TAG, "excepción al crear el JSON");

@@ -10,12 +10,19 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
-import android.telephony.TelephonyManager;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Toast;
+
+import com.rukiasoft.androidapps.comunioelpuntal.MainActivity;
+import com.rukiasoft.androidapps.comunioelpuntal.MainActivity.Orientation;
+import com.rukiasoft.androidapps.comunioelpuntal.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -31,18 +38,10 @@ import java.util.Set;
 
 import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 
-import com.rukiasoft.androidapps.comunioelpuntal.MainActivity;
-import com.rukiasoft.androidapps.comunioelpuntal.MainActivity.Orientation;
-import com.rukiasoft.androidapps.comunioelpuntal.R;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 
 public class ActivityTool {
 
     private static final String TAG = "ActivityTool";
-    static public String ACTIVITY = "activity";
     static private Toast toast = null;
 
     public static String getStringFromString(Resources r, String string, String packageName) {
@@ -190,7 +189,7 @@ public class ActivityTool {
     public static Double getDoubleFromPreferences(Context context, String name) {
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return Double.valueOf(preferences.getFloat(name, 0));
+        return (double) preferences.getFloat(name, 0);
 
     }
 
@@ -377,8 +376,8 @@ public class ActivityTool {
         return ActivityTool.getDoubleFromPreferences(context, ComunioConstants.PROPERTY_CURRENT_ROUND);
     }
 
-    public static String getImei(Context context){
-        return ((TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+    public static String getUniqueID(Context context){
+        return Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
     }
 
 }
