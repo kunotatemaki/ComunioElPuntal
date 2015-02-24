@@ -37,7 +37,7 @@ public class NotificationFragment extends ListFragment implements Serializable {
         Log.i(TAG, "onCreate");
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        setRetainInstance(true);
+        //setRetainInstance(true);
         //Log.d(TAG, "onCreate setListAdapter");
         if (mAdapter == null)
             mAdapter = new NotificationListAdapter(getActivity());

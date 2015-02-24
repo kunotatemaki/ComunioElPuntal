@@ -185,7 +185,6 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
             }
             if (savedInstanceState.containsKey("players")) {
                 players = (List<PlayerItem>) savedInstanceState.getSerializable("players");
-
             }
         }
         super.onCreate(savedInstanceState);
@@ -363,7 +362,13 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
 
     @Override
     public void onResume() {
-        Log.d(TAG, "onResume");
+        String clase = "";
+        if(mMainFragment != null) {
+            clase = mMainFragment.getClass().toString();
+
+        }
+        Log.d(TAG, "onResume: " + clase);
+
         super.onResume();
     }
 

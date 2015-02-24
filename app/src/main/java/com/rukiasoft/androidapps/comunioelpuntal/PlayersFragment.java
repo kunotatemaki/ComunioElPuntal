@@ -53,7 +53,7 @@ public class PlayersFragment extends ListFragment implements OnQueryTextListener
         Log.i(TAG, "onCreate");
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        setRetainInstance(true);
+        //setRetainInstance(true);
         Log.d(TAG, "onCreate setListAdapter");
 
 

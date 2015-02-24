@@ -53,7 +53,7 @@ public class GamerFragment extends Fragment implements Serializable {
     public void onCreate(Bundle savedInstanceState) {
         //Log.i(TAG, "onCreate");
         super.onCreate(savedInstanceState);
-        setRetainInstance(true);
+        //setRetainInstance(true);
 
     }
 

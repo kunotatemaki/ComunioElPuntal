@@ -32,7 +32,7 @@ public class CommunityFragment extends ListFragment implements Serializable {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRetainInstance(true);
+        //setRetainInstance(true);
         // Set the list adapter for this ListFragment
         //Log.d(TAG, "onCreate");
 
