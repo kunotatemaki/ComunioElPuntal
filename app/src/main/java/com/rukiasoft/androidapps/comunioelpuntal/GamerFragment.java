@@ -51,7 +51,7 @@ public class GamerFragment extends Fragment implements Serializable {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        //Log.i(TAG, "onCreate");
+        Log.i(TAG, "onCreate");
         super.onCreate(savedInstanceState);
         //setRetainInstance(true);
 
@@ -59,6 +59,7 @@ public class GamerFragment extends Fragment implements Serializable {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.i(TAG, "Entered onCreateView()");
         return inflater.inflate(R.layout.gamer_fragment, container, false);
     }
 
@@ -91,6 +92,7 @@ public class GamerFragment extends Fragment implements Serializable {
     }
 
     public void updateAllFragment() {
+        Log.i(TAG, "Entered updateAllFragment()");
         try {
             TextView nombre = (TextView) getView().findViewById(R.id.gamer_item_name_view);
             TextView dineroTotalLabel = (TextView) getView().findViewById(R.id.gamer_item_money_label);
@@ -102,7 +104,6 @@ public class GamerFragment extends Fragment implements Serializable {
             TextView puntosLabel = (TextView) getView().findViewById(R.id.gamer_item_puntos_general_label);
             TextView puntosView = (TextView) getView().findViewById(R.id.gamer_item_puntos_general_view);
             LinearLayout layout = (LinearLayout) getView().findViewById(R.id.gamer_item_layout_total);
-            Log.d(TAG, "1");
 
             nombre.setText(gamer.getParticipante().getNombre());
             nombre.setTextColor(getActivity().getResources().getColor(R.color.text_over_header));

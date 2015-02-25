@@ -171,7 +171,7 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "onCreate");
         //supportRequestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-
+        context = this;
         mListener = new MainActivityListener(this);
         registerReceiver(mListener, new IntentFilter(ComunioConstants.START_SELECT_PLAYER_ACTIVITY));
         registerReceiver(mListener, new IntentFilter(ComunioConstants.RESTART_INTEFACE_IN_MY_TEAM));
@@ -193,7 +193,7 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
             databaseLoaded = false;
 
         createFragments();
-        context = this;
+
         setContentView(R.layout.main_activity);
         if (!ActivityTool.isForTablet(this))    //una sola pantalla
             ActivityTool.setOrientation(this, Orientation.PORTRAIT);
@@ -365,10 +365,12 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
         String clase = "";
         if(mMainFragment != null) {
             clase = mMainFragment.getClass().toString();
-
         }
         Log.d(TAG, "onResume: " + clase);
-
+        if(isNeededToCreateFragments()) {
+            Log.d(TAG, "re-creando fragments");
+            createFragments();
+        }
         super.onResume();
     }
 
@@ -538,6 +540,7 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
 
         Log.i(TAG, "Entered onNavigationDrawerItemSelected");
         Bundle extras = item.getIntent().getExtras();
+
         // If there is no FeedFragment instance, then create one
         String name;
         name = extras.getString("Name");
@@ -615,6 +618,7 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
         updateAndShowTitleArray(getResources().getString(extras.getInt("Text")));
         mDrawerLayout.closeDrawer(mDrawerList);
         mDrawerToggle.setDrawerIndicatorEnabled(true);
+
         arrowCounter = 0;
     }
 
@@ -813,43 +817,44 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
         showCurrentTitle();
     }
 
-    private void createFragments() {
-        if (playersFragment == null) {
-            playersFragment = new PlayersFragment();
-            playersFragment.createAdapter();
-            if (players.size() > 0)
-                playersFragment.setPlayerItems(players);
-        }
-        if (gamerFragment == null) {
-            gamerFragment = new GamerFragment();
-        }
-        if (teamPlayersFragment == null) {
-            teamPlayersFragment = new TeamPlayersFragment();
-        }
-        if (communityFragment == null) {
-            communityFragment = new CommunityFragment();
-        }
-        if (remosFragment == null) {
-            remosFragment = new RemosFragment();
-        }
-        if (bonusFragment == null) {
-            bonusFragment = new BonusFragment();
-        }
-        if (scoreFragment == null) {
-            scoreFragment = new ScoreFragment();
-        }
-        if (notificationFragment == null) {
-            notificationFragment = new NotificationFragment();
-        }
-        if (balanceFragment == null) {
-            balanceFragment = new BalanceFragment();
-        }
-        if (classificationTabsFragment == null) {
-            classificationTabsFragment = new ClassificationTabsFragment();
-        }
-        if (dbHandler == null) {
-            dbHandler = new DatabaseHandler(this);
-        }
+    private static void createFragments() {
+        playersFragment = new PlayersFragment();
+        playersFragment.createAdapter();
+        if (players.size() > 0)
+            playersFragment.setPlayerItems(players);
+
+        gamerFragment = new GamerFragment();
+
+        teamPlayersFragment = new TeamPlayersFragment();
+
+        communityFragment = new CommunityFragment();
+
+        remosFragment = new RemosFragment();
+
+        bonusFragment = new BonusFragment();
+
+        scoreFragment = new ScoreFragment();
+
+        notificationFragment = new NotificationFragment();
+
+        balanceFragment = new BalanceFragment();
+
+        classificationTabsFragment = new ClassificationTabsFragment();
+
+        dbHandler = new DatabaseHandler(MainActivity.getContext());
+
+    }
+
+    private static Boolean isNeededToCreateFragments() {
+        Boolean ret = false;
+        if(playersFragment == null || gamerFragment == null || teamPlayersFragment == null ||
+                communityFragment == null || remosFragment == null ||
+                bonusFragment == null || scoreFragment == null ||
+                notificationFragment == null || balanceFragment == null ||
+                classificationTabsFragment == null || dbHandler == null ||
+                playersFragment == null || playersFragment == null )
+            ret = true;
+        return ret;
     }
 
 
@@ -940,18 +945,26 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
     }
 
     public static GamerFragment getGamerFragment() {
+        if(gamerFragment == null)
+            MainActivity.createFragments();
         return gamerFragment;
     }
 
     public static CommunityFragment getCommunityFragment() {
+        if(communityFragment == null)
+            MainActivity.createFragments();
         return communityFragment;
     }
 
     public static ClassificationTabsFragment getClassificationTabsFragment() {
+        if(classificationTabsFragment == null)
+            MainActivity.createFragments();
         return classificationTabsFragment;
     }
 
     public static PlayersFragment getPlayersFragment() {
+        if(playersFragment == null)
+            MainActivity.createFragments();
         return playersFragment;
     }
 
