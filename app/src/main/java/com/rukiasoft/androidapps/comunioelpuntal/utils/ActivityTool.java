@@ -306,9 +306,16 @@ public class ActivityTool {
             activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     }
 
-    public static String getRoundNameFromRoundValue(JSONObject jornadas, Double referencia){
+    public static String getRoundNameFromRoundValue(Context context, JSONObject jornadas, Double referencia){
         Iterator<?> keys = jornadas.keys();
-        String name = "Próxima Jornada";
+        String name = "";
+        if(referencia.compareTo(0.0) == 0){
+            name = context.getResources().getString(R.string.starting_round);
+            return name;
+        }else{
+            name = context.getResources().getString(R.string.current_round);
+        }
+
         while( keys.hasNext() ){
             try {
                 String key = (String)keys.next();

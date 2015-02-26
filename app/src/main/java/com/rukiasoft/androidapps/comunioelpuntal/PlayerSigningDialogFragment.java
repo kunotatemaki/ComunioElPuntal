@@ -55,7 +55,7 @@ public class PlayerSigningDialogFragment extends DialogFragment {
                 frase = frase.replaceAll("_salto_", "<br>");
                 frase = frase.replace("_comprador_", "<font color='blue'><b>" + fichajes.get(i).getComprador() + "</b></font>");
                 frase = frase.replace("_vendedor_", "<font color='red'><b>" + fichajes.get(i).getVendedor() + "</b></font>");
-                frase = frase.replace("_jornada_", "<b>" + ActivityTool.getRoundNameFromRoundValue(MainActivity.getJornadasJSON(), fichajes.get(i).getJornada()) + "</b>");
+                frase = frase.replace("_jornada_", "<b>" + ActivityTool.getRoundNameFromRoundValue(getActivity(), MainActivity.getJornadasJSON(), fichajes.get(i).getJornada()) + "</b>");
                 items.add(Html.fromHtml(frase));
             }
         }

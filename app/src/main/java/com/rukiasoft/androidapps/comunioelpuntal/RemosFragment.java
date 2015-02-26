@@ -31,14 +31,6 @@ public class RemosFragment extends Fragment implements Serializable {
     private List<Puntuacion> puntuaciones;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        //Log.i(TAG, "onCreate");
-        super.onCreate(savedInstanceState);
-        //setRetainInstance(true);
-
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.remos_fragment, container, false);
     }
@@ -72,7 +64,7 @@ public class RemosFragment extends Fragment implements Serializable {
                 String frase = patron.replace("_sancion_", "<font color='darkred'>" + precio + "</font>");
                 frase = frase.replace("€", "<font color='darkred'>€</font>");
                 frase = frase.replace("_motivo_", "<font color='blue'>" + ComunioConstants.TIPOS_SANCIONES[0] + "</font>");
-                frase = frase.replace("_jornada_", "" + ActivityTool.getRoundNameFromRoundValue(MainActivity.getJornadasJSON(), puntuaciones.get(i).getJornada()) + "");
+                frase = frase.replace("_jornada_", "" + ActivityTool.getRoundNameFromRoundValue(getActivity(), MainActivity.getJornadasJSON(), puntuaciones.get(i).getJornada()) + "");
                 ((ArrayAdapter<Spanned>) listView.getAdapter()).add(Html.fromHtml("<b>" + frase + "</b>"));
             }
             if (puntuaciones.get(i).getRemo_equipo()) {
@@ -81,7 +73,7 @@ public class RemosFragment extends Fragment implements Serializable {
                 String frase = patron.replace("_sancion_", "<font color='darkred'>" + precio + "</font>");
                 frase = frase.replace("€", "<font color='darkred'>€</font>");
                 frase = frase.replace("_motivo_", "<font color='blue'>" + ComunioConstants.TIPOS_SANCIONES[1] + "</font>");
-                frase = frase.replace("_jornada_", "" + ActivityTool.getRoundNameFromRoundValue(MainActivity.getJornadasJSON(), puntuaciones.get(i).getJornada()) + "");
+                frase = frase.replace("_jornada_", "" + ActivityTool.getRoundNameFromRoundValue(getActivity(), MainActivity.getJornadasJSON(), puntuaciones.get(i).getJornada()) + "");
                 ((ArrayAdapter<Spanned>) listView.getAdapter()).add(Html.fromHtml("<b>" + frase + "</b>"));
             }
             if (puntuaciones.get(i).getRemo_trupita()) {
@@ -90,7 +82,7 @@ public class RemosFragment extends Fragment implements Serializable {
                 String frase = patron.replace("_sancion_", "<font color='darkred'>" + precio + "</font>");
                 frase = frase.replace("€", "<font color='darkred'>€</font>");
                 frase = frase.replace("_motivo_", "<font color='blue'>" + ComunioConstants.TIPOS_SANCIONES[2] + "</font>");
-                frase = frase.replace("_jornada_", "" + ActivityTool.getRoundNameFromRoundValue(MainActivity.getJornadasJSON(), puntuaciones.get(i).getJornada()) + "");
+                frase = frase.replace("_jornada_", "" + ActivityTool.getRoundNameFromRoundValue(getActivity(), MainActivity.getJornadasJSON(), puntuaciones.get(i).getJornada()) + "");
                 ((ArrayAdapter<Spanned>) listView.getAdapter()).add(Html.fromHtml("<b>" + frase + "</b>"));
             }
 

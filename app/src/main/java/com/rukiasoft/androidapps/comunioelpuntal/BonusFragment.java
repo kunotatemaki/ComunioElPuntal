@@ -33,6 +33,7 @@ public class BonusFragment extends Fragment implements Serializable {
     private Integer totalMoneyTorpeJornada = 0;
     private Integer totalMoneyTorpeGeneral = 0;
 
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -41,13 +42,6 @@ public class BonusFragment extends Fragment implements Serializable {
             //Log.d(TAG, "creo el adapter");
             mAdapter = new BonusListAdapter(activity.getApplicationContext());
         }
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        //Log.i(TAG, "onCreate");
-        super.onCreate(savedInstanceState);
-        //setRetainInstance(true);
     }
 
     @Override
@@ -90,7 +84,7 @@ public class BonusFragment extends Fragment implements Serializable {
             if(puntuaciones.get(i).getPuntuacion_general() == null)
                 continue;
             BonusItem item = new BonusItem();
-            item.setJornada(ActivityTool.getRoundNameFromRoundValue(MainActivity.getJornadasJSON(), puntuaciones.get(i).getJornada()));
+            item.setJornada(ActivityTool.getRoundNameFromRoundValue(getActivity(), MainActivity.getJornadasJSON(), puntuaciones.get(i).getJornada()));
             Integer publicado = 0;
             if(puntuaciones.get(i).getPublicado() && puntuaciones.get(i).getPuntuacion_jornada() != null)
                 publicado = 1;

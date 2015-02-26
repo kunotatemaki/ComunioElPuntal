@@ -37,8 +37,6 @@ public class ClassificationFragment extends Fragment implements Serializable {
     private ClassificationListAdapter mAdapter = null;
     private Comparator<ClassificationItem> comparator = null;
     private final ArrayList<String> datosSpinner = new ArrayList<>();
-    private Integer index = 0;
-    private List<Double> valoresJornadas = null;
 
 
     public static enum OrderType {
@@ -166,7 +164,7 @@ public class ClassificationFragment extends Fragment implements Serializable {
         Integer points = 0;
         for (int i = 0; i < MainActivity.getGamers().size(); i++) {
             ClassificationItem item = new ClassificationItem();
-            if(selectedRound.doubleValue() == 0.0){
+            if(selectedRound == 0.0){
                 item.setName(MainActivity.getGamers().get(i).getParticipante().getNombre());
                 item.setPoints("-");
                 item.setGamerInformation(MainActivity.getGamers().get(i));
@@ -238,7 +236,7 @@ public class ClassificationFragment extends Fragment implements Serializable {
         datosSpinner.clear();
         if (MainActivity.getGamers().size() > 0) {
             for (int i = 0; i < valores.size(); i++) {
-                datosSpinner.add(ActivityTool.getRoundNameFromRoundValue(jornadasJSON, valores.get(i)));
+                datosSpinner.add(ActivityTool.getRoundNameFromRoundValue(getActivity(), jornadasJSON, valores.get(i)));
             }
         }
     }
@@ -256,7 +254,8 @@ public class ClassificationFragment extends Fragment implements Serializable {
     private class ClassificationComparator implements java.util.Comparator<ClassificationItem> {
         @Override
         public int compare(ClassificationItem p1, ClassificationItem p2) {
-            Integer v1=0, v2=0;
+            Integer v1;
+            Integer v2;
             try {
                 v1 = Integer.parseInt(p1.getPoints());
             }catch(NumberFormatException e){

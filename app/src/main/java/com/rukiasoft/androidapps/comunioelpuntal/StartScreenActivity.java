@@ -30,7 +30,7 @@ public class StartScreenActivity extends Activity {
 
     protected class ProgressListener extends BroadcastReceiver {
 
-        Activity activity;
+        final Activity activity;
 
         ProgressListener(Activity _activity){
             this.activity = _activity;

@@ -41,13 +41,6 @@ public class ScoreFragment extends Fragment implements Serializable {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        //Log.i(TAG, "onCreate");
-        super.onCreate(savedInstanceState);
-        //setRetainInstance(true);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.score_fragment, container, false);
     }
@@ -84,7 +77,7 @@ public class ScoreFragment extends Fragment implements Serializable {
             if(puntuaciones.get(i).getPosicion_general() == null)
                 continue;
             ScoreItem item = new ScoreItem();
-            item.setJornada(ActivityTool.getRoundNameFromRoundValue(MainActivity.getJornadasJSON(), puntuaciones.get(i).getJornada()));
+            item.setJornada(ActivityTool.getRoundNameFromRoundValue(getActivity(), MainActivity.getJornadasJSON(), puntuaciones.get(i).getJornada()));
             item.setPointsGeneral(puntuaciones.get(i).getPuntuacion_general().toString());
             if (puntuaciones.get(i).getPuntuacion_jornada() != null)
                 item.setPointsRound(puntuaciones.get(i).getPuntuacion_jornada().toString());

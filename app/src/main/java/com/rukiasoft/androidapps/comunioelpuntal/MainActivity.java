@@ -66,8 +66,8 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
     private static final int RESULT_SELECT_ACTIVITY = 247;
     private static final int RESULT_INSTALL_ACTIVITY = 248;
     private static final int RESULT_SETTINGS_ACTIVITY = 249;
-    public static final int RESULT_LOAD_SELECT = 250;
-    public static final int RESULT_LOAD_START_SCREEN = 251;
+    private static final int RESULT_LOAD_SELECT = 250;
+    private static final int RESULT_LOAD_START_SCREEN = 251;
 
     private static PlayersFragment playersFragment = null;
     private static GamerFragment gamerFragment = null;
@@ -135,7 +135,7 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
 
     protected class MainActivityListener extends BroadcastReceiver {
 
-        Activity activity;
+        final Activity activity;
 
         MainActivityListener(Activity _activity){
             this.activity = _activity;
@@ -162,7 +162,7 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
         }
     }
 
-    MainActivityListener mListener;
+    private MainActivityListener mListener;
 
     //private static Orientation defaultOrientation = Orientation.PORTRAIT;
 
@@ -950,13 +950,13 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
         return gamerFragment;
     }
 
-    public static CommunityFragment getCommunityFragment() {
+    private static CommunityFragment getCommunityFragment() {
         if(communityFragment == null)
             MainActivity.createFragments();
         return communityFragment;
     }
 
-    public static ClassificationTabsFragment getClassificationTabsFragment() {
+    private static ClassificationTabsFragment getClassificationTabsFragment() {
         if(classificationTabsFragment == null)
             MainActivity.createFragments();
         return classificationTabsFragment;

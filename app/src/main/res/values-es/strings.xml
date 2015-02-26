@@ -23,6 +23,7 @@
     <string name="connected">Conectado</string>
     <string name="connection_error">Error al conectar</string>
     <string name="connection_error_reconect">Compruebe configuración y reconecte</string>
+    <string name="current_round">Jornada Actual</string>
     <string name="database_download">Descargando datos de la comunidad</string>
     <string name="database_store">Almacenando datos de la comunidad</string>
     <string name="date_received">Fecha:</string>
@@ -101,6 +102,7 @@
     <string name="signings_colon">Fichajes:</string>
     <string name="signings_pattern">_precio_€ en la _jornada_ _salto_ Comprador: _comprador_ _salto_ Vendedor: _vendedor_</string>
     <string name="score">Puntuaciones</string>
+    <string name="starting_round">Jornada Inicial</string>
     <string name="state">Estado:</string>
     <string name="subject">Asunto</string>
     <string name="talk_now">Hable ahora…</string>

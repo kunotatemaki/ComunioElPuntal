@@ -30,15 +30,6 @@ public class CommunityFragment extends ListFragment implements Serializable {
     private CommunityFragmentSelectionListener mCallback;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        //setRetainInstance(true);
-        // Set the list adapter for this ListFragment
-        //Log.d(TAG, "onCreate");
-
-    }
-
-    @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         if (mAdapter == null) {
