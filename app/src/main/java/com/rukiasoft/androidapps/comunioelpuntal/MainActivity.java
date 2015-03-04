@@ -490,6 +490,8 @@ public class MainActivity extends ActionBarActivity implements GamerFragmentSele
         return true;
     }
 
+
+
     /* Called whenever we call invalidateOptionsMenu() */
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {

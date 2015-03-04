@@ -1,6 +1,7 @@
 package com.rukiasoft.androidapps.comunioelpuntal;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -234,9 +235,12 @@ public class ClassificationFragment extends Fragment implements Serializable {
         Collections.sort(valores);
 
         datosSpinner.clear();
+        Context context = getActivity();
+        if(context == null)
+            context = MainActivity.getContext();
         if (MainActivity.getGamers().size() > 0) {
             for (int i = 0; i < valores.size(); i++) {
-                datosSpinner.add(ActivityTool.getRoundNameFromRoundValue(getActivity(), jornadasJSON, valores.get(i)));
+                datosSpinner.add(ActivityTool.getRoundNameFromRoundValue(context, jornadasJSON, valores.get(i)));
             }
         }
     }
