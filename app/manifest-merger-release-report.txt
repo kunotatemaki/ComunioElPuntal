@@ -94,163 +94,165 @@ MERGED from com.android.support:support-v4:21.0.3:16:5
 		ADDED from AndroidManifest.xml:34:9
 	android:icon
 		ADDED from AndroidManifest.xml:35:9
+	android:largeHeap
+		ADDED from AndroidManifest.xml:38:9
 	android:theme
 		ADDED from AndroidManifest.xml:37:9
 activity#com.rukiasoft.androidapps.comunioelpuntal.MainActivity
-ADDED from AndroidManifest.xml:38:9
+ADDED from AndroidManifest.xml:39:9
 	android:label
+		ADDED from AndroidManifest.xml:41:13
+	android:name
 		ADDED from AndroidManifest.xml:40:13
-	android:name
-		ADDED from AndroidManifest.xml:39:13
 intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from AndroidManifest.xml:41:13
+ADDED from AndroidManifest.xml:42:13
 action#android.intent.action.MAIN
-ADDED from AndroidManifest.xml:42:17
-	android:name
-		ADDED from AndroidManifest.xml:42:25
-category#android.intent.category.LAUNCHER
 ADDED from AndroidManifest.xml:43:17
 	android:name
-		ADDED from AndroidManifest.xml:43:27
+		ADDED from AndroidManifest.xml:43:25
+category#android.intent.category.LAUNCHER
+ADDED from AndroidManifest.xml:44:17
+	android:name
+		ADDED from AndroidManifest.xml:44:27
 activity#com.rukiasoft.androidapps.comunioelpuntal.SettingsActivity
-ADDED from AndroidManifest.xml:47:9
+ADDED from AndroidManifest.xml:48:9
 	android:label
+		ADDED from AndroidManifest.xml:50:13
+	android:name
 		ADDED from AndroidManifest.xml:49:13
-	android:name
-		ADDED from AndroidManifest.xml:48:13
 activity#com.rukiasoft.androidapps.comunioelpuntal.SelectGamerActivity
-ADDED from AndroidManifest.xml:51:9
+ADDED from AndroidManifest.xml:52:9
 	android:label
-		ADDED from AndroidManifest.xml:53:13
-	android:theme
 		ADDED from AndroidManifest.xml:54:13
+	android:theme
+		ADDED from AndroidManifest.xml:55:13
 	android:name
-		ADDED from AndroidManifest.xml:52:13
+		ADDED from AndroidManifest.xml:53:13
 intent-filter#android.intent.category.DEFAULT+com.rukiasoft.androidapps.comunioelpuntal.action.SELECT_WHO_YOU_ARE
-ADDED from AndroidManifest.xml:55:13
+ADDED from AndroidManifest.xml:56:13
 action#com.rukiasoft.androidapps.comunioelpuntal.action.SELECT_WHO_YOU_ARE
-ADDED from AndroidManifest.xml:56:17
-	android:name
-		ADDED from AndroidManifest.xml:56:25
-category#android.intent.category.DEFAULT
 ADDED from AndroidManifest.xml:57:17
 	android:name
-		ADDED from AndroidManifest.xml:57:27
+		ADDED from AndroidManifest.xml:57:25
+category#android.intent.category.DEFAULT
+ADDED from AndroidManifest.xml:58:17
+	android:name
+		ADDED from AndroidManifest.xml:58:27
 activity#com.rukiasoft.androidapps.comunioelpuntal.StartScreenActivity
-ADDED from AndroidManifest.xml:61:9
+ADDED from AndroidManifest.xml:62:9
 	android:label
+		ADDED from AndroidManifest.xml:64:13
+	android:name
 		ADDED from AndroidManifest.xml:63:13
-	android:name
-		ADDED from AndroidManifest.xml:62:13
 activity#com.rukiasoft.androidapps.comunioelpuntal.NotificationActivity
-ADDED from AndroidManifest.xml:66:9
+ADDED from AndroidManifest.xml:67:9
 	android:label
-		ADDED from AndroidManifest.xml:68:13
-	android:launchMode
 		ADDED from AndroidManifest.xml:69:13
+	android:launchMode
+		ADDED from AndroidManifest.xml:70:13
 	android:name
-		ADDED from AndroidManifest.xml:67:13
+		ADDED from AndroidManifest.xml:68:13
 receiver#com.rukiasoft.androidapps.comunioelpuntal.wifi.WifiReceiver
-ADDED from AndroidManifest.xml:71:9
+ADDED from AndroidManifest.xml:72:9
 	android:name
-		ADDED from AndroidManifest.xml:71:19
+		ADDED from AndroidManifest.xml:72:19
 intent-filter#android.net.wifi.STATE_CHANGE
-ADDED from AndroidManifest.xml:72:13
+ADDED from AndroidManifest.xml:73:13
 	android:priority
-		ADDED from AndroidManifest.xml:72:28
+		ADDED from AndroidManifest.xml:73:28
 action#android.net.wifi.STATE_CHANGE
-ADDED from AndroidManifest.xml:73:17
+ADDED from AndroidManifest.xml:74:17
 	android:name
-		ADDED from AndroidManifest.xml:73:25
+		ADDED from AndroidManifest.xml:74:25
 receiver#com.rukiasoft.androidapps.comunioelpuntal.comunication.gcm.StartMyServiceAtBootReceiver
-ADDED from AndroidManifest.xml:77:9
+ADDED from AndroidManifest.xml:78:9
 	android:enabled
-		ADDED from AndroidManifest.xml:79:13
-	android:label
-		ADDED from AndroidManifest.xml:81:13
-	android:exported
 		ADDED from AndroidManifest.xml:80:13
-	android:name
-		ADDED from AndroidManifest.xml:78:13
-intent-filter#android.intent.action.BOOT_COMPLETED
-ADDED from AndroidManifest.xml:82:13
-action#android.intent.action.BOOT_COMPLETED
-ADDED from AndroidManifest.xml:83:17
-	android:name
-		ADDED from AndroidManifest.xml:83:25
-service#com.rukiasoft.androidapps.comunioelpuntal.comunication.gcm.RegisterService
-ADDED from AndroidManifest.xml:87:9
 	android:label
+		ADDED from AndroidManifest.xml:82:13
+	android:exported
+		ADDED from AndroidManifest.xml:81:13
+	android:name
+		ADDED from AndroidManifest.xml:79:13
+intent-filter#android.intent.action.BOOT_COMPLETED
+ADDED from AndroidManifest.xml:83:13
+action#android.intent.action.BOOT_COMPLETED
+ADDED from AndroidManifest.xml:84:17
+	android:name
+		ADDED from AndroidManifest.xml:84:25
+service#com.rukiasoft.androidapps.comunioelpuntal.comunication.gcm.RegisterService
+ADDED from AndroidManifest.xml:88:9
+	android:label
+		ADDED from AndroidManifest.xml:90:13
+	android:name
 		ADDED from AndroidManifest.xml:89:13
-	android:name
-		ADDED from AndroidManifest.xml:88:13
 receiver#com.rukiasoft.androidapps.comunioelpuntal.comunication.gcm.GCMBroadcastReceiver
-ADDED from AndroidManifest.xml:91:9
+ADDED from AndroidManifest.xml:92:9
 	android:permission
+		ADDED from AndroidManifest.xml:94:13
+	android:name
 		ADDED from AndroidManifest.xml:93:13
-	android:name
-		ADDED from AndroidManifest.xml:92:13
 intent-filter#com.google.android.c2dm.intent.RECEIVE+ruler.elpuntal.comunio.androidapp.comunication.gcm
-ADDED from AndroidManifest.xml:94:13
+ADDED from AndroidManifest.xml:95:13
 action#com.google.android.c2dm.intent.RECEIVE
-ADDED from AndroidManifest.xml:95:17
-	android:name
-		ADDED from AndroidManifest.xml:95:25
-category#ruler.elpuntal.comunio.androidapp.comunication.gcm
 ADDED from AndroidManifest.xml:96:17
 	android:name
-		ADDED from AndroidManifest.xml:96:27
+		ADDED from AndroidManifest.xml:96:25
+category#ruler.elpuntal.comunio.androidapp.comunication.gcm
+ADDED from AndroidManifest.xml:97:17
+	android:name
+		ADDED from AndroidManifest.xml:97:27
 receiver#com.rukiasoft.androidapps.comunioelpuntal.NotNotificationOpenReceiver
-ADDED from AndroidManifest.xml:100:9
+ADDED from AndroidManifest.xml:101:9
 	android:exported
+		ADDED from AndroidManifest.xml:103:13
+	android:name
 		ADDED from AndroidManifest.xml:102:13
-	android:name
-		ADDED from AndroidManifest.xml:101:13
 intent-filter#com.rukiasoft.androidapps.comunioelpuntal.action.NOTIFICATION
-ADDED from AndroidManifest.xml:103:13
+ADDED from AndroidManifest.xml:104:13
 	android:priority
-		ADDED from AndroidManifest.xml:103:28
+		ADDED from AndroidManifest.xml:104:28
 action#com.rukiasoft.androidapps.comunioelpuntal.action.NOTIFICATION
-ADDED from AndroidManifest.xml:104:17
+ADDED from AndroidManifest.xml:105:17
 	android:name
-		ADDED from AndroidManifest.xml:104:25
+		ADDED from AndroidManifest.xml:105:25
 receiver#com.rukiasoft.androidapps.comunioelpuntal.DataBaseDownloadReceiver
-ADDED from AndroidManifest.xml:108:9
+ADDED from AndroidManifest.xml:109:9
 	android:exported
+		ADDED from AndroidManifest.xml:111:13
+	android:name
 		ADDED from AndroidManifest.xml:110:13
-	android:name
-		ADDED from AndroidManifest.xml:109:13
 intent-filter#com.rukiasoft.androidapps.comunioelpuntal.action.DATABASE
-ADDED from AndroidManifest.xml:111:13
+ADDED from AndroidManifest.xml:112:13
 	android:priority
-		ADDED from AndroidManifest.xml:111:28
+		ADDED from AndroidManifest.xml:112:28
 action#com.rukiasoft.androidapps.comunioelpuntal.action.DATABASE
-ADDED from AndroidManifest.xml:112:17
+ADDED from AndroidManifest.xml:113:17
 	android:name
-		ADDED from AndroidManifest.xml:112:25
+		ADDED from AndroidManifest.xml:113:25
 service#com.rukiasoft.androidapps.comunioelpuntal.comunication.gcm.GCMIntentService
-ADDED from AndroidManifest.xml:116:9
-	android:name
-		ADDED from AndroidManifest.xml:116:18
-service#com.rukiasoft.androidapps.comunioelpuntal.comunication.gcm.AppDownloaderIntentService
 ADDED from AndroidManifest.xml:117:9
 	android:name
 		ADDED from AndroidManifest.xml:117:18
-service#com.rukiasoft.androidapps.comunioelpuntal.NotNotificationOpenService
+service#com.rukiasoft.androidapps.comunioelpuntal.comunication.gcm.AppDownloaderIntentService
 ADDED from AndroidManifest.xml:118:9
 	android:name
 		ADDED from AndroidManifest.xml:118:18
-service#com.rukiasoft.androidapps.comunioelpuntal.LoadDatabaseService
+service#com.rukiasoft.androidapps.comunioelpuntal.NotNotificationOpenService
 ADDED from AndroidManifest.xml:119:9
 	android:name
 		ADDED from AndroidManifest.xml:119:18
+service#com.rukiasoft.androidapps.comunioelpuntal.LoadDatabaseService
+ADDED from AndroidManifest.xml:120:9
+	android:name
+		ADDED from AndroidManifest.xml:120:18
 meta-data#com.google.android.gms.version
-ADDED from AndroidManifest.xml:121:9
+ADDED from AndroidManifest.xml:122:9
 MERGED from com.google.android.gms:play-services:6.5.87:21:9
 	android:value
-		ADDED from AndroidManifest.xml:123:13
+		ADDED from AndroidManifest.xml:124:13
 	android:name
-		ADDED from AndroidManifest.xml:122:13
+		ADDED from AndroidManifest.xml:123:13
 uses-sdk
 INJECTED from AndroidManifest.xml:0:0 reason: use-sdk injection requested
 MERGED from com.android.support:appcompat-v7:21.0.3:15:5

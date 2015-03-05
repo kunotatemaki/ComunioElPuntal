@@ -14,7 +14,7 @@
     <color name="colorSecondaryDark">#000</color>
     <color name="actionbar_title_text">#fff</color>
     <color name="actionbar_title_text_light">#000</color>
-    <color name="actionbar_menu_text">#0f0</color>
+    <color name="actionbar_menu_text">#fffffdff</color>
     <color name="money_negative">#f44336</color>
     <color name="money_positive_under_limit">#795548</color>
     <color name="money_positive">#3f51b5</color>
